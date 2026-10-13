@@ -484,8 +484,8 @@
         if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white uppercase leading-[0.95] transition-colors duration-500";
         if (heroTagline) heroTagline.className = "text-sm sm:text-base text-white/90 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
         if (heroBadge) heroBadge.className = "border-l-2 border-white pl-3 text-xs font-black tracking-widest uppercase text-white leading-none py-0.5 transition-colors duration-500";
-        if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-white hover:bg-neutral-100 text-black font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
-        if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white font-extrabold text-sm px-6 py-4 rounded-full border border-white/30 backdrop-blur-md shadow-sm transition-all";
+        if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-black font-black text-xs sm:text-sm tracking-wider uppercase px-5 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-2xl transition-all whitespace-nowrap group flex-shrink-0";
+        if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white font-extrabold text-xs sm:text-sm px-4 sm:px-6 py-3.5 sm:py-4 rounded-full border border-white/30 backdrop-blur-md shadow-sm transition-all whitespace-nowrap group flex-shrink-0";
         if (heroBottomDivider) heroBottomDivider.className = "relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-3 pt-2.5 border-t border-white/20 transition-colors duration-500";
         if (heroSocialLinks) {
           heroSocialLinks.className = "flex items-center justify-center gap-3 sm:gap-4 text-white/70 transition-colors duration-500";
@@ -522,8 +522,8 @@
         if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-black uppercase leading-[0.95] transition-colors duration-500";
         if (heroTagline) heroTagline.className = "text-sm sm:text-base text-gray-600 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
         if (heroBadge) heroBadge.className = "border-l-2 border-black pl-3 text-xs font-black tracking-widest uppercase text-black leading-none py-0.5 transition-colors duration-500";
-        if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-black hover:bg-neutral-900 text-white font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
-        if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/90 hover:bg-white text-black font-extrabold text-sm px-6 py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all";
+        if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center justify-center gap-2 bg-black hover:bg-neutral-900 text-white font-black text-xs sm:text-sm tracking-wider uppercase px-5 sm:px-8 py-3.5 sm:py-4 rounded-full shadow-2xl transition-all whitespace-nowrap group flex-shrink-0";
+        if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center justify-center gap-2 bg-white/90 hover:bg-white text-black font-extrabold text-xs sm:text-sm px-4 sm:px-6 py-3.5 sm:py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all whitespace-nowrap group flex-shrink-0";
         if (heroBottomDivider) heroBottomDivider.className = "relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-3 pt-2.5 border-t border-gray-200/40 transition-colors duration-500";
         if (heroSocialLinks) {
           heroSocialLinks.className = "flex items-center justify-center gap-3 sm:gap-4 text-gray-500 transition-colors duration-500";
@@ -574,11 +574,12 @@
         }
       });
 
-      // Auto-scroll the active card into center view in the swipe container
+      // Auto-scroll the active card into center view in the swipe container without scrolling the page window
       const variantSliderContainer = document.getElementById('variant-slider-container');
       const activeCard = Array.from(variantCards).find(c => parseInt(c.getAttribute('data-index'), 10) === index);
       if (activeCard && variantSliderContainer) {
-        activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        const targetScroll = activeCard.offsetLeft - (variantSliderContainer.offsetWidth - activeCard.offsetWidth) / 2;
+        variantSliderContainer.scrollTo({ left: Math.max(0, targetScroll), behavior: animate ? 'smooth' : 'auto' });
       }
 
       // Update mobile swipe indicator dots
