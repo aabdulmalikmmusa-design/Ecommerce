@@ -72,7 +72,7 @@
       price: '$159.00',
       priceInr: '₹12,995',
       image: 'assets/images/shoe-white.png',
-      watermark: 'MALZIE AERO',
+      watermark: 'MALZIE SOFTZ',
       glowClass: 'theme-glow-white',
       accentColor: '#121316',
       colorName: 'Pure Ice / Triple White',
@@ -87,7 +87,7 @@
       price: '$179.00',
       priceInr: '₹14,995',
       image: 'assets/images/shoe-red.png',
-      watermark: 'AERO 270',
+      watermark: 'MALZIE SOFTZ',
       glowClass: 'theme-glow-red',
       accentColor: '#ff3b30',
       colorName: 'Crimson Blaze / Deep Scarlet',
@@ -102,7 +102,7 @@
       price: '$149.00',
       priceInr: '₹11,995',
       image: 'assets/images/shoe-black.png',
-      watermark: 'AERO ALPHA',
+      watermark: 'MALZIE SOFTZ',
       glowClass: 'theme-glow-black',
       accentColor: '#1e2026',
       colorName: 'Stealth Onyx / Triple Black',
@@ -117,7 +117,7 @@
       price: '$169.00',
       priceInr: '₹13,995',
       image: 'assets/images/shoe-cyan.png',
-      watermark: 'AERO PULSE',
+      watermark: 'MALZIE SOFTZ',
       glowClass: 'theme-glow-cyan',
       accentColor: '#00c3ff',
       colorName: 'Electric Cyan / Charcoal Grey',
@@ -277,7 +277,7 @@
           heroShoeImg.src = model.image;
           heroShoeImg.alt = model.name;
 
-          if (heroTitle) heroTitle.innerHTML = `MALZIE SOFTS<br><span class="text-neutral-800">${model.name.replace('MALZIE ', '').replace('AETHER ', '')}</span>`;
+          if (heroTitle) heroTitle.innerHTML = 'MALZIE SOFTZ';
           if (heroTagline) heroTagline.textContent = model.tagline;
           if (heroPrice) heroPrice.textContent = model.price;
           if (heroPriceInr) heroPriceInr.textContent = model.priceInr;
@@ -301,7 +301,7 @@
           heroShoeImg.src = model.image;
           heroShoeImg.alt = model.name;
         }
-        if (heroTitle) heroTitle.innerHTML = `MALZIE SOFTS<br><span class="text-neutral-800">${model.name.replace('MALZIE ', '').replace('AETHER ', '')}</span>`;
+        if (heroTitle) heroTitle.innerHTML = 'MALZIE SOFTZ';
         if (heroTagline) heroTagline.textContent = model.tagline;
         if (heroPrice) heroPrice.textContent = model.price;
         if (heroPriceInr) heroPriceInr.textContent = model.priceInr;
