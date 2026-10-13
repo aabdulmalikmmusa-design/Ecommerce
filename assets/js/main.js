@@ -232,6 +232,15 @@
     // Toast Container
     const toastContainer = document.getElementById('toast-container');
 
+    // Favicon Studio Elements
+    const faviconBtn = document.getElementById('favicon-btn');
+    const faviconModal = document.getElementById('favicon-modal');
+    const faviconBackdrop = document.getElementById('favicon-backdrop');
+    const faviconModalClose = document.getElementById('favicon-modal-close');
+    const faviconFileInput = document.getElementById('favicon-file-input');
+    const faviconResetBtn = document.getElementById('favicon-reset-btn');
+    const faviconAutoSyncToggle = document.getElementById('favicon-autosync-toggle');
+
     // Mobile Menu
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
@@ -393,26 +402,30 @@
         }
       }
 
+      // Auto-sync favicon with active shoe colorway if enabled
+      const autoSyncFavicon = localStorage.getItem('malzie_favicon_autosync') !== 'false';
+      if (autoSyncFavicon && typeof setFavicon === 'function') {
+        setFavicon(model.image, model.name, false);
+      }
+
       if (isDark) {
         if (mainHeader) {
-          if (model.slug === 'red') {
-            mainHeader.className = "sticky top-0 z-40 bg-[#740a07]/90 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
-          } else if (model.slug === 'black') {
-            mainHeader.className = "sticky top-0 z-40 bg-[#121316]/90 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
-          } else {
-            mainHeader.className = "sticky top-0 z-40 bg-[#004f5e]/90 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
-          }
+          let bgClass = "bg-[#740a07]/95";
+          if (model.slug === 'black') bgClass = "bg-[#121316]/95";
+          else if (model.slug === 'cyan') bgClass = "bg-[#004f5e]/95";
+          mainHeader.className = `fixed top-0 left-0 bottom-0 h-screen w-72 z-50 ${bgClass} backdrop-blur-2xl border-r border-white/15 transition-all duration-500 text-white flex flex-col justify-between p-6 shadow-2xl lg:shadow-none -translate-x-full lg:translate-x-0 overflow-y-auto`;
         }
-        if (headerBrandName) headerBrandName.className = "font-display font-black text-xl tracking-tighter text-white leading-none transition-colors duration-500";
+        if (headerBrandName) headerBrandName.className = "font-calligraphy font-bold text-xl text-white leading-none transition-colors duration-500";
         if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-white text-black flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
         if (headerNavLinks) {
-          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-white/90 hover:text-white transition-colors py-2");
+          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-white/80 hover:text-white hover:bg-white/10 transition-all group");
         }
-        if (searchBtn) searchBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative";
+        if (searchBtn) searchBtn.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-white/15 hover:bg-white/25 text-white transition-colors text-xs font-bold";
         if (authBtn) authBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center";
         if (cartBtn) cartBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative";
-        if (soundToggleBtn) soundToggleBtn.className = "hidden sm:flex p-2.5 rounded-full hover:bg-white/15 text-white transition-colors";
-        if (mobileMenuBtn) mobileMenuBtn.className = "md:hidden p-2.5 rounded-full hover:bg-white/15 text-white transition-colors";
+        if (soundToggleBtn) soundToggleBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors";
+        if (faviconBtn) faviconBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center group";
+        if (mobileMenuBtn) mobileMenuBtn.className = "p-2 rounded-full hover:bg-white/15 text-white transition-colors";
 
         if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white uppercase leading-[0.95] transition-colors duration-500";
         if (heroTagline) heroTagline.className = "text-sm sm:text-base text-white/90 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
@@ -428,18 +441,19 @@
         if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
       } else {
         if (mainHeader) {
-          mainHeader.className = "sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-gray-200/60 transition-all duration-500 text-gray-900";
+          mainHeader.className = "fixed top-0 left-0 bottom-0 h-screen w-72 z-50 bg-white/95 backdrop-blur-2xl border-r border-gray-200/80 transition-all duration-500 text-gray-900 flex flex-col justify-between p-6 shadow-2xl lg:shadow-none -translate-x-full lg:translate-x-0 overflow-y-auto";
         }
-        if (headerBrandName) headerBrandName.className = "font-display font-black text-xl tracking-tighter text-black leading-none transition-colors duration-500";
+        if (headerBrandName) headerBrandName.className = "font-calligraphy font-bold text-xl text-black leading-none transition-colors duration-500";
         if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-black text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
         if (headerNavLinks) {
-          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-gray-700 hover:text-black transition-colors py-2");
+          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-gray-700 hover:text-black hover:bg-black/5 transition-all group");
         }
-        if (searchBtn) searchBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative";
+        if (searchBtn) searchBtn.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors text-xs font-bold";
         if (authBtn) authBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative flex items-center justify-center";
         if (cartBtn) cartBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative";
-        if (soundToggleBtn) soundToggleBtn.className = "hidden sm:flex p-2.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black transition-colors";
-        if (mobileMenuBtn) mobileMenuBtn.className = "md:hidden p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors";
+        if (soundToggleBtn) soundToggleBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black transition-colors";
+        if (faviconBtn) faviconBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-700 hover:text-black transition-colors relative flex items-center justify-center group";
+        if (mobileMenuBtn) mobileMenuBtn.className = "p-2 rounded-full hover:bg-gray-100 text-gray-900 transition-colors";
 
         if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-black uppercase leading-[0.95] transition-colors duration-500";
         if (heroTagline) heroTagline.className = "text-sm sm:text-base text-gray-600 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
@@ -593,6 +607,11 @@
         desc: 'Hexagonal micro-lug geometry delivers unmatched grip across dry pavement, wet asphalt, and track surfaces.'
       }
     };
+
+    const hotspotBtns = document.querySelectorAll('.hotspot-btn');
+    const hotspotTooltip = document.getElementById('hotspot-tooltip');
+    const hotspotTitle = document.getElementById('hotspot-title');
+    const hotspotDesc = document.getElementById('hotspot-desc');
 
     hotspotBtns.forEach((btn) => {
       btn.addEventListener('mouseenter', (e) => {
@@ -830,9 +849,6 @@
     }
 
     // Hero "Shop Now" & "Add to Bag"
-    const heroShopNowBtn = document.getElementById('hero-shop-now-btn');
-    const heroAddToBagBtn = document.getElementById('hero-add-to-bag-btn');
-
     if (heroShopNowBtn) {
       heroShopNowBtn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -848,8 +864,8 @@
       });
     }
 
-    if (heroAddToBagBtn) {
-      heroAddToBagBtn.addEventListener('click', () => {
+    if (heroAddBagBtn) {
+      heroAddBagBtn.addEventListener('click', () => {
         const model = shoeModels[currentShoeIndex];
         addToBag({
           id: model.id,
@@ -878,8 +894,8 @@
 
       catalogContainer.innerHTML = filtered
         .map(
-          (product) => `
-        <div class="group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
+          (product, idx) => `
+        <div class="scroll-reveal stagger-${(idx % 4) + 1} group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
           <div class="block">
             <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-60 flex items-center justify-center overflow-hidden">
               <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
@@ -955,6 +971,10 @@
 
       if (window.lucide) {
         window.lucide.createIcons();
+      }
+
+      if (window.refreshScrollAnimations) {
+        window.refreshScrollAnimations();
       }
     }
 
@@ -1415,6 +1435,7 @@
         closeSearchModal();
         closeQuickView();
         closeOrderHistoryModal();
+        closeFaviconModal();
       }
     });
 
@@ -1426,6 +1447,193 @@
         initAudio();
         playUiSound('click');
         mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    // ----------------------------------------------------
+    // 12. FAVICON STUDIO CONTROLLER
+    // ----------------------------------------------------
+    function setFavicon(url, name = 'Custom Icon', save = true) {
+      if (!url) return;
+      let link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'icon';
+        document.head.appendChild(link);
+      }
+      link.id = 'site-favicon';
+      link.type = 'image/png';
+      
+      // Cache bust non-data URLs to force immediate browser tab update
+      const cacheBust = url.startsWith('data:') ? '' : (url.includes('?') ? '&v=' : '?v=') + Date.now();
+      link.href = url + cacheBust;
+
+      if (save) {
+        localStorage.setItem('malzie_favicon_url', url);
+        localStorage.setItem('malzie_favicon_name', name);
+      }
+
+      // Live simulator preview updates
+      const tabPreviewImg = document.getElementById('favicon-tab-preview-img');
+      const currentLabel = document.getElementById('current-favicon-label');
+      if (tabPreviewImg) tabPreviewImg.src = url;
+      if (currentLabel) currentLabel.textContent = name;
+
+      // Update preset active rings
+      document.querySelectorAll('.favicon-preset-btn').forEach((btn) => {
+        const btnUrl = btn.getAttribute('data-url');
+        if (btnUrl === url || (url.includes('shoe-red') && btnUrl.includes('shoe-red')) ||
+            (url.includes('shoe-black') && btnUrl.includes('shoe-black')) ||
+            (url.includes('shoe-white') && btnUrl.includes('shoe-white')) ||
+            (url.includes('shoe-cyan') && btnUrl.includes('shoe-cyan'))) {
+          btn.classList.add('ring-2', 'ring-red-600', 'bg-red-50/40');
+        } else {
+          btn.classList.remove('ring-2', 'ring-red-600', 'bg-red-50/40');
+        }
+      });
+    }
+
+    function openFaviconModal() {
+      initAudio();
+      playUiSound('whoosh');
+      if (faviconModal && faviconBackdrop) {
+        faviconBackdrop.classList.remove('hidden');
+        faviconModal.classList.remove('pointer-events-none');
+        requestAnimationFrame(() => {
+          faviconBackdrop.classList.remove('opacity-0');
+          faviconModal.classList.remove('opacity-0', 'scale-95');
+          faviconModal.classList.add('opacity-100', 'scale-100');
+          if (window.lucide) window.lucide.createIcons();
+        });
+      }
+    }
+
+    function closeFaviconModal() {
+      if (faviconModal && faviconBackdrop) {
+        faviconModal.classList.remove('opacity-100', 'scale-100');
+        faviconModal.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
+        faviconBackdrop.classList.add('opacity-0');
+        setTimeout(() => {
+          faviconBackdrop.classList.add('hidden');
+        }, 250);
+      }
+    }
+
+    // Favicon modal open / close buttons
+    if (faviconBtn) {
+      faviconBtn.addEventListener('click', openFaviconModal);
+    }
+    if (faviconModalClose) {
+      faviconModalClose.addEventListener('click', closeFaviconModal);
+    }
+    if (faviconBackdrop) {
+      faviconBackdrop.addEventListener('click', closeFaviconModal);
+    }
+
+    // Colorway Presets click handlers
+    document.querySelectorAll('.favicon-preset-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        initAudio();
+        playUiSound('click');
+        const url = btn.getAttribute('data-url');
+        const name = btn.getAttribute('data-name');
+        setFavicon(url, name, true);
+        showToast(`Favicon updated to ${name}!`);
+      });
+    });
+
+    // Custom File Upload
+    if (faviconFileInput) {
+      faviconFileInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          const dataUrl = evt.target.result;
+          setFavicon(dataUrl, file.name, true);
+          showToast(`Custom favicon "${file.name}" active in tab!`);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    // Reset button
+    if (faviconResetBtn) {
+      faviconResetBtn.addEventListener('click', () => {
+        initAudio();
+        playUiSound('click');
+        localStorage.removeItem('malzie_favicon_url');
+        localStorage.removeItem('malzie_favicon_name');
+        setFavicon('assets/images/shoe-white.png', 'Pure White Sneaker', true);
+        showToast('Favicon reset to Pure White Sneaker default.');
+      });
+    }
+
+    // Auto-sync Toggle
+    if (faviconAutoSyncToggle) {
+      const savedAutoSync = localStorage.getItem('malzie_favicon_autosync');
+      faviconAutoSyncToggle.checked = savedAutoSync !== 'false';
+      faviconAutoSyncToggle.addEventListener('change', () => {
+        localStorage.setItem('malzie_favicon_autosync', faviconAutoSyncToggle.checked ? 'true' : 'false');
+        showToast(faviconAutoSyncToggle.checked ? 'Auto-sync enabled: Favicon matches active shoe.' : 'Auto-sync disabled.');
+      });
+    }
+
+    // Restore saved favicon on page load
+    const savedFaviconUrl = localStorage.getItem('malzie_favicon_url');
+    const savedFaviconName = localStorage.getItem('malzie_favicon_name');
+    if (savedFaviconUrl) {
+      setFavicon(savedFaviconUrl, savedFaviconName || 'Saved Custom Favicon', false);
+    } else {
+      setFavicon('assets/images/shoe-white.png', 'Pure White Sneaker', false);
+    }
+
+    // Expose setFavicon globally
+    window.setFavicon = setFavicon;
+
+    // ----------------------------------------------------
+    // 13. MOBILE SIDEBAR TOGGLE
+    // ----------------------------------------------------
+    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
+    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        initAudio();
+        playUiSound('whoosh');
+        if (mainHeader && sidebarBackdrop) {
+          sidebarBackdrop.classList.remove('hidden');
+          requestAnimationFrame(() => {
+            sidebarBackdrop.classList.remove('opacity-0');
+            mainHeader.classList.remove('-translate-x-full');
+          });
+        }
+      });
+    }
+
+    if (sidebarCloseBtn) {
+      sidebarCloseBtn.addEventListener('click', () => {
+        initAudio();
+        playUiSound('click');
+        if (mainHeader && sidebarBackdrop) {
+          mainHeader.classList.add('-translate-x-full');
+          sidebarBackdrop.classList.add('opacity-0');
+          setTimeout(() => {
+            sidebarBackdrop.classList.add('hidden');
+          }, 300);
+        }
+      });
+    }
+
+    if (sidebarBackdrop) {
+      sidebarBackdrop.addEventListener('click', () => {
+        if (mainHeader && sidebarBackdrop) {
+          mainHeader.classList.add('-translate-x-full');
+          sidebarBackdrop.classList.add('opacity-0');
+          setTimeout(() => {
+            sidebarBackdrop.classList.add('hidden');
+          }, 300);
+        }
       });
     }
 

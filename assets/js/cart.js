@@ -861,6 +861,23 @@
         });
       });
     });
+
+    // Site-wide Favicon Sync
+    initFavicon();
+  }
+
+  function initFavicon() {
+    const savedUrl = localStorage.getItem('malzie_favicon_url') || 'assets/images/shoe-white.png';
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.head.appendChild(link);
+    }
+    link.id = 'site-favicon';
+    link.type = 'image/png';
+    const cacheBust = savedUrl.startsWith('data:') ? '' : (savedUrl.includes('?') ? '&v=' : '?v=') + Date.now();
+    link.href = savedUrl + cacheBust;
   }
 
   // Expose API on window

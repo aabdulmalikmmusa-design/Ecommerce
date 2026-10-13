@@ -6,6 +6,9 @@
   <title>Malzie Softs // All Products — Footwear & Apparel</title>
   <meta name="description" content="Browse the full collection of Malzie Softs high-performance footwear and engineered athletic shirts.">
 
+  <!-- Favicon -->
+  <link id="site-favicon" rel="icon" type="image/png" href="assets/images/shoe-white.png">
+
   <!-- Google Fonts: Barlow Condensed, Oswald, Inter, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
@@ -21,6 +24,7 @@
           fontFamily: {
             display: ['"Barlow Condensed"', 'Oswald', 'sans-serif'],
             sans: ['Inter', '"Plus Jakarta Sans"', 'sans-serif'],
+            calligraphy: ['"Lucida Calligraphy"', '"Lucida Caligraphy"', '"Lucida Handwriting"', '"Apple Chancery"', 'cursive', 'serif'],
           },
           colors: {
             brand: {
@@ -37,53 +41,53 @@
   </script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=4.4">
 
   <!-- Lucide Icons Library -->
   <script src="assets/js/lucide.min.js"></script>
 </head>
-<body class="font-sans bg-[#f7f8fa] text-[#121316] antialiased selection:bg-black selection:text-white">
+<body class="font-sans antialiased text-white selection:bg-black selection:text-white" style="background: radial-gradient(ellipse at 50% -8%, #FE9600 0%, #FD6300 24%, #D36311 55%, #421300 100%) no-repeat fixed; min-height: 100vh;">
 
   <!-- ============================================================ -->
   <!-- 1. NAVIGATION BAR -->
   <!-- ============================================================ -->
-  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-gray-100">
+  <header class="sticky top-0 z-40 bg-[#421300]/80 backdrop-blur-xl border-b border-white/15 text-white transition-all shadow-lg">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="Malzie Softs Home">
-        <div class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
+        <div class="w-10 h-10 rounded-2xl bg-white text-[#421300] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
           <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-bold text-xl tracking-tight text-black leading-none">MALZIE SOFTS</span>
-          <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">STUDIO</span>
+          <span class="font-calligraphy font-bold text-xl md:text-2xl text-white leading-none">MALZIE SOFTZ</span>
+          <span class="text-[9px] font-extrabold tracking-[0.25em] text-amber-200 uppercase leading-tight">STUDIO</span>
         </div>
       </a>
 
       <!-- Center Links -->
-      <nav class="hidden md:flex items-center space-x-8 text-sm font-bold text-gray-700">
-        <a href="index.html" class="hover:text-black transition-colors py-2">Home</a>
-        <a href="products.html" class="text-black font-extrabold transition-colors py-2 border-b-2 border-black">All Products</a>
-        <button onclick="setFilter('Footwear')" class="hover:text-black transition-colors py-2 font-bold text-gray-600">Footwear</button>
-        <button onclick="setFilter('Shirts')" class="hover:text-black transition-colors py-2 font-bold text-gray-600">Shirts & Tops</button>
-        <a href="index.html#innovations-section" class="hover:text-black transition-colors py-2">Technology</a>
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-bold text-white/80">
+        <a href="index.html" class="hover:text-white transition-colors py-2">Home</a>
+        <a href="products.html" class="text-white font-extrabold transition-colors py-2 border-b-2 border-white">All Products</a>
+        <button onclick="setFilter('Footwear')" class="hover:text-white transition-colors py-2 font-bold text-white/80">Footwear</button>
+        <button onclick="setFilter('Shirts')" class="hover:text-white transition-colors py-2 font-bold text-white/80">Shirts & Tops</button>
+        <a href="index.html#innovations-section" class="hover:text-white transition-colors py-2">Technology</a>
       </nav>
 
       <!-- Right Actions -->
       <div class="flex items-center space-x-3 sm:space-x-4">
         <!-- Back to Home Link -->
-        <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-gray-600 hover:text-black bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-full transition-colors">
+        <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-white hover:bg-white/25 bg-white/15 border border-white/20 px-3.5 py-2 rounded-full transition-all backdrop-blur-md">
           <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
           <span>Back to Home</span>
         </a>
 
         <!-- Cart Bag Trigger with dynamic badge -->
-        <button id="cart-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative" aria-label="Shopping Bag" title="Shopping Bag">
+        <button id="cart-btn" class="p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative" aria-label="Shopping Bag" title="Shopping Bag">
           <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-          <span id="cart-count-badge" class="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">1</span>
+          <span id="cart-count-badge" class="absolute top-1 right-1 w-4 h-4 bg-white text-[#421300] text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-[#421300]">0</span>
         </button>
       </div>
 
@@ -93,25 +97,27 @@
   <!-- ============================================================ -->
   <!-- 2. COLLECTION BANNER -->
   <!-- ============================================================ -->
-  <section class="bg-gradient-to-b from-white to-[#f4f6fa] border-b border-gray-200/80 py-14">
+  <section class="border-b border-white/10 py-14 bg-black/10 backdrop-blur-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-2xl">
-        <span class="text-xs font-black uppercase tracking-widest text-red-600">COMPLETE ROSTER // 2026</span>
-        <h1 class="font-display text-4xl sm:text-5xl font-bold text-black uppercase tracking-tight mt-1 leading-tight">
+        <span class="inline-block text-xs font-black uppercase tracking-widest text-amber-200 bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-amber-300/30">
+          COMPLETE ROSTER // 2026
+        </span>
+        <h1 class="font-serif-times text-4xl sm:text-5xl font-bold text-white uppercase tracking-normal mt-2 leading-tight drop-shadow-sm">
           Footwear & Performance Shirts
         </h1>
-        <p class="text-sm sm:text-base text-gray-600 mt-2 font-medium">
+        <p class="text-sm sm:text-base text-white/90 mt-2 font-medium">
           Zero-gravity nitrogen cushioning meets precision-engineered technical apparel. Click on any item to view its detailed specifications and price.
         </p>
       </div>
 
       <!-- Quick Category Pills Filter -->
-      <div class="flex flex-wrap items-center gap-2 mt-8">
-        <button data-cat="All" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-black text-white shadow-md transition-all">All Items</button>
-        <button data-cat="Footwear" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 transition-all">Footwear Only</button>
-        <button data-cat="Shirts" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 transition-all">Shirts & Apparel</button>
-        <button data-cat="Running" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 transition-all">Running Category</button>
-        <button data-cat="Lifestyle" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 transition-all">Lifestyle</button>
+      <div class="flex flex-wrap items-center gap-2.5 mt-8">
+        <button data-cat="All" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-black shadow-lg transition-all scale-105">All Items</button>
+        <button data-cat="Footwear" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Footwear Only</button>
+        <button data-cat="Shirts" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Shirts & Apparel</button>
+        <button data-cat="Running" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Running Category</button>
+        <button data-cat="Lifestyle" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Lifestyle</button>
       </div>
     </div>
   </section>
@@ -123,14 +129,14 @@
     
     <!-- Count & Sort Bar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-      <p id="products-count" class="text-xs font-bold text-gray-500 uppercase tracking-wider">
+      <p id="products-count" class="text-xs font-bold text-white/80 uppercase tracking-wider">
         Showing 8 Products
       </p>
 
       <!-- Instant Search Filter -->
       <div class="relative max-w-xs w-full">
-        <input id="collection-search" type="text" placeholder="Search shoes or shirts..." class="w-full bg-white border border-gray-200 text-xs font-semibold rounded-full pl-9 pr-4 py-2.5 focus:outline-none focus:border-black shadow-sm">
-        <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-3"></i>
+        <input id="collection-search" type="text" placeholder="Search shoes or shirts..." class="w-full bg-white/15 text-white placeholder-white/60 border border-white/25 text-xs font-semibold rounded-full pl-9 pr-4 py-2.5 focus:outline-none focus:bg-white/25 focus:border-white shadow-inner backdrop-blur-md">
+        <i data-lucide="search" class="w-4 h-4 text-white/70 absolute left-3 top-3"></i>
       </div>
     </div>
 
@@ -144,8 +150,8 @@
   <!-- ============================================================ -->
   <!-- 4. FOOTER -->
   <!-- ============================================================ -->
-  <footer class="bg-black text-white py-12 mt-20 border-t border-gray-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+  <footer class="bg-[#380e00] text-white/70 py-12 mt-20 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-amber-200/60">
       <p>© 2026 Malzie Softs Athletic Studio. Footwear & Technical Apparel.</p>
       <div class="flex gap-6">
         <a href="index.html" class="hover:text-white transition-colors">Home Welcoming Page</a>
@@ -227,6 +233,7 @@
   <!-- Central Products Data & Commerce Engine -->
   <script src="assets/js/products-data.js"></script>
   <script src="assets/js/cart.js"></script>
+  <script src="assets/js/scroll-animate.js?v=4.4"></script>
 
   <script>
     let activeCategory = 'All';
@@ -235,9 +242,9 @@
       activeCategory = cat;
       document.querySelectorAll('.filter-tab-btn').forEach(b => {
         if (b.getAttribute('data-cat') === cat) {
-          b.className = 'filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-black text-white shadow-md transition-all';
+          b.className = 'filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-black shadow-lg transition-all scale-105';
         } else {
-          b.className = 'filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 transition-all';
+          b.className = 'filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all';
         }
       });
       renderProducts();
@@ -271,24 +278,24 @@
 
       if (list.length === 0) {
         grid.innerHTML = `
-          <div class="col-span-full py-16 text-center text-gray-400">
-            <p class="font-bold text-base">No items found matching your filter.</p>
-            <p class="text-xs text-gray-500 mt-1">Try switching categories or clearing search.</p>
+          <div class="col-span-full py-16 text-center text-white/80 bg-black/20 rounded-3xl border border-white/10 backdrop-blur-md">
+            <p class="font-bold text-base text-white">No items found matching your filter.</p>
+            <p class="text-xs text-amber-200/80 mt-1">Try switching categories or clearing search.</p>
           </div>
         `;
         return;
       }
 
       // Render cards with both Quick Add and View Detail options
-      grid.innerHTML = list.map(p => `
-        <div class="group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
+      grid.innerHTML = list.map((p, idx) => `
+        <div class="scroll-reveal stagger-${(idx % 4) + 1} group bg-white/95 backdrop-blur-md rounded-3xl p-5 border border-amber-200/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
           <div>
             <a href="product-detail.html?id=${p.id}" class="block">
-              <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-64 flex items-center justify-center overflow-hidden">
+              <div class="relative bg-gradient-to-b from-amber-50/70 to-orange-100/40 rounded-2xl p-4 h-64 flex items-center justify-center overflow-hidden">
                 <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
                   ${p.badge}
                 </span>
-                <span class="absolute top-3 right-3 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                <span class="absolute top-3 right-3 bg-[#421300] text-amber-200 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
                   ${p.type}
                 </span>
                 <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-500">
@@ -299,19 +306,19 @@
                   <span>${p.type}</span>
                   <span class="text-amber-500 font-bold">★ ${p.rating}</span>
                 </div>
-                <h3 class="text-base font-bold text-gray-900 group-hover:text-red-500 transition-colors">${p.name}</h3>
+                <h3 class="text-base font-bold text-gray-900 group-hover:text-[#ad4f12] transition-colors">${p.name}</h3>
                 <p class="text-xs text-gray-500 mt-0.5">${p.color}</p>
               </div>
             </a>
           </div>
 
           <!-- Bottom: Action Buttons -->
-          <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-            <button data-id="${p.id}" class="prod-quick-add-btn bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold px-3.5 py-2.5 rounded-full transition-colors flex items-center gap-1 shadow-sm" title="Quick Add">
+          <div class="mt-5 pt-3 border-t border-amber-100/70 flex items-center justify-between gap-2">
+            <button data-id="${p.id}" class="prod-quick-add-btn bg-amber-50 hover:bg-amber-100 text-[#421300] text-xs font-bold px-3.5 py-2.5 rounded-full transition-colors flex items-center gap-1 shadow-sm" title="Quick Add">
               <i data-lucide="plus" class="w-3.5 h-3.5"></i>
               <span>Bag</span>
             </button>
-            <a href="product-detail.html?id=${p.id}" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-bold px-4 py-2.5 rounded-full transition-all group-hover:scale-102 shadow-md">
+            <a href="product-detail.html?id=${p.id}" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#ad4f12] hover:bg-[#8d3b07] text-white text-xs font-bold px-4 py-2.5 rounded-full transition-all group-hover:scale-102 shadow-md">
               <span>View & Price</span>
               <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
@@ -321,6 +328,10 @@
 
       if (window.lucide) {
         window.lucide.createIcons();
+      }
+
+      if (window.refreshScrollAnimations) {
+        window.refreshScrollAnimations();
       }
 
       // Wire quick add buttons

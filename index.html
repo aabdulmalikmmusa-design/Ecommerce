@@ -6,11 +6,13 @@
   <title>Malzie Softs // Aero Max 90 — Defy Gravity</title>
   <meta name="description" content="Discover the next evolution in athletic footwear. Malzie Softs Aero Max combines zero-gravity nitrogen cushioning with aerodynamic matrix weave.">
 
-  <!-- Google Fonts: Syne (Ultra Bold Display), Plus Jakarta Sans, Outfit -->
+  <!-- Favicon -->
+  <link id="site-favicon" rel="icon" type="image/png" href="assets/images/shoe-white.png">
+
   <!-- Google Fonts: Barlow Condensed & Oswald (Athletic, Orderly, Crisp), Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,6 +24,8 @@
           fontFamily: {
             display: ['"Barlow Condensed"', 'Oswald', 'sans-serif'],
             sans: ['Inter', '"Plus Jakarta Sans"', 'sans-serif'],
+            calligraphy: ['"Lucida Calligraphy"', '"Lucida Caligraphy"', '"Lucida Handwriting"', '"Apple Chancery"', 'cursive', 'serif'],
+            times: ['"Times New Roman"', 'Times', 'Baskerville', 'Georgia', 'serif'],
           },
           colors: {
             brand: {
@@ -38,7 +42,7 @@
   </script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css?v=4.0">
+  <link rel="stylesheet" href="assets/css/style.css?v=4.4">
 
   <!-- Lucide Icons Library -->
   <script src="assets/js/lucide.min.js"></script>
@@ -46,46 +50,97 @@
 <body class="font-sans bg-[#f7f8fa] text-[#121316] antialiased selection:bg-black selection:text-white overflow-x-hidden">
 
 
+  <!-- Mobile Top Navigation Bar (Visible only on screens < lg) -->
+  <div id="mobile-top-bar" class="lg:hidden sticky top-0 z-30 bg-white/90 backdrop-blur-xl border-b border-gray-100 h-16 flex items-center justify-between px-4 sm:px-6">
+    <a href="#hero-section" class="flex items-center gap-2.5">
+      <div class="w-8 h-8 rounded-xl bg-black flex items-center justify-center text-white shadow-sm">
+        <svg class="w-5 h-5 -rotate-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
+        </svg>
+      </div>
+      <span class="font-calligraphy font-bold text-lg text-black">MALZIE SOFTZ</span>
+    </a>
+    <div class="flex items-center gap-2">
+      <!-- Mobile Shopping Bag -->
+      <button class="cart-trigger-btn p-2 rounded-full hover:bg-gray-100 text-gray-900 relative" aria-label="Shopping Bag">
+        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+        <span class="cart-count-badge absolute top-0.5 right-0.5 w-4 h-4 bg-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">1</span>
+      </button>
+      <!-- Mobile Sidebar Toggle -->
+      <button id="mobile-menu-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-900" aria-label="Open Navigation">
+        <i data-lucide="menu" class="w-6 h-6"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div id="sidebar-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden"></div>
+
   <!-- ============================================================ -->
-  <!-- 2. MAIN NAVIGATION BAR -->
+  <!-- 2. LEFT SIDEBAR NAVIGATION BAR -->
   <!-- ============================================================ -->
-  <header id="main-header" class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 transition-all duration-500">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-      
-      <!-- Left: Bespoke Brand Logo (Non-Nike) -->
+  <header id="main-header" class="fixed top-0 left-0 bottom-0 h-screen w-72 z-50 bg-white/95 backdrop-blur-2xl border-r border-gray-200/80 transition-all duration-500 text-gray-900 flex flex-col justify-between p-6 shadow-2xl lg:shadow-none -translate-x-full lg:translate-x-0 overflow-y-auto">
+    
+    <!-- Top: Bespoke Brand Logo + Mobile Close Button -->
+    <div class="flex items-center justify-between pb-6 border-b border-gray-200/50">
       <a href="#hero-section" class="flex items-center gap-3 group focus:outline-none" aria-label="Malzie Softs Home">
         <div id="header-logo-box" class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
-          <!-- Custom Aerodynamic Wing & Vortex Emblem -->
           <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
           </svg>
         </div>
         <div class="flex flex-col">
-          <span id="header-brand-name" class="font-display font-black text-xl tracking-tighter text-black leading-none transition-colors duration-500">MALZIE SOFTZ</span>
+          <span id="header-brand-name" class="font-calligraphy font-bold text-xl text-black leading-none transition-colors duration-500">MALZIE SOFTZ</span>
           <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">STUDIO</span>
         </div>
       </a>
+      <button id="sidebar-close-btn" class="lg:hidden p-1.5 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors" aria-label="Close Navigation">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
 
-      <!-- Center: Navigation Links -->
-      <nav id="header-nav-links" class="hidden md:flex items-center space-x-8 text-sm font-bold text-gray-700 transition-colors duration-500">
-        <a href="products.html?filter=Footwear" class="hover:text-black transition-colors py-2">Footwear</a>
-        <a href="products.html?filter=Shirts" class="hover:text-black transition-colors py-2">Shirts & Apparel</a>
-        <a href="products.html" class="hover:text-black transition-colors py-2">All Products</a>
-        <a href="#innovations-section" class="hover:text-black transition-colors py-2">Technology</a>
-        <a href="products.html" class="flex items-center gap-1.5 text-red-600 hover:text-red-700 font-extrabold py-2">
-          <span>Sale</span>
-          <span class="bg-red-100 text-red-600 text-[10px] font-black px-1.5 py-0.5 rounded-full uppercase">Hot</span>
-        </a>
-      </nav>
+    <!-- Center: Navigation Links -->
+    <nav id="header-nav-links" class="flex flex-col space-y-1.5 my-6 text-sm font-bold transition-colors duration-500">
+      <span class="text-[10px] font-black tracking-widest text-gray-400 uppercase px-3 mb-2">Explore Atelier</span>
+      <a href="products.html?filter=Footwear" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-gray-700 hover:text-black hover:bg-black/5 transition-all group">
+        <i data-lucide="footprints" class="w-4 h-4 text-gray-400 group-hover:text-black transition-colors"></i>
+        <span>Footwear</span>
+      </a>
+      <a href="products.html?filter=Shirts" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-gray-700 hover:text-black hover:bg-black/5 transition-all group">
+        <i data-lucide="shirt" class="w-4 h-4 text-gray-400 group-hover:text-black transition-colors"></i>
+        <span>Shirts & Apparel</span>
+      </a>
+      <a href="products.html" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-gray-700 hover:text-black hover:bg-black/5 transition-all group">
+        <i data-lucide="grid" class="w-4 h-4 text-gray-400 group-hover:text-black transition-colors"></i>
+        <span>All Products</span>
+      </a>
+      <a href="#innovations-section" class="flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-gray-700 hover:text-black hover:bg-black/5 transition-all group">
+        <i data-lucide="cpu" class="w-4 h-4 text-gray-400 group-hover:text-black transition-colors"></i>
+        <span>Technology</span>
+      </a>
+      <a href="products.html" class="flex items-center justify-between px-3.5 py-2.5 rounded-2xl text-red-600 hover:bg-red-50/60 font-extrabold transition-all group">
+        <div class="flex items-center gap-3">
+          <i data-lucide="flame" class="w-4 h-4 text-red-600"></i>
+          <span>Exclusive Sale</span>
+        </div>
+        <span class="bg-red-100 text-red-600 text-[10px] font-black px-2 py-0.5 rounded-full uppercase">Hot</span>
+      </a>
+    </nav>
 
-      <!-- Right: Action Icons (Search, Profile/Auth, Cart, Sound, Mobile Menu) -->
-      <div id="header-actions" class="flex items-center space-x-3 sm:space-x-4 transition-colors duration-500">
-        <!-- Live Search Trigger -->
-        <button id="search-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative" aria-label="Search" title="Search (Ctrl+K)">
-          <i data-lucide="search" class="w-5 h-5"></i>
-        </button>
+    <!-- Bottom: Action Icons & Utilities -->
+    <div id="header-actions" class="pt-5 border-t border-gray-200/50 flex flex-col space-y-3 transition-colors duration-500">
+      <!-- Search Trigger Button -->
+      <button id="search-btn" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors text-xs font-bold" aria-label="Search" title="Search (Ctrl+K)">
+        <div class="flex items-center gap-2.5">
+          <i data-lucide="search" class="w-4 h-4 text-gray-500"></i>
+          <span>Search Drop</span>
+        </div>
+        <kbd class="text-[10px] bg-white border border-gray-300 rounded px-1.5 py-0.5 text-gray-500">⌘K</kbd>
+      </button>
 
-        <!-- Account / Login / Register Trigger & Dropdown -->
+      <!-- Utility Control Row -->
+      <div class="flex items-center justify-between px-1">
+        <!-- Account Trigger & Menu -->
         <div class="relative">
           <button id="auth-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative flex items-center justify-center" aria-label="Account" title="Account / Sign In">
             <i id="auth-icon-logged-out" data-lucide="user" class="w-5 h-5"></i>
@@ -93,9 +148,8 @@
               AM
             </div>
           </button>
-
-          <!-- User Profile Dropdown Menu (Hidden by default) -->
-          <div id="user-menu-dropdown" class="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 py-3 px-4 hidden z-50 transition-all">
+          <!-- User Profile Dropdown Menu -->
+          <div id="user-menu-dropdown" class="absolute bottom-12 left-0 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 py-3 px-4 hidden z-50 transition-all text-gray-900">
             <div class="pb-3 border-b border-gray-100">
               <p id="user-display-name" class="font-bold text-sm text-gray-900">Alex Mercer</p>
               <p id="user-display-email" class="text-xs text-gray-400">alex@malziesofts.com</p>
@@ -126,28 +180,24 @@
         </button>
 
         <!-- Audio Sound SFX Toggle -->
-        <button id="sound-toggle-btn" class="hidden sm:flex p-2.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black transition-colors" title="Toggle UI Sound Effects">
+        <button id="sound-toggle-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black transition-colors" title="Toggle UI Sound Effects">
           <i id="sound-icon-on" data-lucide="volume-2" class="w-5 h-5"></i>
           <i id="sound-icon-off" data-lucide="volume-x" class="w-5 h-5 hidden"></i>
         </button>
 
-        <!-- Mobile Menu Hamburger Button -->
-        <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors" aria-label="Menu">
-          <i data-lucide="menu" class="w-6 h-6"></i>
+        <!-- Favicon Studio Switcher Button -->
+        <button id="favicon-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-700 hover:text-black transition-colors relative flex items-center justify-center group" aria-label="Change Tab Favicon" title="Favicon Studio — Change Browser Tab Icon">
+          <i data-lucide="palette" class="w-5 h-5"></i>
+          <span id="favicon-indicator-dot" class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-600 ring-2 ring-white"></span>
         </button>
       </div>
-
-    </div>
-
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-6 py-5 space-y-3">
-      <a href="#catalog-section" class="block text-base font-bold text-gray-900 py-1">Men's Footwear</a>
-      <a href="#catalog-section" class="block text-base font-bold text-gray-900 py-1">Women's Footwear</a>
-      <a href="#catalog-section" class="block text-base font-bold text-gray-900 py-1">Kids</a>
-      <a href="#innovations-section" class="block text-base font-bold text-gray-900 py-1">Collections & Labs</a>
-      <a href="#catalog-section" class="block text-base font-bold text-red-600 py-1">Exclusive Sale 🔥</a>
     </div>
   </header>
+
+  <!-- ============================================================ -->
+  <!-- MAIN SITE CONTENT WRAPPER (Shifted right for left sidebar) -->
+  <!-- ============================================================ -->
+  <div id="site-main-content" class="site-main-content min-h-screen flex flex-col">
 
   <!-- ============================================================ -->
   <!-- 3. HERO WELCOMING SECTION (Matching & Elevating Reference UI) -->
@@ -312,17 +362,25 @@
         
         <!-- Instagram -->
         <a href="#" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="Instagram">
-          <i data-lucide="instagram" class="w-4 h-4"></i>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
         </a>
 
         <!-- Twitter / X -->
         <a href="#" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="Twitter">
-          <i data-lucide="twitter" class="w-4 h-4"></i>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
         </a>
 
         <!-- Facebook -->
         <a href="#" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="Facebook">
-          <i data-lucide="facebook" class="w-4 h-4"></i>
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+          </svg>
         </a>
 
         <!-- Share / Connect -->
@@ -341,26 +399,20 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
       <!-- Section Header -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+      <div class="scroll-reveal flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
         <div>
           <span class="text-xs font-black uppercase tracking-widest text-red-600">ENGINEERED IN ATELIER 2026</span>
-          <h2 class="font-display text-4xl sm:text-5xl font-black text-black tracking-tight mt-2">
+          <h2 class="font-serif-times text-4xl sm:text-5xl font-bold text-black tracking-normal mt-2">
             The Anatomy of Zero Resistance
           </h2>
         </div>
-        <p class="text-gray-500 font-medium max-w-md text-sm sm:text-base">
-          Built from atomic polymer lattices and aerospace-grade nitrogen damping. Tested by elite marathoners and street pioneers.
-        </p>
       </div>
 
       <!-- Feature Grid -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Card 1 -->
-        <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-          <div class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i data-lucide="zap" class="w-7 h-7 text-cyan-400"></i>
-          </div>
+        <div class="scroll-reveal stagger-1 p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
           <h3 class="text-xl font-black text-black mb-2">Nitrogen Kinetic Capsule</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
             Captures deceleration energy and snaps back with 88% mechanical return. Zero degradation across 800+ kilometers of relentless wear.
@@ -371,10 +423,7 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-          <div class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i data-lucide="recycle" class="w-7 h-7 text-emerald-400"></i>
-          </div>
+        <div class="scroll-reveal stagger-2 p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
           <h3 class="text-xl font-black text-black mb-2">100% Recycled Matrix Weave</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
             Spun from ocean-recovered polymers. The featherweight micro-mesh adapts to your foot swell while dissipating heat 3.4x faster than standard knits.
@@ -385,10 +434,7 @@
         </div>
 
         <!-- Card 3 -->
-        <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-          <div class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <i data-lucide="shield-check" class="w-7 h-7 text-amber-400"></i>
-          </div>
+        <div class="scroll-reveal stagger-3 p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
           <h3 class="text-xl font-black text-black mb-2">Biomimetic Carbon Grip</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
             Multi-tread chevron layout inspired by raptor talons. Delivers razor-sharp cornering stability across wet ceramic tiles, pavement, and gravel.
@@ -409,7 +455,7 @@
   <section id="catalog-section" class="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Catalog Header & Controls -->
-    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12">
+    <div class="scroll-reveal flex flex-col lg:flex-row lg:items-center justify-between gap-6 mb-12">
       <div>
         <span class="text-xs font-black uppercase tracking-widest text-gray-400">CURATED DROPS</span>
         <h2 class="font-display text-3xl sm:text-4xl font-bold text-black uppercase tracking-tight mt-1">
@@ -439,7 +485,7 @@
   <!-- 6. EDITORIAL LIFESTYLE BANNER -->
   <!-- ============================================================ -->
   <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="relative rounded-3xl overflow-hidden shadow-2xl bg-neutral-900 min-h-[460px] flex items-center">
+    <div class="scroll-reveal-scale relative rounded-3xl overflow-hidden shadow-2xl bg-neutral-900 min-h-[460px] flex items-center">
       <img src="assets/images/lifestyle-banner.jpg" alt="Malzie Softs Athlete in motion" class="absolute inset-0 w-full h-full object-cover opacity-75">
       <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
 
@@ -447,7 +493,7 @@
         <span class="inline-block bg-white/20 backdrop-blur-md text-white text-[10px] font-black tracking-widest uppercase px-3 py-1 rounded-full mb-4">
           MALZIE SOFTS FIELD TEST // TOKYO DUSK
         </span>
-        <h2 class="font-display text-3xl sm:text-5xl font-black tracking-tight leading-tight mb-4">
+        <h2 class="font-display text-3xl sm:text-5xl font-black italic tracking-wide sm:tracking-wider leading-snug sm:leading-relaxed [word-spacing:0.12em] mb-6">
           Engineered for those who outrun the ordinary.
         </h2>
         <p class="text-gray-300 text-sm sm:text-base mb-8 leading-relaxed">
@@ -466,9 +512,9 @@
   <!-- ============================================================ -->
   <section class="py-24 bg-white border-t border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-2xl mx-auto mb-16">
+      <div class="scroll-reveal text-center max-w-2xl mx-auto mb-16">
         <span class="text-xs font-black uppercase tracking-widest text-red-600">VERIFIED PERFORMANCE</span>
-        <h2 class="font-display text-3xl sm:text-4xl font-black text-black tracking-tight mt-1">
+        <h2 class="font-serif-times text-3xl sm:text-4xl font-bold text-black tracking-normal mt-1">
           Voices From The Track
         </h2>
         <p class="text-gray-500 text-sm mt-3">Rated 4.9 / 5 across more than 14,000 verified runners and sneaker connoisseurs worldwide.</p>
@@ -477,7 +523,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Review 1 -->
-        <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 flex flex-col justify-between">
+        <div class="scroll-reveal stagger-1 p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 flex flex-col justify-between">
           <div>
             <div class="flex items-center text-amber-400 mb-4">★★★★★</div>
             <p class="text-sm font-semibold text-gray-800 leading-relaxed italic">
@@ -494,7 +540,7 @@
         </div>
 
         <!-- Review 2 -->
-        <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 flex flex-col justify-between">
+        <div class="scroll-reveal stagger-2 p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 flex flex-col justify-between">
           <div>
             <div class="flex items-center text-amber-400 mb-4">★★★★★</div>
             <p class="text-sm font-semibold text-gray-800 leading-relaxed italic">
@@ -511,7 +557,7 @@
         </div>
 
         <!-- Review 3 -->
-        <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 flex flex-col justify-between">
+        <div class="scroll-reveal stagger-3 p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 flex flex-col justify-between">
           <div>
             <div class="flex items-center text-amber-400 mb-4">★★★★★</div>
             <p class="text-sm font-semibold text-gray-800 leading-relaxed italic">
@@ -607,6 +653,7 @@
       </div>
     </div>
   </footer>
+  </div><!-- End of #site-main-content -->
 
   <!-- ============================================================ -->
   <!-- 9. SHOPPING CART SLIDE-OVER DRAWER -->
@@ -859,15 +906,137 @@
   </div>
 
   <!-- ============================================================ -->
-  <!-- 13. DYNAMIC TOAST NOTIFICATIONS CONTAINER -->
+  <!-- 13. FAVICON STUDIO SWITCHER MODAL -->
+  <!-- ============================================================ -->
+  <div id="favicon-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <div id="favicon-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 scale-95 pointer-events-none transition-all duration-300">
+    <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-gray-100 overflow-hidden pointer-events-auto transform transition-all">
+      <!-- Modal Header -->
+      <div class="px-6 py-5 border-b border-gray-100 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-black text-white flex items-center justify-center shadow-md">
+            <i data-lucide="palette" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <h3 class="font-display font-black text-xl text-black uppercase tracking-tight">Tab Favicon Studio</h3>
+            <p class="text-xs text-gray-500 font-medium">Switch or upload the browser tab icon in real time</p>
+          </div>
+        </div>
+        <button id="favicon-modal-close" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 flex items-center justify-center transition-colors">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <div class="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
+        <!-- Live Browser Tab Preview Simulator -->
+        <div class="space-y-2">
+          <span class="text-[11px] font-black uppercase tracking-wider text-gray-400">Live Browser Tab Preview</span>
+          <div class="bg-neutral-900 rounded-2xl p-3 border border-neutral-800 shadow-inner">
+            <div class="flex items-center gap-2 bg-neutral-800/90 text-white rounded-xl px-3 py-2 text-xs border border-white/10 max-w-sm shadow-sm">
+              <div class="w-5 h-5 rounded flex items-center justify-center bg-white/10 flex-shrink-0 p-0.5">
+                <img id="favicon-tab-preview-img" src="assets/images/shoe-white.png" alt="Favicon" class="w-4 h-4 object-contain">
+              </div>
+              <span class="font-semibold text-[11px] truncate flex-1 text-gray-200">Malzie Softs // Aero Max 90</span>
+              <span class="text-gray-400 text-[10px] px-1">✕</span>
+            </div>
+            <div class="flex items-center justify-between mt-2 pt-2 border-t border-neutral-800/80 px-1 text-[11px] text-gray-400">
+              <span>Active Favicon: <strong id="current-favicon-label" class="text-white">Pure White Sneaker</strong></span>
+              <span class="text-emerald-400 font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Live in Tab
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shoe Colorway Presets -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-black uppercase tracking-wider text-gray-400">Shoe Colorway Presets</span>
+            <span class="text-[10px] font-bold text-gray-400">Click to apply instantly</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <!-- Red -->
+            <button type="button" class="favicon-preset-btn p-3 rounded-2xl border-2 border-gray-100 hover:border-red-500 hover:shadow-md transition-all flex flex-col items-center gap-2 text-center group bg-white" data-url="assets/images/shoe-red.png" data-name="Aero Red Sneaker">
+              <div class="w-12 h-12 rounded-xl bg-red-50 flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
+                <img src="assets/images/shoe-red.png" alt="Red" class="w-10 h-10 object-contain">
+              </div>
+              <span class="text-xs font-bold text-gray-800 group-hover:text-red-600">Aero Red</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-red-100 text-red-700">#FF3B30</span>
+            </button>
+
+            <!-- Black -->
+            <button type="button" class="favicon-preset-btn p-3 rounded-2xl border-2 border-gray-100 hover:border-neutral-800 hover:shadow-md transition-all flex flex-col items-center gap-2 text-center group bg-white" data-url="assets/images/shoe-black.png" data-name="Phantom Black Sneaker">
+              <div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
+                <img src="assets/images/shoe-black.png" alt="Black" class="w-10 h-10 object-contain">
+              </div>
+              <span class="text-xs font-bold text-gray-800 group-hover:text-black">Black</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-neutral-200 text-neutral-800">#121316</span>
+            </button>
+
+            <!-- White -->
+            <button type="button" class="favicon-preset-btn p-3 rounded-2xl border-2 border-gray-100 hover:border-gray-400 hover:shadow-md transition-all flex flex-col items-center gap-2 text-center group bg-white ring-2 ring-red-600 bg-red-50/30" data-url="assets/images/shoe-white.png" data-name="Pure White Sneaker">
+              <div class="w-12 h-12 rounded-xl bg-gray-50 flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
+                <img src="assets/images/shoe-white.png" alt="White" class="w-10 h-10 object-contain">
+              </div>
+              <span class="text-xs font-bold text-gray-800">Pure White</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">#FFFFFF</span>
+            </button>
+
+            <!-- Cyan -->
+            <button type="button" class="favicon-preset-btn p-3 rounded-2xl border-2 border-gray-100 hover:border-cyan-500 hover:shadow-md transition-all flex flex-col items-center gap-2 text-center group bg-white" data-url="assets/images/shoe-cyan.png" data-name="Hyper Cyan Sneaker">
+              <div class="w-12 h-12 rounded-xl bg-cyan-50 flex items-center justify-center p-1 group-hover:scale-105 transition-transform">
+                <img src="assets/images/shoe-cyan.png" alt="Cyan" class="w-10 h-10 object-contain">
+              </div>
+              <span class="text-xs font-bold text-gray-800 group-hover:text-cyan-600">Hyper Cyan</span>
+              <span class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-cyan-100 text-cyan-800">#00E5FF</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Custom Upload Section -->
+        <div class="space-y-2.5 pt-2 border-t border-gray-100">
+          <span class="text-[11px] font-black uppercase tracking-wider text-gray-400">Custom Favicon Upload</span>
+          <div class="flex items-center gap-3">
+            <label class="flex-1 cursor-pointer flex items-center justify-center gap-2.5 px-4 py-3 rounded-2xl border-2 border-dashed border-gray-200 hover:border-black hover:bg-gray-50 transition-all text-xs font-bold text-gray-700">
+              <i data-lucide="upload" class="w-4 h-4 text-gray-500"></i>
+              <span>Upload Custom Image (PNG, JPG, ICO, SVG)</span>
+              <input id="favicon-file-input" type="file" accept="image/png, image/jpeg, image/x-icon, image/svg+xml, image/webp" class="hidden">
+            </label>
+            <button id="favicon-reset-btn" type="button" class="px-4 py-3 rounded-2xl border border-gray-200 hover:bg-gray-100 text-xs font-bold text-gray-600 transition-colors flex items-center gap-1.5" title="Reset to default white sneaker">
+              <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+              <span>Reset</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Auto-Sync Feature Toggle -->
+        <div class="pt-3 border-t border-gray-100 flex items-center justify-between">
+          <div class="pr-4">
+            <p class="text-xs font-bold text-gray-900">Auto-sync with Shoe Colorway</p>
+            <p class="text-[11px] text-gray-500">Automatically changes tab favicon when clicking Red, Black, White, or Cyan</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer">
+            <input id="favicon-autosync-toggle" type="checkbox" checked class="sr-only peer">
+            <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-black"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 14. DYNAMIC TOAST NOTIFICATIONS CONTAINER -->
   <!-- ============================================================ -->
   <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
 
   <!-- Central Data & Commerce Engine -->
   <script src="assets/js/products-data.js"></script>
-  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/cart.js?v=4.4"></script>
   <!-- Main Application Logic -->
-  <script src="assets/js/main.js?v=4.0"></script>
+  <script src="assets/js/main.js?v=4.4"></script>
+  <!-- Continuous Scroll Reveal Animation Engine -->
+  <script src="assets/js/scroll-animate.js?v=4.4"></script>
   <script>
     if (window.lucide) {
       window.lucide.createIcons();
