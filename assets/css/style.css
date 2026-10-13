@@ -135,11 +135,12 @@
   animation: hotspotPulse 2.4s infinite;
 }
 
-/* Image blend mode for seamless studio cutout */
+/* Isolated floating shoe presentation */
 .blend-shoe {
-  mix-blend-mode: multiply;
-  filter: contrast(1.05) brightness(1.02);
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.35));
+  transition: transform 0.4s ease, filter 0.4s ease;
 }
+
 
 /* Smooth custom scrollbars */
 ::-webkit-scrollbar {

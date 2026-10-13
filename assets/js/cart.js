@@ -97,7 +97,7 @@
         name: 'Malzie Aero Excee Pure',
         size: 'US 10',
         price: 159,
-        image: 'assets/images/shoe-white.jpg',
+        image: 'assets/images/shoe-white.png',
         quantity: 1,
         type: 'Footwear'
       }

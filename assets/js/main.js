@@ -71,7 +71,7 @@
       tagline: 'Feel the future. Move with pure zero-gravity Air.',
       price: '$159.00',
       priceInr: '₹12,995',
-      image: 'assets/images/shoe-white.jpg',
+      image: 'assets/images/shoe-white.png',
       watermark: 'MALZIE AERO',
       glowClass: 'theme-glow-white',
       accentColor: '#121316',
@@ -86,7 +86,7 @@
       tagline: 'High-octane scarlet energy. Ignite every stride.',
       price: '$179.00',
       priceInr: '₹14,995',
-      image: 'assets/images/shoe-red.jpg',
+      image: 'assets/images/shoe-red.png',
       watermark: 'AERO 270',
       glowClass: 'theme-glow-red',
       accentColor: '#ff3b30',
@@ -101,7 +101,7 @@
       tagline: 'Nocturnal engineering. Surgical control & carbon stability.',
       price: '$149.00',
       priceInr: '₹11,995',
-      image: 'assets/images/shoe-black.jpg',
+      image: 'assets/images/shoe-black.png',
       watermark: 'AERO ALPHA',
       glowClass: 'theme-glow-black',
       accentColor: '#1e2026',
@@ -116,7 +116,7 @@
       tagline: 'Step directly into 2030 with luminescent gas chambers.',
       price: '$169.00',
       priceInr: '₹13,995',
-      image: 'assets/images/shoe-cyan.jpg',
+      image: 'assets/images/shoe-cyan.png',
       watermark: 'AERO PULSE',
       glowClass: 'theme-glow-cyan',
       accentColor: '#00c3ff',
@@ -136,7 +136,7 @@
       category: 'Footwear',
       price: 159,
       priceStr: '$159.00',
-      image: 'assets/images/shoe-white.jpg',
+      image: 'assets/images/shoe-white.png',
       color: 'Triple White',
       rating: 4.9,
       badge: 'Hot'
@@ -150,7 +150,7 @@
       name: 'Malzie Aero Excee Pure',
       size: 'US 10',
       price: 159,
-      image: 'assets/images/shoe-white.jpg',
+      image: 'assets/images/shoe-white.png',
       quantity: 1
     }
   ];
