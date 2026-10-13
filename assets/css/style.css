@@ -20,9 +20,9 @@
 
 /* Hero studio backdrop */
 .hero-backdrop {
-  background: radial-gradient(circle at 65% 45%, #ffffff 0%, #f3f4f7 40%, #e6e9ef 100%);
   position: relative;
   overflow: hidden;
+  transition: background 0.6s ease;
 }
 
 /* Large Watermark Typography */
@@ -174,19 +174,23 @@
 /* VIVID HERO COLORWAY THEMES (High-Saturation & Dynamic Contrast) */
 /* ============================================================ */
 .hero-theme-white {
-  background: radial-gradient(ellipse at 65% 45%, #ffffff 0%, #f1f3f7 45%, #e1e4ec 100%);
+  background: radial-gradient(ellipse at 68% 46%, #ffffff 0%, #eff2f7 48%, #dfe3eb 100%);
+  background-color: #eff2f7;
 }
 
 .hero-theme-red {
-  background: radial-gradient(ellipse at 65% 45%, #b91515 0%, #8e0b0b 45%, #580303 100%);
+  background: radial-gradient(ellipse at 68% 46%, #ba1613 0%, #8c0c08 48%, #540705 100%);
+  background-color: #8c0c08;
 }
 
 .hero-theme-black {
-  background: radial-gradient(ellipse at 65% 45%, #1d1f25 0%, #121316 45%, #08090a 100%);
+  background: radial-gradient(ellipse at 68% 46%, #22252c 0%, #14151a 48%, #08090b 100%);
+  background-color: #14151a;
 }
 
 .hero-theme-cyan {
-  background: radial-gradient(ellipse at 65% 45%, #009cb8 0%, #00748a 45%, #004b5c 100%);
+  background: radial-gradient(ellipse at 68% 46%, #00acc7 0%, #00768b 48%, #004352 100%);
+  background-color: #00768b;
 }
 
 /* Sliding Curtain Panels */

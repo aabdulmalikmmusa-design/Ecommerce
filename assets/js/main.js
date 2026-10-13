@@ -376,14 +376,37 @@
       }
 
       // 4. Contrast Adapting (Header, CTA Buttons, Hero Texts, Social Icons)
+      if (heroSection) {
+        heroSection.className = 'relative hero-backdrop min-h-[calc(100vh-5rem)] flex flex-col justify-center py-4 sm:py-6 overflow-hidden select-none hero-theme-' + model.slug;
+      }
+
+      if (document.body) {
+        document.body.style.transition = 'background-color 500ms ease';
+        if (model.slug === 'red') {
+          document.body.style.backgroundColor = '#540705';
+        } else if (model.slug === 'black') {
+          document.body.style.backgroundColor = '#08090b';
+        } else if (model.slug === 'cyan') {
+          document.body.style.backgroundColor = '#004352';
+        } else {
+          document.body.style.backgroundColor = '#f7f8fa';
+        }
+      }
+
       if (isDark) {
         if (mainHeader) {
-          mainHeader.className = "sticky top-0 z-40 bg-black/30 backdrop-blur-xl border-b border-white/10 transition-all duration-500 text-white";
+          if (model.slug === 'red') {
+            mainHeader.className = "sticky top-0 z-40 bg-[#740a07]/90 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
+          } else if (model.slug === 'black') {
+            mainHeader.className = "sticky top-0 z-40 bg-[#121316]/90 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
+          } else {
+            mainHeader.className = "sticky top-0 z-40 bg-[#004f5e]/90 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
+          }
         }
         if (headerBrandName) headerBrandName.className = "font-display font-black text-xl tracking-tighter text-white leading-none transition-colors duration-500";
         if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-white text-black flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
         if (headerNavLinks) {
-          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-white/80 hover:text-white transition-colors py-2");
+          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-white/90 hover:text-white transition-colors py-2");
         }
         if (searchBtn) searchBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative";
         if (authBtn) authBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center";
@@ -392,20 +415,20 @@
         if (mobileMenuBtn) mobileMenuBtn.className = "md:hidden p-2.5 rounded-full hover:bg-white/15 text-white transition-colors";
 
         if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white uppercase leading-[0.95] transition-colors duration-500";
-        if (heroTagline) heroTagline.className = "text-sm sm:text-base text-white/80 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
+        if (heroTagline) heroTagline.className = "text-sm sm:text-base text-white/90 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
         if (heroBadge) heroBadge.className = "border-l-2 border-white pl-3 text-xs font-black tracking-widest uppercase text-white leading-none py-0.5 transition-colors duration-500";
         if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-white hover:bg-neutral-100 text-black font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
         if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white font-extrabold text-sm px-6 py-4 rounded-full border border-white/30 backdrop-blur-md shadow-sm transition-all";
         if (heroBottomDivider) heroBottomDivider.className = "relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-3 pt-2.5 border-t border-white/20 transition-colors duration-500";
         if (heroSocialLinks) {
-          heroSocialLinks.className = "flex items-center justify-center gap-3 sm:gap-4 text-white/60 transition-colors duration-500";
+          heroSocialLinks.className = "flex items-center justify-center gap-3 sm:gap-4 text-white/70 transition-colors duration-500";
           heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/15 hover:bg-white hover:text-black text-white flex items-center justify-center border border-white/20 shadow-sm transition-all");
         }
         if (btnPrevVariant) btnPrevVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
         if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
       } else {
         if (mainHeader) {
-          mainHeader.className = "sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 transition-all duration-500 text-gray-900";
+          mainHeader.className = "sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-gray-200/60 transition-all duration-500 text-gray-900";
         }
         if (headerBrandName) headerBrandName.className = "font-display font-black text-xl tracking-tighter text-black leading-none transition-colors duration-500";
         if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-black text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
@@ -442,26 +465,26 @@
 
         if (isDark) {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white bg-white text-black shadow-2xl scale-[1.02] w-full group";
-            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-100 flex items-center justify-center p-1 overflow-hidden border border-gray-200 transition-colors duration-300 flex-shrink-0";
-            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight truncate";
-            if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
-          } else {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white/20 bg-white/15 text-white hover:bg-white/25 backdrop-blur-md shadow-sm w-full group";
-            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/25 flex items-center justify-center p-1 overflow-hidden border border-white/10 transition-colors duration-300 flex-shrink-0";
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-white bg-white/20 text-white shadow-2xl scale-[1.03] backdrop-blur-xl w-full group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/20 flex items-center justify-center p-1 overflow-hidden border border-white/30 transition-colors duration-300 flex-shrink-0";
             if (titleEl) titleEl.className = "text-xs font-bold text-white leading-tight truncate";
+            if (checkBadge) { checkBadge.className = "active-check text-white font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
+          } else {
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-white/15 bg-white/10 hover:bg-white/20 text-white/90 backdrop-blur-md shadow-sm w-full group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/25 flex items-center justify-center p-1 overflow-hidden border border-white/10 transition-colors duration-300 flex-shrink-0";
+            if (titleEl) titleEl.className = "text-xs font-bold text-white/90 leading-tight truncate";
             if (checkBadge) checkBadge.classList.add('hidden');
           }
         } else {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-black bg-white text-black shadow-xl scale-[1.02] w-full group";
-            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0";
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-black bg-white text-black shadow-xl scale-[1.02] w-full group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-100 flex items-center justify-center p-1 overflow-hidden border border-gray-200 transition-colors duration-300 flex-shrink-0";
             if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight truncate";
             if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
           } else {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 text-gray-900 hover:bg-white shadow-sm hover:shadow-lg w-full group";
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-gray-200/80 bg-white/70 hover:bg-white text-gray-800 shadow-sm hover:shadow-md w-full group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0";
-            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight truncate";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-800 leading-tight truncate";
             if (checkBadge) checkBadge.classList.add('hidden');
           }
         }
