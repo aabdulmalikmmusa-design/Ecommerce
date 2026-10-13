@@ -170,18 +170,54 @@
   transform: translateY(0px) scale(0.98);
 }
 
-/* Color theme aura */
-.theme-glow-white {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(220, 225, 235, 0.3) 60%, transparent 80%);
+/* ============================================================ */
+/* VIVID HERO COLORWAY THEMES (High-Saturation & Dynamic Contrast) */
+/* ============================================================ */
+.hero-theme-white {
+  background: radial-gradient(ellipse at 65% 45%, #ffffff 0%, #f1f3f7 45%, #e1e4ec 100%);
 }
-.theme-glow-red {
-  background: radial-gradient(circle, rgba(255, 59, 48, 0.25) 0%, rgba(255, 69, 58, 0.1) 60%, transparent 80%);
+
+.hero-theme-red {
+  background: radial-gradient(ellipse at 65% 45%, #b91515 0%, #8e0b0b 45%, #580303 100%);
 }
-.theme-glow-black {
-  background: radial-gradient(circle, rgba(30, 32, 38, 0.2) 0%, rgba(15, 16, 20, 0.08) 60%, transparent 80%);
+
+.hero-theme-black {
+  background: radial-gradient(ellipse at 65% 45%, #1d1f25 0%, #121316 45%, #08090a 100%);
 }
-.theme-glow-cyan {
-  background: radial-gradient(circle, rgba(0, 229, 255, 0.22) 0%, rgba(0, 195, 255, 0.08) 60%, transparent 80%);
+
+.hero-theme-cyan {
+  background: radial-gradient(ellipse at 65% 45%, #009cb8 0%, #00748a 45%, #004b5c 100%);
+}
+
+/* Sliding Curtain Panels */
+.hero-bg-curtain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+/* Watermark Theme Variants */
+.watermark-white {
+  color: rgba(20, 24, 33, 0.04);
+  -webkit-text-stroke: 1px rgba(20, 24, 33, 0.08);
+}
+
+.watermark-red {
+  color: rgba(255, 255, 255, 0.07);
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.2);
+}
+
+.watermark-black {
+  color: rgba(255, 255, 255, 0.03);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.12);
+}
+
+.watermark-cyan {
+  color: rgba(255, 255, 255, 0.07);
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.22);
 }
 
 /* Modal and Drawer Transitions */

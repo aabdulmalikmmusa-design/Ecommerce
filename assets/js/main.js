@@ -165,11 +165,27 @@
     const heroWatermark = document.getElementById('hero-watermark');
     const heroTitle = document.getElementById('hero-title');
     const heroTagline = document.getElementById('hero-tagline');
-    const heroPrice = document.getElementById('hero-price');
-    const heroPriceInr = document.getElementById('hero-price-inr');
     const heroBadge = document.getElementById('hero-badge');
-    const heroAura = document.getElementById('hero-aura');
     const tiltContainer = document.getElementById('hero-tilt-container');
+
+    // Dual-buffered sliding background curtains
+    const curtainA = document.getElementById('hero-bg-curtain-a');
+    const curtainB = document.getElementById('hero-bg-curtain-b');
+    let activeCurtain = 'a';
+    let curtainSlideTimer = null;
+    let shoeSlideTimerA = null;
+    let shoeSlideTimerB = null;
+
+    // Header & CTA elements for dynamic contrast theming
+    const mainHeader = document.getElementById('main-header');
+    const headerBrandName = document.getElementById('header-brand-name');
+    const headerLogoBox = document.getElementById('header-logo-box');
+    const headerNavLinks = document.getElementById('header-nav-links');
+    const headerActions = document.getElementById('header-actions');
+    const heroShopNowBtn = document.getElementById('hero-shop-now-btn');
+    const heroAddBagBtn = document.getElementById('hero-add-to-bag-btn');
+    const heroBottomDivider = document.getElementById('hero-bottom-divider');
+    const heroSocialLinks = document.getElementById('hero-social-links');
 
     // Colorway Thumbnails
     const variantCards = document.querySelectorAll('.variant-card');
@@ -220,12 +236,6 @@
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
-    // Hotspots
-    const hotspotBtns = document.querySelectorAll('.hotspot-btn');
-    const hotspotTooltip = document.getElementById('hotspot-tooltip');
-    const hotspotTitle = document.getElementById('hotspot-title');
-    const hotspotDesc = document.getElementById('hotspot-desc');
-
     // Catalog Rendering
     const catalogContainer = document.getElementById('catalog-products-container');
     const catalogFilters = document.querySelectorAll('.catalog-filter-btn');
@@ -238,75 +248,227 @@
     let selectedSize = 'US 9.5';
 
     // ----------------------------------------------------
-    // 1. UPDATE HERO SHOE DISPLAY
+    // 1. UPDATE HERO SHOE DISPLAY WITH VIVID SLIDE TRANSITION
     // ----------------------------------------------------
-    function updateHeroShoe(index, animate = true) {
+    function updateHeroShoe(index, animate = true, direction = 'auto') {
       if (index < 0) index = shoeModels.length - 1;
       if (index >= shoeModels.length) index = 0;
+
+      const prevIndex = currentShoeIndex;
+      if (direction === 'auto') {
+        direction = index >= prevIndex ? 'next' : 'prev';
+      }
       currentShoeIndex = index;
-
       const model = shoeModels[index];
+      const isDark = model.slug !== 'white'; // Red, Black, Cyan are dark/vivid; White is studio light
 
-      // Update variant cards state
-      variantCards.forEach((card, idx) => {
-        const isCurrent = idx === index;
-        const checkBadge = card.querySelector('.active-check');
-        if (isCurrent) {
-          card.classList.add('border-black', 'bg-white', 'shadow-xl', 'scale-[1.03]');
-          card.classList.remove('border-transparent', 'bg-white/60');
-          if (checkBadge) checkBadge.classList.remove('hidden');
+      // Clear any in-flight slide animation timers
+      if (curtainSlideTimer) { clearTimeout(curtainSlideTimer); curtainSlideTimer = null; }
+      if (shoeSlideTimerA) { clearTimeout(shoeSlideTimerA); shoeSlideTimerA = null; }
+      if (shoeSlideTimerB) { clearTimeout(shoeSlideTimerB); shoeSlideTimerB = null; }
+
+      // 1. Sliding Color Curtain Transition
+      if (curtainA && curtainB) {
+        const themeClass = 'hero-theme-' + model.slug;
+        const currentCurtain = activeCurtain === 'a' ? curtainA : curtainB;
+        const incomingCurtain = activeCurtain === 'a' ? curtainB : curtainA;
+
+        if (animate) {
+          incomingCurtain.className = 'hero-bg-curtain ' + themeClass;
+          incomingCurtain.style.opacity = '1';
+          incomingCurtain.style.transition = 'none';
+          incomingCurtain.style.zIndex = '2';
+          currentCurtain.style.zIndex = '1';
+
+          if (direction === 'next') {
+            incomingCurtain.style.transform = 'translateX(100%)';
+          } else {
+            incomingCurtain.style.transform = 'translateX(-100%)';
+          }
+
+          void incomingCurtain.offsetWidth;
+
+          incomingCurtain.style.transition = 'transform 650ms cubic-bezier(0.22, 1, 0.36, 1)';
+          currentCurtain.style.transition = 'transform 650ms cubic-bezier(0.22, 1, 0.36, 1)';
+
+          incomingCurtain.style.transform = 'translateX(0%)';
+          if (direction === 'next') {
+            currentCurtain.style.transform = 'translateX(-100%)';
+          } else {
+            currentCurtain.style.transform = 'translateX(100%)';
+          }
+
+          activeCurtain = activeCurtain === 'a' ? 'b' : 'a';
+
+          curtainSlideTimer = setTimeout(() => {
+            currentCurtain.style.transition = 'none';
+            currentCurtain.style.opacity = '0';
+            currentCurtain.style.transform = 'translateX(0%)';
+            currentCurtain.style.zIndex = '0';
+          }, 680);
         } else {
-          card.classList.remove('border-black', 'bg-white', 'shadow-xl', 'scale-[1.03]');
-          card.classList.add('border-transparent', 'bg-white/60');
-          if (checkBadge) checkBadge.classList.add('hidden');
+          curtainA.className = 'hero-bg-curtain ' + themeClass;
+          curtainA.style.opacity = '1';
+          curtainA.style.transform = 'translateX(0%)';
+          curtainB.style.opacity = '0';
+          activeCurtain = 'a';
+        }
+      }
+
+      // 2. Sliding Shoe Animation
+      if (animate && heroShoeImg) {
+        heroShoeImg.style.transition = 'transform 260ms cubic-bezier(0.4, 0, 1, 1), opacity 200ms ease';
+        if (direction === 'next') {
+          heroShoeImg.style.transform = 'translateX(-120%) rotate(-25deg) scale(0.85)';
+        } else {
+          heroShoeImg.style.transform = 'translateX(120%) rotate(5deg) scale(0.85)';
+        }
+        heroShoeImg.style.opacity = '0';
+
+        if (heroShoeShadow) {
+          heroShoeShadow.style.transition = 'transform 260ms ease, opacity 200ms ease';
+          heroShoeShadow.style.transform = 'scale(0.4)';
+          heroShoeShadow.style.opacity = '0.1';
+        }
+
+        shoeSlideTimerA = setTimeout(() => {
+          heroShoeImg.src = model.image;
+          heroShoeImg.alt = model.name;
+          heroShoeImg.style.transition = 'none';
+
+          if (direction === 'next') {
+            heroShoeImg.style.transform = 'translateX(120%) rotate(5deg) scale(0.85)';
+          } else {
+            heroShoeImg.style.transform = 'translateX(-120%) rotate(-25deg) scale(0.85)';
+          }
+
+          void heroShoeImg.offsetWidth;
+
+          heroShoeImg.style.transition = 'transform 550ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease';
+          heroShoeImg.style.transform = 'translateX(0) rotate(-12deg) scale(1)';
+          heroShoeImg.style.opacity = '1';
+
+          if (heroShoeShadow) {
+            heroShoeShadow.style.transition = 'transform 550ms cubic-bezier(0.16, 1, 0.3, 1), opacity 350ms ease';
+            heroShoeShadow.style.transform = 'scale(1)';
+            heroShoeShadow.style.opacity = '0.55';
+          }
+
+          shoeSlideTimerB = setTimeout(() => {
+            heroShoeImg.style.transition = '';
+            heroShoeImg.style.transform = '';
+          }, 580);
+        }, 220);
+      } else if (heroShoeImg) {
+        heroShoeImg.src = model.image;
+        heroShoeImg.alt = model.name;
+        heroShoeImg.style.transform = '';
+        heroShoeImg.style.opacity = '1';
+      }
+
+      // 3. Update Text Content & Thematic Typography
+      if (heroTitle) heroTitle.innerHTML = 'MALZIE SOFTZ';
+      if (heroTagline) heroTagline.textContent = model.tagline;
+      if (heroBadge) heroBadge.textContent = model.badge;
+      if (heroWatermark) {
+        heroWatermark.textContent = model.watermark;
+        heroWatermark.className = 'watermark-text text-[15vw] md:text-[18vw] font-black uppercase tracking-tight text-center leading-none transform translate-y-[-4%] transition-all duration-700 watermark-' + model.slug;
+      }
+
+      // 4. Contrast Adapting (Header, CTA Buttons, Hero Texts, Social Icons)
+      if (isDark) {
+        if (mainHeader) {
+          mainHeader.className = "sticky top-0 z-40 bg-black/30 backdrop-blur-xl border-b border-white/10 transition-all duration-500 text-white";
+        }
+        if (headerBrandName) headerBrandName.className = "font-display font-black text-xl tracking-tighter text-white leading-none transition-colors duration-500";
+        if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-white text-black flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
+        if (headerNavLinks) {
+          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-white/80 hover:text-white transition-colors py-2");
+        }
+        if (searchBtn) searchBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative";
+        if (authBtn) authBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center";
+        if (cartBtn) cartBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative";
+        if (soundToggleBtn) soundToggleBtn.className = "hidden sm:flex p-2.5 rounded-full hover:bg-white/15 text-white transition-colors";
+        if (mobileMenuBtn) mobileMenuBtn.className = "md:hidden p-2.5 rounded-full hover:bg-white/15 text-white transition-colors";
+
+        if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white uppercase leading-[0.95] transition-colors duration-500";
+        if (heroTagline) heroTagline.className = "text-sm sm:text-base text-white/80 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
+        if (heroBadge) heroBadge.className = "border-l-2 border-white pl-3 text-xs font-black tracking-widest uppercase text-white leading-none py-0.5 transition-colors duration-500";
+        if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-white hover:bg-neutral-100 text-black font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
+        if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white font-extrabold text-sm px-6 py-4 rounded-full border border-white/30 backdrop-blur-md shadow-sm transition-all";
+        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/20 pt-6 transition-colors duration-500";
+        if (heroSocialLinks) {
+          heroSocialLinks.className = "flex items-center gap-4 text-white/60 transition-colors duration-500";
+          heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-9 h-9 rounded-full bg-white/15 hover:bg-white hover:text-black text-white flex items-center justify-center border border-white/20 shadow-sm transition-all");
+        }
+        if (btnPrevVariant) btnPrevVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
+        if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
+      } else {
+        if (mainHeader) {
+          mainHeader.className = "sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 transition-all duration-500 text-gray-900";
+        }
+        if (headerBrandName) headerBrandName.className = "font-display font-black text-xl tracking-tighter text-black leading-none transition-colors duration-500";
+        if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-black text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
+        if (headerNavLinks) {
+          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-gray-700 hover:text-black transition-colors py-2");
+        }
+        if (searchBtn) searchBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative";
+        if (authBtn) authBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative flex items-center justify-center";
+        if (cartBtn) cartBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative";
+        if (soundToggleBtn) soundToggleBtn.className = "hidden sm:flex p-2.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black transition-colors";
+        if (mobileMenuBtn) mobileMenuBtn.className = "md:hidden p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors";
+
+        if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-black uppercase leading-[0.95] transition-colors duration-500";
+        if (heroTagline) heroTagline.className = "text-sm sm:text-base text-gray-600 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
+        if (heroBadge) heroBadge.className = "border-l-2 border-black pl-3 text-xs font-black tracking-widest uppercase text-black leading-none py-0.5 transition-colors duration-500";
+        if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-black hover:bg-neutral-900 text-white font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
+        if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/90 hover:bg-white text-black font-extrabold text-sm px-6 py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all";
+        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-6 border-t border-gray-200/80 pt-6 transition-colors duration-500";
+        if (heroSocialLinks) {
+          heroSocialLinks.className = "flex items-center gap-4 text-gray-500 transition-colors duration-500";
+          heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white text-gray-700 flex items-center justify-center border border-gray-200 shadow-sm transition-all");
+        }
+        if (btnPrevVariant) btnPrevVariant.className = "w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200";
+        if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200";
+      }
+
+      // 5. Update Variant Switcher Cards
+      variantCards.forEach((card) => {
+        const cardIdx = parseInt(card.getAttribute('data-index'), 10);
+        const isCurrent = cardIdx === index;
+        const checkBadge = card.querySelector('.active-check');
+        const thumbBox = card.querySelector('.variant-thumb-box');
+        const titleEl = card.querySelector('h4');
+
+        if (isDark) {
+          if (isCurrent) {
+            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white bg-white text-black shadow-2xl scale-[1.04] flex-shrink-0 group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center p-1 overflow-hidden border border-gray-200 transition-colors duration-300";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
+            if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
+          } else {
+            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white/20 bg-white/15 text-white hover:bg-white/25 backdrop-blur-md shadow-sm flex-shrink-0 group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-black/25 flex items-center justify-center p-1 overflow-hidden border border-white/10 transition-colors duration-300";
+            if (titleEl) titleEl.className = "text-xs font-bold text-white leading-tight";
+            if (checkBadge) checkBadge.classList.add('hidden');
+          }
+        } else {
+          if (isCurrent) {
+            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-black bg-white text-black shadow-xl scale-[1.03] flex-shrink-0 group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
+            if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
+          } else {
+            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 text-gray-900 hover:bg-white shadow-sm hover:shadow-lg flex-shrink-0 group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
+            if (checkBadge) checkBadge.classList.add('hidden');
+          }
         }
       });
 
-      // Update Watermark & Titles with smooth burst
-      if (animate && heroShoeImg) {
-        heroShoeImg.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease';
-        heroShoeImg.style.transform = 'scale(0.88) rotate(-4deg)';
-        heroShoeImg.style.opacity = '0.3';
-
-        if (heroWatermark) {
-          heroWatermark.style.opacity = '0';
-          heroWatermark.style.transform = 'translateY(15px) scale(0.96)';
-        }
-
-        setTimeout(() => {
-          heroShoeImg.src = model.image;
-          heroShoeImg.alt = model.name;
-
-          if (heroTitle) heroTitle.innerHTML = 'MALZIE SOFTZ';
-          if (heroTagline) heroTagline.textContent = model.tagline;
-          if (heroPrice) heroPrice.textContent = model.price;
-          if (heroPriceInr) heroPriceInr.textContent = model.priceInr;
-          if (heroBadge) heroBadge.textContent = model.badge;
-          if (heroWatermark) {
-            heroWatermark.textContent = model.watermark;
-            heroWatermark.style.opacity = '1';
-            heroWatermark.style.transform = 'translateY(0) scale(1)';
-          }
-
-          // Update aura glow class
-          if (heroAura) {
-            heroAura.className = 'absolute inset-0 pointer-events-none transition-all duration-700 ' + model.glowClass;
-          }
-
-          heroShoeImg.style.transform = 'scale(1) rotate(0deg)';
-          heroShoeImg.style.opacity = '1';
-        }, 180);
-      } else {
-        if (heroShoeImg) {
-          heroShoeImg.src = model.image;
-          heroShoeImg.alt = model.name;
-        }
-        if (heroTitle) heroTitle.innerHTML = 'MALZIE SOFTZ';
-        if (heroTagline) heroTagline.textContent = model.tagline;
-        if (heroPrice) heroPrice.textContent = model.price;
-        if (heroPriceInr) heroPriceInr.textContent = model.priceInr;
-        if (heroBadge) heroBadge.textContent = model.badge;
-        if (heroWatermark) heroWatermark.textContent = model.watermark;
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
       }
     }
 
@@ -316,7 +478,8 @@
         initAudio();
         playUiSound('whoosh');
         const index = parseInt(card.getAttribute('data-index'), 10);
-        updateHeroShoe(index, true);
+        const direction = index >= currentShoeIndex ? 'next' : 'prev';
+        updateHeroShoe(index, true, direction);
       });
     });
 
@@ -324,7 +487,7 @@
       btnPrevVariant.addEventListener('click', () => {
         initAudio();
         playUiSound('click');
-        updateHeroShoe(currentShoeIndex - 1, true);
+        updateHeroShoe(currentShoeIndex - 1, true, 'prev');
       });
     }
 
@@ -332,7 +495,7 @@
       btnNextVariant.addEventListener('click', () => {
         initAudio();
         playUiSound('click');
-        updateHeroShoe(currentShoeIndex + 1, true);
+        updateHeroShoe(currentShoeIndex + 1, true, 'next');
       });
     }
 

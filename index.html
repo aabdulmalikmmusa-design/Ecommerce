@@ -49,25 +49,25 @@
   <!-- ============================================================ -->
   <!-- 2. MAIN NAVIGATION BAR -->
   <!-- ============================================================ -->
-  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 transition-all duration-300">
+  <header id="main-header" class="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-gray-100 transition-all duration-500">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Left: Bespoke Brand Logo (Non-Nike) -->
       <a href="#hero-section" class="flex items-center gap-3 group focus:outline-none" aria-label="Malzie Softs Home">
-        <div class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
+        <div id="header-logo-box" class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
           <!-- Custom Aerodynamic Wing & Vortex Emblem -->
           <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-black text-xl tracking-tighter text-black leading-none">MALZIE SOFTZ</span>
+          <span id="header-brand-name" class="font-display font-black text-xl tracking-tighter text-black leading-none transition-colors duration-500">MALZIE SOFTZ</span>
           <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">STUDIO</span>
         </div>
       </a>
 
       <!-- Center: Navigation Links -->
-      <nav class="hidden md:flex items-center space-x-8 text-sm font-bold text-gray-700">
+      <nav id="header-nav-links" class="hidden md:flex items-center space-x-8 text-sm font-bold text-gray-700 transition-colors duration-500">
         <a href="products.html?filter=Footwear" class="hover:text-black transition-colors py-2">Footwear</a>
         <a href="products.html?filter=Shirts" class="hover:text-black transition-colors py-2">Shirts & Apparel</a>
         <a href="products.html" class="hover:text-black transition-colors py-2">All Products</a>
@@ -79,7 +79,7 @@
       </nav>
 
       <!-- Right: Action Icons (Search, Profile/Auth, Cart, Sound, Mobile Menu) -->
-      <div class="flex items-center space-x-3 sm:space-x-4">
+      <div id="header-actions" class="flex items-center space-x-3 sm:space-x-4 transition-colors duration-500">
         <!-- Live Search Trigger -->
         <button id="search-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative" aria-label="Search" title="Search (Ctrl+K)">
           <i data-lucide="search" class="w-5 h-5"></i>
@@ -154,12 +154,13 @@
   <!-- ============================================================ -->
   <main id="hero-section" class="relative hero-backdrop min-h-[calc(100vh-5rem)] flex flex-col justify-between pt-6 pb-8 overflow-hidden select-none">
     
-    <!-- Dynamic Ambient Aura Backlight -->
-    <div id="hero-aura" class="absolute inset-0 pointer-events-none transition-all duration-700 theme-glow-white"></div>
+    <!-- Dual-buffered Slide Background Layers for smooth color slide transitions -->
+    <div id="hero-bg-curtain-a" class="hero-bg-curtain hero-theme-white opacity-100"></div>
+    <div id="hero-bg-curtain-b" class="hero-bg-curtain opacity-0"></div>
 
     <!-- Massive Watermark Typography in Background (AIR MAX / AERO MAX) -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-0">
-      <h2 id="hero-watermark" class="watermark-text text-[15vw] md:text-[18vw] font-black uppercase tracking-tight text-center leading-none transform translate-y-[-4%]">
+    <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden z-[5]">
+      <h2 id="hero-watermark" class="watermark-text text-[15vw] md:text-[18vw] font-black uppercase tracking-tight text-center leading-none transform translate-y-[-4%] watermark-white">
         MALZIE SOFTZ
       </h2>
     </div>
@@ -242,7 +243,7 @@
 
     <!-- Bottom Carousel / Colorway Switcher (Exact Counterpart to Reference Design) -->
     <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-4">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6 border-t border-gray-200/80 pt-6">
+      <div id="hero-bottom-divider" class="flex flex-col md:flex-row items-center justify-between gap-6 border-t border-gray-200/80 pt-6 transition-colors duration-500">
         
         <!-- Left: Carousel Navigation & Thumbnail Cards -->
         <div class="flex items-center gap-3 sm:gap-4 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
@@ -254,7 +255,7 @@
 
           <!-- Card 1: Crimson Blaze (Red) -->
           <div data-index="1" class="variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg flex-shrink-0 group">
-            <div class="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100">
+            <div class="variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300">
               <img src="assets/images/shoe-red.png" alt="Malzie Aero 270" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform">
             </div>
             <div class="text-left">
@@ -265,7 +266,7 @@
 
           <!-- Card 2: Stealth Onyx (Black) -->
           <div data-index="2" class="variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg flex-shrink-0 group">
-            <div class="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100">
+            <div class="variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300">
               <img src="assets/images/shoe-black.png" alt="Malzie Aero Alpha" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform">
             </div>
             <div class="text-left">
@@ -276,7 +277,7 @@
 
           <!-- Card 3: Pure Ice (White) — Active by Default -->
           <div data-index="0" class="variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-black bg-white shadow-xl scale-[1.03] flex-shrink-0 group">
-            <div class="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100">
+            <div class="variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300">
               <img src="assets/images/shoe-white.png" alt="Malzie Aero Excee" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform">
             </div>
             <div class="text-left">
@@ -287,7 +288,7 @@
 
           <!-- Card 4: Cyber Pulse (Cyan) -->
           <div data-index="3" class="variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg flex-shrink-0 group">
-            <div class="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100">
+            <div class="variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300">
               <img src="assets/images/shoe-cyan.png" alt="Malzie Aero Pulse" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform">
             </div>
             <div class="text-left">
@@ -304,7 +305,7 @@
         </div>
 
         <!-- Right: Social Media Links (Counterpart to the social row at bottom of reference UI) -->
-        <div class="flex items-center gap-4 text-gray-500">
+        <div id="hero-social-links" class="flex items-center gap-4 text-gray-500 transition-colors duration-500">
           <span class="text-xs font-bold uppercase tracking-wider text-gray-400 mr-2 hidden sm:inline">Connect:</span>
           
           <!-- Instagram -->
