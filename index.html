@@ -39,6 +39,9 @@
 
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Lucide Icons Library -->
+  <script src="assets/js/lucide.min.js"></script>
 </head>
 <body class="font-sans bg-[#f7f8fa] text-[#121316] antialiased selection:bg-black selection:text-white overflow-x-hidden">
 
@@ -79,17 +82,13 @@
       <div class="flex items-center space-x-3 sm:space-x-4">
         <!-- Live Search Trigger -->
         <button id="search-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative" aria-label="Search" title="Search (Ctrl+K)">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-          </svg>
+          <i data-lucide="search" class="w-5 h-5"></i>
         </button>
 
         <!-- Account / Login / Register Trigger & Dropdown -->
         <div class="relative">
           <button id="auth-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative flex items-center justify-center" aria-label="Account" title="Account / Sign In">
-            <svg id="auth-icon-logged-out" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-            </svg>
+            <i id="auth-icon-logged-out" data-lucide="user" class="w-5 h-5"></i>
             <div id="auth-avatar" class="w-7 h-7 rounded-full bg-black text-white font-black text-[10px] hidden items-center justify-center uppercase shadow-sm">
               AM
             </div>
@@ -122,27 +121,19 @@
 
         <!-- Cart Bag Trigger with dynamic badge -->
         <button id="cart-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative" aria-label="Shopping Bag" title="Shopping Bag">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-          </svg>
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
           <span id="cart-count-badge" class="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">1</span>
         </button>
 
         <!-- Audio Sound SFX Toggle -->
         <button id="sound-toggle-btn" class="hidden sm:flex p-2.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black transition-colors" title="Toggle UI Sound Effects">
-          <svg id="sound-icon-on" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
-          </svg>
-          <svg id="sound-icon-off" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z M17 14l4-4m0 4l-4-4"/>
-          </svg>
+          <i id="sound-icon-on" data-lucide="volume-2" class="w-5 h-5"></i>
+          <i id="sound-icon-off" data-lucide="volume-x" class="w-5 h-5 hidden"></i>
         </button>
 
         <!-- Mobile Menu Hamburger Button -->
         <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors" aria-label="Menu">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
+          <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
       </div>
 
@@ -205,7 +196,8 @@
             <span id="hero-price" class="text-2xl sm:text-3xl font-extrabold text-black tracking-tight font-sans">$159.00</span>
             <span id="hero-price-inr" class="text-sm font-semibold text-gray-500 font-sans">₹12,995</span>
             <div class="flex items-center text-amber-500 text-xs font-bold gap-1 bg-white/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-gray-200">
-              <span>★ 4.9</span>
+              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400 text-amber-400 inline"></i>
+              <span>4.9</span>
               <span class="text-gray-400 font-normal">(2,450)</span>
             </div>
           </div>
@@ -213,18 +205,14 @@
           <!-- Primary CTA Buttons -->
           <div class="flex flex-wrap items-center gap-4 pt-3">
             <!-- SHOP NOW Button (Leads to full products collection) -->
-            <a id="hero-shop-now-btn" href="products.html" class="btn-magnetic inline-flex items-center gap-3 bg-black hover:bg-neutral-900 text-white font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group">
+            <a id="hero-shop-now-btn" href="products.html" class="btn-magnetic inline-flex items-center gap-2.5 bg-black hover:bg-neutral-900 text-white font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group">
               <span>SHOP NOW</span>
-              <svg class="w-4 h-4 transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M7 17L17 7M17 7H7M17 7V17"/>
-              </svg>
+              <i data-lucide="arrow-up-right" class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
             </a>
 
             <!-- Quick Add to Bag CTA -->
             <button id="hero-add-to-bag-btn" class="btn-magnetic inline-flex items-center gap-2 bg-white/90 hover:bg-white text-black font-extrabold text-sm px-6 py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-              </svg>
+              <i data-lucide="shopping-bag" class="w-4 h-4"></i>
               <span>Quick Bag</span>
             </button>
           </div>
@@ -327,9 +315,7 @@
           
           <!-- Prev Button -->
           <button id="btn-prev-variant" class="w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200" aria-label="Previous shoe model">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
-            </svg>
+            <i data-lucide="chevron-left" class="w-4 h-4"></i>
           </button>
 
           <!-- Card 1: Crimson Blaze (Red) -->
@@ -382,9 +368,7 @@
 
           <!-- Next Button -->
           <button id="btn-next-variant" class="w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200" aria-label="Next shoe model">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
-            </svg>
+            <i data-lucide="chevron-right" class="w-4 h-4"></i>
           </button>
 
         </div>
@@ -395,30 +379,22 @@
           
           <!-- Instagram -->
           <a href="#" class="w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="Instagram">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
+            <i data-lucide="instagram" class="w-4 h-4"></i>
           </a>
 
           <!-- Twitter / X -->
-          <a href="#" class="w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="X">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
+          <a href="#" class="w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="Twitter">
+            <i data-lucide="twitter" class="w-4 h-4"></i>
           </a>
 
           <!-- Facebook -->
           <a href="#" class="w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="Facebook">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.688 5H18V0h-3.808C10.597 0 9 1.582 9 4.615V8z"/>
-            </svg>
+            <i data-lucide="facebook" class="w-4 h-4"></i>
           </a>
 
-          <!-- TikTok -->
-          <a href="#" class="w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="TikTok">
-            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.12 1.19 2.03 2.31 2.26.79.16 1.63.07 2.36-.28.84-.4 1.4-1.22 1.57-2.14.07-.46.08-.93.08-1.4V.02z"/>
-            </svg>
+          <!-- Share / Connect -->
+          <a href="#" class="w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white flex items-center justify-center border border-gray-200 shadow-sm transition-all" aria-label="Share">
+            <i data-lucide="share-2" class="w-4 h-4"></i>
           </a>
 
         </div>
@@ -453,9 +429,7 @@
         <!-- Card 1 -->
         <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
           <div class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
+            <i data-lucide="zap" class="w-7 h-7 text-cyan-400"></i>
           </div>
           <h3 class="text-xl font-black text-black mb-2">Nitrogen Kinetic Capsule</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
@@ -469,9 +443,7 @@
         <!-- Card 2 -->
         <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
           <div class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg class="w-7 h-7 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-            </svg>
+            <i data-lucide="recycle" class="w-7 h-7 text-emerald-400"></i>
           </div>
           <h3 class="text-xl font-black text-black mb-2">100% Recycled Matrix Weave</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
@@ -485,9 +457,7 @@
         <!-- Card 3 -->
         <div class="p-8 rounded-3xl bg-[#f8f9fb] border border-gray-100 hover:shadow-xl transition-all duration-300 group">
           <div class="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
+            <i data-lucide="shield-check" class="w-7 h-7 text-amber-400"></i>
           </div>
           <h3 class="text-xl font-black text-black mb-2">Biomimetic Carbon Grip</h3>
           <p class="text-sm text-gray-500 leading-relaxed">
@@ -555,9 +525,7 @@
         </p>
         <a href="#catalog-section" class="btn-magnetic inline-flex items-center gap-3 bg-white hover:bg-gray-100 text-black font-black text-xs uppercase tracking-widest px-8 py-4 rounded-full shadow-2xl transition-all">
           <span>Discover The Velocity Series</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-          </svg>
+          <i data-lucide="arrow-right" class="w-4 h-4"></i>
         </a>
       </div>
     </div>
@@ -719,22 +687,18 @@
     <!-- Header -->
     <div class="p-6 border-b border-gray-100 flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-        </svg>
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-gray-900"></i>
         <h3 class="font-display font-black text-xl text-gray-900">Your Bag</h3>
       </div>
       <button id="cart-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors" aria-label="Close cart">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
+        <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
     <!-- Free Shipping Progress -->
     <div class="bg-gray-50 px-6 py-3 border-b border-gray-100 text-xs font-semibold text-gray-700 flex items-center justify-between">
       <span class="flex items-center gap-1.5 text-emerald-600 font-bold">
-        <span>⚡</span> Free Express Shipping Unlocked!
+        <i data-lucide="zap" class="w-3.5 h-3.5"></i> Free Express Shipping Unlocked!
       </span>
       <span class="text-gray-400 font-normal">Orders over $100</span>
     </div>
@@ -779,9 +743,7 @@
       <!-- Checkout Button -->
       <button id="checkout-btn" class="w-full bg-black hover:bg-neutral-900 text-white font-black py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 text-sm uppercase tracking-wider transition-all hover:scale-[1.01] active:scale-[0.99]">
         <span>Checkout Securely</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </button>
 
     </div>
@@ -813,9 +775,7 @@
             <p class="text-xs text-gray-500 mt-0.5">Welcome to the members portal</p>
           </div>
           <button id="auth-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors" aria-label="Close modal">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
+            <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
 
@@ -905,9 +865,7 @@
       <div class="p-6 sm:p-8">
         <div class="flex justify-end">
           <button id="quick-view-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors" aria-label="Close">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
+            <i data-lucide="x" class="w-5 h-5"></i>
           </button>
         </div>
 
@@ -939,9 +897,7 @@
             <div class="mt-6 space-y-2.5">
               <button id="qv-add-bag-btn" class="w-full bg-black hover:bg-neutral-900 text-white font-black py-3.5 rounded-2xl text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 transition-all">
                 <span>Add To Bag</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
-                </svg>
+                <i data-lucide="plus" class="w-4 h-4"></i>
               </button>
               <a id="qv-view-detail-link" href="product-detail.html" class="block text-center text-xs font-bold text-gray-700 hover:text-black py-1 transition-colors">
                 View Full Technical Specs & Specifications →
@@ -961,9 +917,7 @@
   <div id="search-modal" class="fixed inset-0 z-50 flex items-start justify-center p-4 pt-20 opacity-0 scale-95 pointer-events-none transition-all duration-300">
     <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-gray-100 overflow-hidden pointer-events-auto">
       <div class="p-6 border-b border-gray-100 flex items-center gap-3">
-        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
+        <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
         <input id="search-input" type="text" placeholder="Search models, colorways, or tech (e.g. Aero, Pulse, White)..." class="text-sm font-semibold text-gray-900 flex-1 focus:outline-none">
         <button id="search-close-btn" class="text-xs font-bold text-gray-400 hover:text-black">ESC</button>
       </div>
@@ -984,5 +938,10 @@
   <script src="assets/js/cart.js"></script>
   <!-- Main Application Logic -->
   <script src="assets/js/main.js"></script>
+  <script>
+    if (window.lucide) {
+      window.lucide.createIcons();
+    }
+  </script>
 </body>
 </html>

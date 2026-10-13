@@ -213,9 +213,7 @@
         container.innerHTML = `
           <div class="flex flex-col items-center justify-center h-64 text-center px-4">
             <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 mb-4">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-              </svg>
+              <i data-lucide="shopping-bag" class="w-8 h-8 text-gray-400"></i>
             </div>
             <p class="text-base font-bold text-gray-900 mb-1">Your Bag is Empty</p>
             <p class="text-xs text-gray-500 max-w-xs mb-4">Explore our footwear and apparel roster to elevate your athletic experience.</p>
@@ -244,9 +242,7 @@
               </div>
             </div>
             <button data-action="remove" data-index="${index}" class="cart-remove-btn text-gray-400 hover:text-red-500 p-2 transition-colors" title="Remove item">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-              </svg>
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
             </button>
           </div>
         `
@@ -286,6 +282,9 @@
             showToast(`Removed ${removedName} from bag`);
           });
         });
+      }
+      if (window.lucide) {
+        window.lucide.createIcons();
       }
     }
   }
@@ -383,7 +382,7 @@
           <div class="p-6 border-b border-gray-100 flex items-center justify-between bg-neutral-900 text-white">
             <div class="flex items-center gap-3">
               <div class="w-8 h-8 rounded-xl bg-white text-black flex items-center justify-center font-black">
-                ⚡
+                <i data-lucide="zap" class="w-4 h-4 text-black"></i>
               </div>
               <div>
                 <h3 class="font-display font-bold text-xl leading-none">Malzie Softs Express Checkout</h3>
@@ -391,9 +390,7 @@
               </div>
             </div>
             <button id="checkout-close-btn" class="p-2 rounded-full hover:bg-neutral-800 text-gray-400 hover:text-white transition-colors" aria-label="Close Checkout">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
+              <i data-lucide="x" class="w-5 h-5"></i>
             </button>
           </div>
 
@@ -500,15 +497,15 @@
               <div class="pt-4 border-t border-gray-100">
                 <button type="submit" id="btn-confirm-order" class="w-full bg-black hover:bg-neutral-900 text-white font-extrabold py-4 rounded-2xl text-xs uppercase tracking-widest shadow-xl flex items-center justify-center gap-2 transition-transform active:scale-[0.99]">
                   <span>Authorize & Place Order</span>
-                  <span>→</span>
+                  <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </button>
               </div>
             </form>
 
             <!-- Success Confirmation Screen (Hidden initially) -->
             <div id="checkout-success" class="hidden text-center py-6 space-y-4">
-              <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto shadow-md">
-                ✓
+              <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto shadow-md">
+                <i data-lucide="check" class="w-8 h-8 text-emerald-600"></i>
               </div>
               <h4 class="font-display font-bold text-2xl uppercase tracking-tight text-black">Order Confirmed!</h4>
               <p class="text-xs text-gray-600 max-w-sm mx-auto">
@@ -605,6 +602,10 @@
         if (refEl) refEl.textContent = orderId;
         if (successView) successView.classList.remove('hidden');
 
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+
         showToast(`Order Confirmed! Ref: ${orderId}`);
       });
     }
@@ -666,6 +667,7 @@
         backdrop.classList.remove('opacity-0');
         modal.classList.remove('opacity-0', 'scale-95');
         modal.classList.add('opacity-100', 'scale-100');
+        if (window.lucide) window.lucide.createIcons();
       });
     }
     closeCart();
@@ -698,9 +700,7 @@
               <p class="text-xs text-gray-500">Biomechanical athlete dimensions</p>
             </div>
             <button id="size-guide-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
+              <i data-lucide="x" class="w-5 h-5"></i>
             </button>
           </div>
           <div class="p-6 overflow-y-auto space-y-6">
@@ -782,6 +782,7 @@
         backdrop.classList.remove('opacity-0');
         modal.classList.remove('opacity-0', 'scale-95');
         modal.classList.add('opacity-100', 'scale-100');
+        if (window.lucide) window.lucide.createIcons();
       });
     }
   }

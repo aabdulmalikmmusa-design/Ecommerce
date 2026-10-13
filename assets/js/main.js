@@ -707,9 +707,7 @@
               </a>
               <!-- Quick View Floating Action -->
               <button data-id="${product.id}" class="quick-view-btn absolute bottom-3 right-3 bg-white/95 hover:bg-black hover:text-white text-gray-800 p-2.5 rounded-xl shadow-md transition-all opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0" title="Quick Preview">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                </svg>
+                <i data-lucide="eye" class="w-4 h-4"></i>
               </button>
             </div>
             <div class="mt-4">
@@ -727,11 +725,13 @@
           </div>
           <!-- Bottom Action Buttons: Quick Bag + View Specs -->
           <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-            <button data-id="${product.id}" class="catalog-add-btn flex-1 bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold py-2.5 px-3 rounded-full transition-colors flex items-center justify-center gap-1" title="Quick Add">
-              <span>+ Bag</span>
+            <button data-id="${product.id}" class="catalog-add-btn flex-1 bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold py-2.5 px-3 rounded-full transition-colors flex items-center justify-center gap-1.5" title="Quick Add">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Bag</span>
             </button>
-            <a href="product-detail.html?id=${product.id}" class="flex-1 bg-black hover:bg-neutral-800 text-white text-xs font-bold py-2.5 px-3 rounded-full transition-all text-center group-hover:scale-102 shadow-sm">
+            <a href="product-detail.html?id=${product.id}" class="flex-1 bg-black hover:bg-neutral-800 text-white text-xs font-bold py-2.5 px-3 rounded-full transition-all text-center group-hover:scale-102 shadow-sm flex items-center justify-center gap-1">
               <span>View Specs</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
           </div>
         </div>
@@ -766,6 +766,10 @@
           if (p) openQuickView(p);
         });
       });
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
     }
 
     // Filter Buttons
@@ -1009,9 +1013,7 @@
                   <p class="text-xs text-gray-500">Track shipments & laboratory receipts</p>
                 </div>
                 <button id="orders-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                  </svg>
+                  <i data-lucide="x" class="w-5 h-5"></i>
                 </button>
               </div>
               <div id="orders-list-body" class="p-6 overflow-y-auto divide-y divide-gray-100 space-y-4">
@@ -1067,6 +1069,7 @@
         backdrop.classList.remove('opacity-0');
         modal.classList.remove('opacity-0', 'scale-95');
         modal.classList.add('opacity-100', 'scale-100');
+        if (window.lucide) window.lucide.createIcons();
       });
     }
 
@@ -1249,6 +1252,10 @@
     const commerce = window.MalzieCommerce || window.AetherCommerce;
     if (commerce && commerce.updateCartUI) {
       commerce.updateCartUI();
+    }
+
+    if (window.lucide) {
+      window.lucide.createIcons();
     }
   });
 })();

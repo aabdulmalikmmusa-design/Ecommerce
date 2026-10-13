@@ -38,6 +38,9 @@
 
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Lucide Icons Library -->
+  <script src="assets/js/lucide.min.js"></script>
 </head>
 <body class="font-sans bg-[#f7f8fa] text-[#121316] antialiased selection:bg-black selection:text-white">
 
@@ -73,14 +76,13 @@
       <div class="flex items-center space-x-3 sm:space-x-4">
         <!-- Back to Home Link -->
         <a href="index.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-gray-600 hover:text-black bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-full transition-colors">
-          <span>← Back to Home</span>
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Home</span>
         </a>
 
         <!-- Cart Bag Trigger with dynamic badge -->
         <button id="cart-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative" aria-label="Shopping Bag" title="Shopping Bag">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-          </svg>
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
           <span id="cart-count-badge" class="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">1</span>
         </button>
       </div>
@@ -128,9 +130,7 @@
       <!-- Instant Search Filter -->
       <div class="relative max-w-xs w-full">
         <input id="collection-search" type="text" placeholder="Search shoes or shirts..." class="w-full bg-white border border-gray-200 text-xs font-semibold rounded-full pl-9 pr-4 py-2.5 focus:outline-none focus:border-black shadow-sm">
-        <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-        </svg>
+        <i data-lucide="search" class="w-4 h-4 text-gray-400 absolute left-3 top-3"></i>
       </div>
     </div>
 
@@ -163,22 +163,18 @@
     <!-- Header -->
     <div class="p-6 border-b border-gray-100 flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-        </svg>
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-gray-900"></i>
         <h3 class="font-display font-black text-xl text-gray-900">Your Bag</h3>
       </div>
       <button id="cart-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors" aria-label="Close cart">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
+        <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
     <!-- Free Shipping Notice -->
     <div class="bg-gray-50 px-6 py-3 border-b border-gray-100 text-xs font-semibold text-gray-700 flex items-center justify-between">
       <span class="flex items-center gap-1.5 text-emerald-600 font-bold">
-        <span>⚡</span> Free Express Shipping Unlocked!
+        <i data-lucide="zap" class="w-3.5 h-3.5"></i> Free Express Shipping Unlocked!
       </span>
       <span class="text-gray-400 font-normal">Orders over $100</span>
     </div>
@@ -220,9 +216,7 @@
       <!-- Checkout Button -->
       <button id="checkout-btn" class="w-full bg-black hover:bg-neutral-900 text-white font-black py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 text-sm uppercase tracking-wider transition-all hover:scale-[1.01] active:scale-[0.99]">
         <span>Checkout Securely</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </button>
     </div>
   </div>
@@ -314,17 +308,20 @@
           <!-- Bottom: Action Buttons -->
           <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
             <button data-id="${p.id}" class="prod-quick-add-btn bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold px-3.5 py-2.5 rounded-full transition-colors flex items-center gap-1 shadow-sm" title="Quick Add">
-              <span>+ Bag</span>
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Bag</span>
             </button>
             <a href="product-detail.html?id=${p.id}" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-bold px-4 py-2.5 rounded-full transition-all group-hover:scale-102 shadow-md">
               <span>View & Price</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-              </svg>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
           </div>
         </div>
       `).join('');
+
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
 
       // Wire quick add buttons
       grid.querySelectorAll('.prod-quick-add-btn').forEach(btn => {
@@ -373,6 +370,10 @@
 
       if (window.MalzieCommerce) {
         window.MalzieCommerce.updateCartUI();
+      }
+
+      if (window.lucide) {
+        window.lucide.createIcons();
       }
     });
   </script>

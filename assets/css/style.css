@@ -208,3 +208,10 @@
   animation: luxuryGlow 3s infinite ease-in-out;
 }
 
+/* Lucide Icon integration utilities */
+svg.lucide, i[data-lucide] {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+

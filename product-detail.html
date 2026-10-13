@@ -38,6 +38,9 @@
 
   <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Lucide Icons Library -->
+  <script src="assets/js/lucide.min.js"></script>
 </head>
 <body class="font-sans bg-[#f7f8fa] text-[#121316] antialiased selection:bg-black selection:text-white">
 
@@ -73,14 +76,13 @@
       <div class="flex items-center space-x-3 sm:space-x-4">
         <!-- Back Button -->
         <a href="products.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-gray-600 hover:text-black bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-full transition-colors">
-          <span>← Back to Catalog</span>
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Back to Catalog</span>
         </a>
 
         <!-- Shopping Cart Trigger -->
         <button id="cart-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative" aria-label="Shopping Bag">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-          </svg>
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
           <span id="cart-count-badge" class="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">1</span>
         </button>
       </div>
@@ -137,9 +139,7 @@
 
           <!-- Zoom / Fullscreen Hint -->
           <div class="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md text-gray-600 text-[11px] font-bold px-3 py-1.5 rounded-full border border-gray-200 flex items-center gap-1.5 shadow-sm">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
-            </svg>
+            <i data-lucide="maximize-2" class="w-3.5 h-3.5"></i>
             <span>HD Studio Render</span>
           </div>
 
@@ -232,15 +232,14 @@
               <!-- Main Add to Bag Button -->
               <button id="add-to-bag-btn" class="btn-magnetic flex-1 bg-black hover:bg-neutral-900 text-white font-extrabold text-sm py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 uppercase tracking-wider transition-all">
                 <span>Add To Bag</span>
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
-                </svg>
+                <i data-lucide="shopping-bag" class="w-4 h-4"></i>
               </button>
             </div>
 
             <!-- Instant Buy Now -->
-            <button id="instant-buy-btn" class="w-full bg-gray-100 hover:bg-gray-200 text-black font-extrabold text-xs py-3.5 rounded-2xl uppercase tracking-wider transition-all">
-              Buy With 1-Click Express
+            <button id="instant-buy-btn" class="w-full bg-gray-100 hover:bg-gray-200 text-black font-extrabold text-xs py-3.5 rounded-2xl uppercase tracking-wider transition-all flex items-center justify-center gap-1.5">
+              <i data-lucide="zap" class="w-4 h-4 text-black"></i>
+              <span>Buy With 1-Click Express</span>
             </button>
 
           </div>
@@ -248,21 +247,15 @@
           <!-- Trust Guarantees -->
           <div class="pt-4 border-t border-gray-100 space-y-2.5 text-xs text-gray-600 font-medium">
             <div class="flex items-center gap-2.5">
-              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
+              <i data-lucide="truck" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
               <span>Free Express Worldwide Delivery (2-3 business days)</span>
             </div>
             <div class="flex items-center gap-2.5">
-              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-              </svg>
+              <i data-lucide="rotate-ccw" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
               <span>30-Day Zero-Risk Wear Test & Hassle-Free Returns</span>
             </div>
             <div class="flex items-center gap-2.5">
-              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
+              <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600 flex-shrink-0"></i>
               <span>100% Authentic Malzie Softs Guarantee</span>
             </div>
           </div>
@@ -302,11 +295,12 @@
 
   <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
     <div class="p-6 border-b border-gray-100 flex items-center justify-between">
-      <h3 class="font-display font-bold text-xl text-gray-900">Your Bag</h3>
+      <div class="flex items-center gap-2">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-gray-900"></i>
+        <h3 class="font-display font-bold text-xl text-gray-900">Your Bag</h3>
+      </div>
       <button id="cart-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
+        <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
 
@@ -343,9 +337,7 @@
 
       <button id="checkout-btn" class="w-full bg-black hover:bg-neutral-900 text-white font-black py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 text-sm uppercase tracking-wider transition-all hover:scale-[1.01] active:scale-[0.99]">
         <span>Checkout Securely</span>
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-        </svg>
+        <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </button>
     </div>
   </div>
@@ -486,14 +478,13 @@
 
           <!-- Bottom: Quick Bag & View Product -->
           <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-            <button data-id="${p.id}" class="related-quick-add-btn bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold px-3 py-2 rounded-full transition-colors" title="Quick Add">
-              <span>+ Bag</span>
+            <button data-id="${p.id}" class="related-quick-add-btn bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold px-3 py-2 rounded-full transition-colors flex items-center gap-1" title="Quick Add">
+              <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+              <span>Bag</span>
             </button>
             <a href="product-detail.html?id=${p.id}" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-bold px-3.5 py-2 rounded-full transition-all text-center">
               <span>View Product</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-              </svg>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
           </div>
         </div>
@@ -521,6 +512,10 @@
       // Initialize cart UI
       if (window.MalzieCommerce) {
         window.MalzieCommerce.updateCartUI();
+      }
+
+      if (window.lucide) {
+        window.lucide.createIcons();
       }
     });
   </script>
