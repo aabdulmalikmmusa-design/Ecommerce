@@ -635,23 +635,11 @@
     // 6. ADD TO BAG FUNCTIONALITY
     // ----------------------------------------------------
     function addToBag(item) {
-      initAudio();
-      playUiSound('success');
-      const existing = cart.find((i) => i.name === item.name && i.size === item.size);
-      if (existing) {
-        existing.quantity += item.quantity || 1;
+      if (window.AetherCommerce && window.AetherCommerce.addToBag) {
+        window.AetherCommerce.addToBag(item);
       } else {
-        cart.push({
-          id: item.id || 'prod-' + Date.now(),
-          name: item.name,
-          size: item.size || 'US 10',
-          price: item.price,
-          image: item.image,
-          quantity: item.quantity || 1
-        });
+        showToast(`Added ${item.name} (${item.size || 'US 10'}) to bag!`);
       }
-      updateCartUI();
-      showToast(`Added ${item.name} (${item.size || 'US 10'}) to bag!`);
     }
 
     // Hero "Shop Now" & "Add to Bag"
@@ -667,9 +655,9 @@
           name: model.name,
           size: 'US 10',
           price: parseFloat(model.price.replace('$', '')),
-          image: model.image
+          image: model.image,
+          type: 'Footwear'
         });
-        openCart();
       });
     }
 
@@ -681,7 +669,8 @@
           name: model.name,
           size: 'US 10',
           price: parseFloat(model.price.replace('$', '')),
-          image: model.image
+          image: model.image,
+          type: 'Footwear'
         });
       });
     }
@@ -691,18 +680,20 @@
     // ----------------------------------------------------
     function renderCatalog(filterCategory = 'All') {
       if (!catalogContainer) return;
-      const filtered = filterCategory === 'All'
-        ? catalogProducts
-        : catalogProducts.filter((p) => 
-            (p.type && p.type.toLowerCase() === filterCategory.toLowerCase()) ||
-            (p.category && p.category.toLowerCase() === filterCategory.toLowerCase())
-          );
+      const allProducts = window.AETHER_PRODUCTS || catalogProducts;
+      let filtered = allProducts;
+      if (filterCategory !== 'All') {
+        filtered = allProducts.filter((p) =>
+          (p.type && p.type.toLowerCase() === filterCategory.toLowerCase()) ||
+          (p.category && p.category.toLowerCase() === filterCategory.toLowerCase())
+        );
+      }
 
       catalogContainer.innerHTML = filtered
         .map(
           (product) => `
         <div class="group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
-          <a href="product-detail.html?id=${product.id}" class="block">
+          <div class="block">
             <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-60 flex items-center justify-center overflow-hidden">
               <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
                 ${product.badge}
@@ -710,47 +701,56 @@
               <span class="absolute top-3 right-3 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
                 ${product.type || 'Product'}
               </span>
-              <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
+              <a href="product-detail.html?id=${product.id}" class="w-full h-full flex items-center justify-center">
+                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
+              </a>
+              <!-- Quick View Floating Action -->
+              <button data-id="${product.id}" class="quick-view-btn absolute bottom-3 right-3 bg-white/95 hover:bg-black hover:text-white text-gray-800 p-2.5 rounded-xl shadow-md transition-all opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0" title="Quick Preview">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                </svg>
+              </button>
             </div>
             <div class="mt-4">
               <div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
-                <span>${product.type || product.category}</span>
+                <span>${product.type}</span>
                 <span class="flex items-center text-amber-500 font-bold">
                   ★ ${product.rating}
                 </span>
               </div>
-              <h3 class="text-base font-extrabold text-gray-900 group-hover:text-red-500 transition-colors">${product.name}</h3>
+              <a href="product-detail.html?id=${product.id}">
+                <h3 class="text-base font-extrabold text-gray-900 hover:text-red-500 transition-colors leading-snug">${product.name}</h3>
+              </a>
               <p class="text-xs text-gray-500 mt-0.5">${product.color}</p>
             </div>
-          </a>
-          <!-- Bottom: NO PRICE SHOWN ON CARD! User clicks to reveal price on product-detail.html -->
-          <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
-            <span class="text-[11px] font-medium text-gray-400">Click to reveal price</span>
-            <a href="product-detail.html?id=${product.id}" class="inline-flex items-center gap-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-bold px-4 py-2.5 rounded-full transition-all group-hover:scale-105 shadow-md">
-              <span>View Product & Price</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-              </svg>
+          </div>
+          <!-- Bottom Action Buttons: Quick Bag + View Specs -->
+          <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+            <button data-id="${product.id}" class="catalog-add-btn flex-1 bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold py-2.5 px-3 rounded-full transition-colors flex items-center justify-center gap-1" title="Quick Add">
+              <span>+ Bag</span>
+            </button>
+            <a href="product-detail.html?id=${product.id}" class="flex-1 bg-black hover:bg-neutral-800 text-white text-xs font-bold py-2.5 px-3 rounded-full transition-all text-center group-hover:scale-102 shadow-sm">
+              <span>View Specs</span>
             </a>
           </div>
         </div>
       `
         )
         .join('');
-    }
 
       // Attach add-to-bag handlers
       catalogContainer.querySelectorAll('.catalog-add-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const id = btn.getAttribute('data-id');
-          const p = catalogProducts.find((item) => item.id === id);
+          const p = (window.AETHER_PRODUCTS || catalogProducts).find((item) => item.id === id);
           if (p) {
             addToBag({
               id: p.id,
               name: p.name,
-              size: 'US 10',
+              size: p.sizes ? p.sizes[0] : (p.type === 'Shirts' ? 'M' : 'US 10'),
               price: p.price,
-              image: p.image
+              image: p.image,
+              type: p.type
             });
           }
         });
@@ -758,9 +758,10 @@
 
       // Attach quick view handlers
       catalogContainer.querySelectorAll('.quick-view-btn').forEach((btn) => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
           const id = btn.getAttribute('data-id');
-          const p = catalogProducts.find((item) => item.id === id);
+          const p = (window.AETHER_PRODUCTS || catalogProducts).find((item) => item.id === id);
           if (p) openQuickView(p);
         });
       });
@@ -789,30 +790,50 @@
       initAudio();
       playUiSound('whoosh');
       quickViewActiveProduct = product;
-      selectedSize = 'US 10';
+      selectedSize = product.sizes ? product.sizes[0] : (product.type === 'Shirts' ? 'M' : 'US 10');
 
       const qImg = document.getElementById('qv-image');
       const qTitle = document.getElementById('qv-title');
       const qCategory = document.getElementById('qv-category');
       const qPrice = document.getElementById('qv-price');
       const qDesc = document.getElementById('qv-desc');
+      const qSizeLabel = document.getElementById('qv-size-label');
+      const qDetailLink = document.getElementById('qv-view-detail-link');
+      const qSizesContainer = document.getElementById('qv-sizes-container');
 
       if (qImg) qImg.src = product.image;
       if (qTitle) qTitle.textContent = product.name;
-      if (qCategory) qCategory.textContent = product.category;
-      if (qPrice) qPrice.textContent = product.priceStr;
-      if (qDesc) qDesc.textContent = `Premium performance footwear featuring multi-density air dampening, engineered matrix weave, and anatomical support.`;
+      if (qCategory) qCategory.textContent = `${product.type} // ${product.color}`;
+      if (qPrice) qPrice.textContent = product.priceStr || `$${product.price}.00`;
+      if (qDesc) qDesc.textContent = product.description || `High-performance athletic gear featuring precision engineering.`;
+      if (qSizeLabel) qSizeLabel.textContent = product.type === 'Shirts' ? 'Select Apparel Size' : 'Select Footwear Size (US)';
+      if (qDetailLink) qDetailLink.href = `product-detail.html?id=${product.id}`;
 
-      // Reset size buttons
-      document.querySelectorAll('.size-select-btn').forEach((b) => {
-        if (b.getAttribute('data-size') === selectedSize) {
-          b.classList.add('border-black', 'bg-black', 'text-white');
-          b.classList.remove('border-gray-200', 'bg-white', 'text-gray-800');
-        } else {
-          b.classList.remove('border-black', 'bg-black', 'text-white');
-          b.classList.add('border-gray-200', 'bg-white', 'text-gray-800');
-        }
-      });
+      // Populate dynamic sizes
+      if (qSizesContainer) {
+        const sizesList = product.sizes || (product.type === 'Shirts' ? ['XS', 'S', 'M', 'L', 'XL'] : ['US 8', 'US 9', 'US 10', 'US 11']);
+        qSizesContainer.innerHTML = sizesList
+          .map(
+            (s, idx) => `
+          <button data-size="${s}" class="size-select-btn border py-2 rounded-xl text-xs font-bold transition-all ${
+            idx === 0 ? 'border-black bg-black text-white' : 'border-gray-200 bg-white text-gray-800 hover:border-black'
+          }">${s}</button>
+        `
+          )
+          .join('');
+
+        qSizesContainer.querySelectorAll('.size-select-btn').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            initAudio();
+            playUiSound('click');
+            qSizesContainer.querySelectorAll('.size-select-btn').forEach((b) => {
+              b.className = 'size-select-btn border border-gray-200 bg-white text-gray-800 hover:border-black py-2 rounded-xl text-xs font-bold transition-all';
+            });
+            btn.className = 'size-select-btn border border-black bg-black text-white py-2 rounded-xl text-xs font-bold transition-all';
+            selectedSize = btn.getAttribute('data-size');
+          });
+        });
+      }
 
       if (quickViewModal && quickViewBackdrop) {
         quickViewBackdrop.classList.remove('hidden');
@@ -838,21 +859,6 @@
     if (quickViewCloseBtn) quickViewCloseBtn.addEventListener('click', closeQuickView);
     if (quickViewBackdrop) quickViewBackdrop.addEventListener('click', closeQuickView);
 
-    // Size Selection in Quick View
-    document.querySelectorAll('.size-select-btn').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        initAudio();
-        playUiSound('click');
-        document.querySelectorAll('.size-select-btn').forEach((b) => {
-          b.classList.remove('border-black', 'bg-black', 'text-white');
-          b.classList.add('border-gray-200', 'bg-white', 'text-gray-800');
-        });
-        btn.classList.add('border-black', 'bg-black', 'text-white');
-        btn.classList.remove('border-gray-200', 'bg-white', 'text-gray-800');
-        selectedSize = btn.getAttribute('data-size');
-      });
-    });
-
     const qvAddBagBtn = document.getElementById('qv-add-bag-btn');
     if (qvAddBagBtn) {
       qvAddBagBtn.addEventListener('click', () => {
@@ -862,7 +868,8 @@
             name: quickViewActiveProduct.name,
             size: selectedSize,
             price: quickViewActiveProduct.price,
-            image: quickViewActiveProduct.image
+            image: quickViewActiveProduct.image,
+            type: quickViewActiveProduct.type
           });
           closeQuickView();
         }
@@ -870,7 +877,7 @@
     }
 
     // ----------------------------------------------------
-    // 9. AUTH MODAL (LOGIN & CREATE ACCOUNT)
+    // 9. AUTH MODAL & USER SESSION
     // ----------------------------------------------------
     function openAuthModal(defaultTab = 'signin') {
       initAudio();
@@ -915,7 +922,166 @@
       }
     }
 
-    if (authBtn) authBtn.addEventListener('click', () => openAuthModal('signin'));
+    function initUserSession() {
+      const savedUserStr = localStorage.getItem('aether_current_user');
+      const authAvatar = document.getElementById('auth-avatar');
+      const authIconOut = document.getElementById('auth-icon-logged-out');
+      const userDropdown = document.getElementById('user-menu-dropdown');
+      const displayName = document.getElementById('user-display-name');
+      const displayEmail = document.getElementById('user-display-email');
+      const signOutBtn = document.getElementById('btn-sign-out');
+      const viewOrdersBtn = document.getElementById('btn-view-orders');
+
+      if (savedUserStr) {
+        try {
+          const user = JSON.parse(savedUserStr);
+          if (authAvatar && authIconOut) {
+            authIconOut.classList.add('hidden');
+            authAvatar.classList.remove('hidden');
+            authAvatar.classList.add('flex');
+            const initials = user.name
+              ? user.name.split(' ').map((n) => n[0]).join('').slice(0, 2).toUpperCase()
+              : 'AM';
+            authAvatar.textContent = initials;
+          }
+          if (displayName) displayName.textContent = user.name || 'Alex Mercer';
+          if (displayEmail) displayEmail.textContent = user.email || 'alex@aetherlabs.com';
+        } catch (e) {}
+      } else {
+        if (authAvatar && authIconOut) {
+          authAvatar.classList.add('hidden');
+          authAvatar.classList.remove('flex');
+          authIconOut.classList.remove('hidden');
+        }
+      }
+
+      if (authBtn) {
+        authBtn.onclick = (e) => {
+          e.stopPropagation();
+          const currentUser = localStorage.getItem('aether_current_user');
+          if (currentUser && userDropdown) {
+            userDropdown.classList.toggle('hidden');
+          } else {
+            openAuthModal('signin');
+          }
+        };
+      }
+
+      document.addEventListener('click', (e) => {
+        if (userDropdown && !userDropdown.contains(e.target) && !authBtn.contains(e.target)) {
+          userDropdown.classList.add('hidden');
+        }
+      });
+
+      if (signOutBtn) {
+        signOutBtn.onclick = () => {
+          localStorage.removeItem('aether_current_user');
+          if (userDropdown) userDropdown.classList.add('hidden');
+          showToast('Signed out successfully');
+          initUserSession();
+        };
+      }
+
+      if (viewOrdersBtn) {
+        viewOrdersBtn.onclick = () => {
+          if (userDropdown) userDropdown.classList.add('hidden');
+          showOrderHistoryModal();
+        };
+      }
+    }
+
+    function showOrderHistoryModal() {
+      let orders = [];
+      try {
+        orders = JSON.parse(localStorage.getItem('aether_placed_orders') || '[]');
+      } catch (e) {}
+
+      let historyModal = document.getElementById('orders-history-modal');
+      if (!historyModal) {
+        const modalHtml = `
+          <div id="orders-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+          <div id="orders-history-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 scale-95 pointer-events-none transition-all duration-300">
+            <div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-gray-100 overflow-hidden pointer-events-auto max-h-[85vh] flex flex-col">
+              <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+                <div>
+                  <h3 class="font-display font-bold text-xl text-black">Order Dispatch History</h3>
+                  <p class="text-xs text-gray-500">Track shipments & laboratory receipts</p>
+                </div>
+                <button id="orders-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                  </svg>
+                </button>
+              </div>
+              <div id="orders-list-body" class="p-6 overflow-y-auto divide-y divide-gray-100 space-y-4">
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHtml);
+        document.getElementById('orders-close-btn').onclick = closeOrderHistoryModal;
+        document.getElementById('orders-backdrop').onclick = closeOrderHistoryModal;
+      }
+
+      const listBody = document.getElementById('orders-list-body');
+      if (orders.length === 0) {
+        listBody.innerHTML = `
+          <div class="text-center py-10 text-gray-400 space-y-2">
+            <p class="text-base font-bold text-gray-700">No past orders yet</p>
+            <p class="text-xs text-gray-500">Your recent gear purchases will appear here with live tracking.</p>
+          </div>
+        `;
+      } else {
+        listBody.innerHTML = orders
+          .map(
+            (o) => `
+          <div class="pt-4 first:pt-0 space-y-2">
+            <div class="flex items-center justify-between text-xs">
+              <span class="font-mono font-bold text-black">${o.orderId}</span>
+              <span class="text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full font-bold">In Transit</span>
+            </div>
+            <p class="text-[11px] text-gray-500">Placed on ${o.date} • Total: $${o.total.toFixed(2)}</p>
+            <div class="space-y-1 pt-1">
+              ${(o.items || [])
+                .map(
+                  (it) => `
+                <div class="flex items-center justify-between text-xs text-gray-700">
+                  <span>${it.name} (${it.size}) × ${it.quantity}</span>
+                  <span class="font-bold">$${(it.price * it.quantity).toFixed(2)}</span>
+                </div>
+              `
+                )
+                .join('')}
+            </div>
+          </div>
+        `
+          )
+          .join('');
+      }
+
+      const modal = document.getElementById('orders-history-modal');
+      const backdrop = document.getElementById('orders-backdrop');
+      backdrop.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        backdrop.classList.remove('opacity-0');
+        modal.classList.remove('opacity-0', 'scale-95');
+        modal.classList.add('opacity-100', 'scale-100');
+      });
+    }
+
+    function closeOrderHistoryModal() {
+      const modal = document.getElementById('orders-history-modal');
+      const backdrop = document.getElementById('orders-backdrop');
+      if (modal && backdrop) {
+        modal.classList.remove('opacity-100', 'scale-100');
+        modal.classList.add('opacity-0', 'scale-95');
+        backdrop.classList.add('opacity-0');
+        setTimeout(() => {
+          backdrop.classList.add('hidden');
+        }, 250);
+      }
+    }
+
     if (authCloseBtn) authCloseBtn.addEventListener('click', closeAuthModal);
     if (authBackdrop) authBackdrop.addEventListener('click', closeAuthModal);
 
@@ -928,7 +1094,12 @@
         e.preventDefault();
         initAudio();
         playUiSound('success');
-        showToast('Welcome back, Athlete!');
+        const email = formSignIn.querySelector('input[type="email"]').value;
+        const name = email.split('@')[0].replace('.', ' ');
+        const capName = name.charAt(0).toUpperCase() + name.slice(1);
+        localStorage.setItem('aether_current_user', JSON.stringify({ name: capName, email: email }));
+        initUserSession();
+        showToast(`Welcome back, ${capName}!`);
         closeAuthModal();
       });
     }
@@ -938,6 +1109,10 @@
         e.preventDefault();
         initAudio();
         playUiSound('success');
+        const name = formSignUp.querySelector('input[placeholder="Alex Mercer"]').value;
+        const email = formSignUp.querySelector('input[type="email"]').value;
+        localStorage.setItem('aether_current_user', JSON.stringify({ name: name, email: email }));
+        initUserSession();
         showToast('Account created successfully! Welcome to Aether.');
         closeAuthModal();
       });
@@ -974,16 +1149,22 @@
 
     function renderSearchResults(query) {
       if (!searchResultsContainer) return;
+      const allProducts = window.AETHER_PRODUCTS || catalogProducts;
       const q = query.trim().toLowerCase();
       const results = q === ''
-        ? catalogProducts.slice(0, 4)
-        : catalogProducts.filter((p) => p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.color.toLowerCase().includes(q));
+        ? allProducts.slice(0, 5)
+        : allProducts.filter((p) =>
+            p.name.toLowerCase().includes(q) ||
+            p.category.toLowerCase().includes(q) ||
+            p.type.toLowerCase().includes(q) ||
+            p.color.toLowerCase().includes(q)
+          );
 
       if (results.length === 0) {
         searchResultsContainer.innerHTML = `
           <div class="py-8 text-center text-gray-400">
-            <p class="font-semibold text-sm">No footwear matching "${query}"</p>
-            <p class="text-xs mt-1 text-gray-500">Try searching for "Aero", "Pulse", "Running", or "Excee"</p>
+            <p class="font-semibold text-sm">No items matching "${query}"</p>
+            <p class="text-xs mt-1 text-gray-500">Try searching for "Aero", "Pulse", "Shirt", or "Excee"</p>
           </div>
         `;
         return;
@@ -999,11 +1180,11 @@
             </div>
             <div>
               <h5 class="text-sm font-bold text-gray-900">${p.name}</h5>
-              <p class="text-xs text-gray-500">${p.category} • ${p.color}</p>
+              <p class="text-xs text-gray-500">${p.type} • ${p.color}</p>
             </div>
           </div>
           <div class="text-right">
-            <span class="text-sm font-black text-gray-900">${p.priceStr}</span>
+            <span class="text-sm font-black text-gray-900">${p.priceStr || '$' + p.price}</span>
           </div>
         </div>
       `
@@ -1013,7 +1194,7 @@
       searchResultsContainer.querySelectorAll('.search-result-item').forEach((item) => {
         item.addEventListener('click', () => {
           const id = item.getAttribute('data-id');
-          const p = catalogProducts.find((i) => i.id === id);
+          const p = (window.AETHER_PRODUCTS || catalogProducts).find((i) => i.id === id);
           if (p) {
             closeSearchModal();
             openQuickView(p);
@@ -1038,35 +1219,16 @@
         e.preventDefault();
         openSearchModal();
       } else if (e.key === 'Escape') {
-        closeCart();
+        if (window.AetherCommerce) window.AetherCommerce.closeCart();
         closeAuthModal();
         closeSearchModal();
         closeQuickView();
+        closeOrderHistoryModal();
       }
     });
 
     // ----------------------------------------------------
-    // 11. SOUND SFX TOGGLE
-    // ----------------------------------------------------
-    if (soundToggleBtn) {
-      soundToggleBtn.addEventListener('click', () => {
-        soundEnabled = !soundEnabled;
-        if (soundEnabled) {
-          initAudio();
-          playUiSound('success');
-          if (soundIconOn) soundIconOn.classList.remove('hidden');
-          if (soundIconOff) soundIconOff.classList.add('hidden');
-          showToast('Sound Effects Enabled 🔊');
-        } else {
-          if (soundIconOn) soundIconOn.classList.add('hidden');
-          if (soundIconOff) soundIconOff.classList.remove('hidden');
-          showToast('Sound Muted 🔇');
-        }
-      });
-    }
-
-    // ----------------------------------------------------
-    // 12. MOBILE MENU TOGGLE
+    // 11. MOBILE MENU TOGGLE
     // ----------------------------------------------------
     if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener('click', () => {
@@ -1081,6 +1243,10 @@
     // ----------------------------------------------------
     updateHeroShoe(0, false);
     renderCatalog('All');
-    updateCartUI();
+    initUserSession();
+    if (window.AetherCommerce) {
+      window.AetherCommerce.updateCartUI();
+    }
   });
 })();
+

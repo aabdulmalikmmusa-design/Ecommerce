@@ -76,12 +76,13 @@
           <span>← Back to Home</span>
         </a>
 
-        <!-- Cart Bag Trigger -->
-        <a href="index.html#cart" onclick="alert('Open cart on main page or view bag!');" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative" aria-label="Bag">
+        <!-- Cart Bag Trigger with dynamic badge -->
+        <button id="cart-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative" aria-label="Shopping Bag" title="Shopping Bag">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
           </svg>
-        </a>
+          <span id="cart-count-badge" class="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">1</span>
+        </button>
       </div>
 
     </div>
@@ -153,8 +154,85 @@
     </div>
   </footer>
 
-  <!-- Central Products Data -->
+  <!-- ============================================================ -->
+  <!-- 5. SHOPPING CART SLIDE-OVER DRAWER -->
+  <!-- ============================================================ -->
+  <div id="cart-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+    <!-- Header -->
+    <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <svg class="w-5 h-5 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <h3 class="font-display font-black text-xl text-gray-900">Your Bag</h3>
+      </div>
+      <button id="cart-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors" aria-label="Close cart">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Free Shipping Notice -->
+    <div class="bg-gray-50 px-6 py-3 border-b border-gray-100 text-xs font-semibold text-gray-700 flex items-center justify-between">
+      <span class="flex items-center gap-1.5 text-emerald-600 font-bold">
+        <span>⚡</span> Free Express Shipping Unlocked!
+      </span>
+      <span class="text-gray-400 font-normal">Orders over $100</span>
+    </div>
+
+    <!-- Scrollable Items Container -->
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 divide-y divide-gray-100"></div>
+
+    <!-- Footer Summary & Checkout -->
+    <div class="p-6 border-t border-gray-100 bg-gray-50 space-y-4">
+      <!-- Promo code -->
+      <div>
+        <div class="flex gap-2">
+          <input id="promo-code-input" type="text" placeholder="Promo Code (FUTURE20)" class="bg-white border border-gray-200 rounded-xl px-3.5 py-2 text-xs font-semibold uppercase flex-1 focus:outline-none focus:border-black">
+          <button id="apply-promo-btn" class="bg-black text-white px-4 py-2 rounded-xl text-xs font-black hover:bg-neutral-800 transition-colors">Apply</button>
+        </div>
+        <span id="promo-feedback" class="text-xs hidden"></span>
+      </div>
+
+      <!-- Financials Breakdown -->
+      <div class="space-y-1.5 text-xs font-semibold text-gray-600">
+        <div class="flex justify-between">
+          <span>Subtotal</span>
+          <span id="cart-subtotal" class="font-black text-gray-900">$0.00</span>
+        </div>
+        <div class="flex justify-between text-emerald-600">
+          <span>Discount</span>
+          <span id="cart-discount">-$0.00</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Express Shipping</span>
+          <span class="text-emerald-600 font-black">FREE</span>
+        </div>
+        <div class="flex justify-between text-sm font-black text-gray-900 pt-2 border-t border-gray-200">
+          <span>Total</span>
+          <span id="cart-total" class="text-base font-display">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <button id="checkout-btn" class="w-full bg-black hover:bg-neutral-900 text-white font-black py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 text-sm uppercase tracking-wider transition-all hover:scale-[1.01] active:scale-[0.99]">
+        <span>Checkout Securely</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+  <!-- Central Products Data & Commerce Engine -->
   <script src="assets/js/products-data.js"></script>
+  <script src="assets/js/cart.js"></script>
 
   <script>
     let activeCategory = 'All';
@@ -207,35 +285,39 @@
         return;
       }
 
-      // Render cards WITHOUT prices! Clicking opens product-detail.html where price is shown!
+      // Render cards with both Quick Add and View Detail options
       grid.innerHTML = list.map(p => `
         <div class="group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
-          <a href="product-detail.html?id=${p.id}" class="block">
-            <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-64 flex items-center justify-center overflow-hidden">
-              <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
-                ${p.badge}
-              </span>
-              <span class="absolute top-3 right-3 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
-                ${p.type}
-              </span>
-              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-500">
-            </div>
-            
-            <div class="mt-4">
-              <div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
-                <span>${p.type}</span>
-                <span class="text-amber-500 font-bold">★ ${p.rating}</span>
+          <div>
+            <a href="product-detail.html?id=${p.id}" class="block">
+              <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-64 flex items-center justify-center overflow-hidden">
+                <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
+                  ${p.badge}
+                </span>
+                <span class="absolute top-3 right-3 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                  ${p.type}
+                </span>
+                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-500">
               </div>
-              <h3 class="text-base font-bold text-gray-900 group-hover:text-red-500 transition-colors">${p.name}</h3>
-              <p class="text-xs text-gray-500 mt-0.5">${p.color}</p>
-            </div>
-          </a>
+              
+              <div class="mt-4">
+                <div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
+                  <span>${p.type}</span>
+                  <span class="text-amber-500 font-bold">★ ${p.rating}</span>
+                </div>
+                <h3 class="text-base font-bold text-gray-900 group-hover:text-red-500 transition-colors">${p.name}</h3>
+                <p class="text-xs text-gray-500 mt-0.5">${p.color}</p>
+              </div>
+            </a>
+          </div>
 
-          <!-- Bottom: NO PRICE SHOWN ON CARD! User clicks to reveal price on product page! -->
-          <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between">
-            <span class="text-[11px] font-medium text-gray-400">Click to reveal price</span>
-            <a href="product-detail.html?id=${p.id}" class="inline-flex items-center gap-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-bold px-4 py-2.5 rounded-full transition-all group-hover:scale-105 shadow-md">
-              <span>View Product & Price</span>
+          <!-- Bottom: Action Buttons -->
+          <div class="mt-5 pt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+            <button data-id="${p.id}" class="prod-quick-add-btn bg-gray-100 hover:bg-gray-200 text-black text-xs font-bold px-3.5 py-2.5 rounded-full transition-colors flex items-center gap-1 shadow-sm" title="Quick Add">
+              <span>+ Bag</span>
+            </button>
+            <a href="product-detail.html?id=${p.id}" class="flex-1 inline-flex items-center justify-center gap-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-bold px-4 py-2.5 rounded-full transition-all group-hover:scale-102 shadow-md">
+              <span>View & Price</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
               </svg>
@@ -243,6 +325,25 @@
           </div>
         </div>
       `).join('');
+
+      // Wire quick add buttons
+      grid.querySelectorAll('.prod-quick-add-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const id = btn.getAttribute('data-id');
+          const p = (window.AETHER_PRODUCTS || []).find(item => item.id === id);
+          if (p && window.AetherCommerce) {
+            window.AetherCommerce.addToBag({
+              id: p.id,
+              name: p.name,
+              size: p.sizes ? p.sizes[0] : (p.type === 'Shirts' ? 'M' : 'US 10'),
+              price: p.price,
+              image: p.image,
+              type: p.type
+            });
+          }
+        });
+      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -268,6 +369,10 @@
         searchInput.addEventListener('input', (e) => {
           renderProducts(e.target.value);
         });
+      }
+
+      if (window.AetherCommerce) {
+        window.AetherCommerce.updateCartUI();
       }
     });
   </script>

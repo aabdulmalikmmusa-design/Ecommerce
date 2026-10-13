@@ -182,3 +182,29 @@
 .theme-glow-cyan {
   background: radial-gradient(circle, rgba(0, 229, 255, 0.22) 0%, rgba(0, 195, 255, 0.08) 60%, transparent 80%);
 }
+
+/* Modal and Drawer Transitions */
+.modal-enter {
+  opacity: 0;
+  transform: scale(0.95);
+}
+.modal-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+/* Micro-interaction pulses */
+@keyframes luxuryGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 59, 48, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 59, 48, 0.35);
+  }
+}
+
+.luxury-glow {
+  animation: luxuryGlow 3s infinite ease-in-out;
+}
+
