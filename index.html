@@ -160,7 +160,7 @@
   <!-- ============================================================ -->
   <!-- 3. HERO WELCOMING SECTION (Matching & Elevating Reference UI) -->
   <!-- ============================================================ -->
-  <main id="hero-section" class="relative hero-backdrop hero-theme-white min-h-[calc(100vh-5rem)] flex flex-col justify-center py-4 sm:py-6 overflow-hidden">
+  <main id="hero-section" class="relative hero-backdrop hero-theme-white min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-3 pb-24 sm:py-6 overflow-hidden">
     
     <!-- Dual-buffered Slide Background Layers for smooth color slide transitions -->
     <div id="hero-bg-curtain-a" class="hero-bg-curtain hero-theme-white opacity-100"></div>
@@ -251,17 +251,29 @@
 
     <!-- Bottom Colorway Switcher: 4 Shoe Samples on Full Row -->
     <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-2 sm:mt-3">
-      <div class="flex items-center justify-between gap-2 sm:gap-3 w-full">
+      <div class="flex items-center justify-between gap-1.5 sm:gap-3 w-full">
         
         <!-- Prev Button -->
-        <button id="btn-prev-variant" class="w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200" aria-label="Previous shoe model">
+        <button id="btn-prev-variant" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200" aria-label="Previous shoe model">
           <i data-lucide="chevron-left" class="w-4 h-4"></i>
         </button>
 
         <!-- Swipeable Horizontal Variant Cards Container -->
-        <div id="variant-slider-container" class="flex items-center gap-2.5 sm:gap-4 overflow-x-auto scrollbar-none snap-x snap-mandatory flex-1 py-1.5 px-0.5 scroll-smooth">
+        <div id="variant-slider-container" class="flex items-center gap-2 sm:gap-4 overflow-x-auto scrollbar-none snap-x snap-mandatory flex-1 py-1.5 px-0.5 scroll-smooth">
+          <!-- Card 0: Pure Ice (White) — Active by Default -->
+          <div data-index="0" class="variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-black bg-white shadow-xl scale-[1.02] group">
+            <div class="variant-thumb-box pointer-events-none w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0">
+              <img src="assets/images/shoe-white.png" alt="Malzie Aero Excee" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform pointer-events-none">
+            </div>
+            <div class="text-left flex-1 min-w-0 pointer-events-none">
+              <h4 class="text-xs font-bold text-gray-900 leading-tight">Malzie Aero Excee</h4>
+              <span class="text-[10px] text-gray-400 font-medium">Pure Ice</span>
+            </div>
+            <span class="active-check text-black font-black ml-1 text-xs pointer-events-none">●</span>
+          </div>
+
           <!-- Card 1: Crimson Blaze (Red) -->
-          <div data-index="1" class="variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg group">
+          <div data-index="1" class="variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg group">
             <div class="variant-thumb-box pointer-events-none w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0">
               <img src="assets/images/shoe-red.png" alt="Malzie Aero 270" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform pointer-events-none">
             </div>
@@ -273,7 +285,7 @@
           </div>
 
           <!-- Card 2: Stealth Onyx (Black) -->
-          <div data-index="2" class="variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg group">
+          <div data-index="2" class="variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg group">
             <div class="variant-thumb-box pointer-events-none w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0">
               <img src="assets/images/shoe-black.png" alt="Malzie Aero Alpha" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform pointer-events-none">
             </div>
@@ -284,20 +296,8 @@
             <span class="active-check hidden text-emerald-500 ml-1 pointer-events-none font-black text-xs">✓</span>
           </div>
 
-          <!-- Card 3: Pure Ice (White) — Active by Default -->
-          <div data-index="0" class="variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-black bg-white shadow-xl scale-[1.02] group">
-            <div class="variant-thumb-box pointer-events-none w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0">
-              <img src="assets/images/shoe-white.png" alt="Malzie Aero Excee" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform pointer-events-none">
-            </div>
-            <div class="text-left flex-1 min-w-0 pointer-events-none">
-              <h4 class="text-xs font-bold text-gray-900 leading-tight">Malzie Aero Excee</h4>
-              <span class="text-[10px] text-gray-400 font-medium">Pure Ice</span>
-            </div>
-            <span class="active-check text-black font-black ml-1 text-xs pointer-events-none">●</span>
-          </div>
-
-          <!-- Card 4: Cyber Pulse (Cyan) -->
-          <div data-index="3" class="variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg group">
+          <!-- Card 3: Cyber Pulse (Cyan) -->
+          <div data-index="3" class="variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 hover:bg-white shadow-sm hover:shadow-lg group">
             <div class="variant-thumb-box pointer-events-none w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0">
               <img src="assets/images/shoe-cyan.png" alt="Malzie Aero Pulse" class="w-full h-full object-contain blend-shoe group-hover:scale-110 transition-transform pointer-events-none">
             </div>
@@ -310,7 +310,7 @@
         </div>
 
         <!-- Next Button -->
-        <button id="btn-next-variant" class="w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200" aria-label="Next shoe model">
+        <button id="btn-next-variant" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200" aria-label="Next shoe model">
           <i data-lucide="chevron-right" class="w-4 h-4"></i>
         </button>
 
@@ -318,15 +318,15 @@
 
       <!-- Mobile Swipe Pagination Dots (Active indicator) -->
       <div id="variant-swipe-indicators" class="flex md:hidden items-center justify-center gap-1.5 mt-2">
-        <span data-index="1" class="variant-swipe-dot cursor-pointer w-1.5 h-1.5 rounded-full bg-white/35 transition-all duration-300" title="Crimson Blaze"></span>
-        <span data-index="2" class="variant-swipe-dot cursor-pointer w-1.5 h-1.5 rounded-full bg-white/35 transition-all duration-300" title="Stealth Onyx"></span>
-        <span data-index="0" class="variant-swipe-dot cursor-pointer w-6 h-1.5 rounded-full bg-white transition-all duration-300" title="Pure Ice"></span>
-        <span data-index="3" class="variant-swipe-dot cursor-pointer w-1.5 h-1.5 rounded-full bg-white/35 transition-all duration-300" title="Hyper Cyan"></span>
+        <span data-index="0" class="variant-swipe-dot cursor-pointer w-6 h-1.5 rounded-full bg-black shadow-sm transition-all duration-300" title="Pure Ice"></span>
+        <span data-index="1" class="variant-swipe-dot cursor-pointer w-1.5 h-1.5 rounded-full bg-gray-300 transition-all duration-300" title="Crimson Blaze"></span>
+        <span data-index="2" class="variant-swipe-dot cursor-pointer w-1.5 h-1.5 rounded-full bg-gray-300 transition-all duration-300" title="Stealth Onyx"></span>
+        <span data-index="3" class="variant-swipe-dot cursor-pointer w-1.5 h-1.5 rounded-full bg-gray-300 transition-all duration-300" title="Hyper Cyan"></span>
       </div>
     </div>
 
     <!-- Different Line Entirely: Connect to Social Media -->
-    <div id="hero-bottom-divider" class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-3 pt-2.5 border-t border-gray-200/40 transition-colors duration-500">
+    <div id="hero-bottom-divider" class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-3 pt-2.5 pb-2 md:pb-0 mb-16 md:mb-0 border-t border-gray-200/40 transition-colors duration-500">
       <div id="hero-social-links" class="flex items-center justify-center gap-3 sm:gap-4 text-gray-500 transition-colors duration-500">
         <span class="text-xs font-bold uppercase tracking-wider text-gray-400">Connect:</span>
         

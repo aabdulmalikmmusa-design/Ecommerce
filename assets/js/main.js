@@ -413,7 +413,7 @@
 
       // 4. Contrast Adapting (Header, CTA Buttons, Hero Texts, Social Icons)
       if (heroSection) {
-        heroSection.className = 'relative hero-backdrop min-h-[calc(100vh-5rem)] flex flex-col justify-center py-4 sm:py-6 overflow-hidden hero-theme-' + model.slug;
+        heroSection.className = 'relative hero-backdrop min-h-[calc(100vh-5rem)] flex flex-col justify-center pt-3 pb-24 sm:py-6 overflow-hidden hero-theme-' + model.slug;
       }
 
       if (document.body) {
@@ -549,24 +549,24 @@
 
         if (isDark) {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-white bg-white/20 text-white shadow-2xl scale-[1.02] backdrop-blur-xl group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-white bg-white/20 text-white shadow-2xl scale-[1.02] backdrop-blur-xl group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/20 flex items-center justify-center p-1 overflow-hidden border border-white/30 transition-colors duration-300 flex-shrink-0";
             if (titleEl) titleEl.className = "text-xs font-bold text-white leading-tight";
             if (checkBadge) { checkBadge.className = "active-check text-white font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
           } else {
-            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-white/15 bg-white/10 hover:bg-white/20 text-white/90 backdrop-blur-md shadow-sm group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-white/15 bg-white/10 hover:bg-white/20 text-white/90 backdrop-blur-md shadow-sm group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/25 flex items-center justify-center p-1 overflow-hidden border border-white/10 transition-colors duration-300 flex-shrink-0";
             if (titleEl) titleEl.className = "text-xs font-bold text-white/90 leading-tight";
             if (checkBadge) checkBadge.classList.add('hidden');
           }
         } else {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-black bg-white text-black shadow-xl scale-[1.02] group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-black bg-white text-black shadow-xl scale-[1.02] group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-100 flex items-center justify-center p-1 overflow-hidden border border-gray-200 transition-colors duration-300 flex-shrink-0";
             if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
             if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
           } else {
-            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-gray-200/80 bg-white/70 hover:bg-white text-gray-800 shadow-sm hover:shadow-md group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[195px] xs:w-[220px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-gray-200/80 bg-white/70 hover:bg-white text-gray-800 shadow-sm hover:shadow-md group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0";
             if (titleEl) titleEl.className = "text-xs font-bold text-gray-800 leading-tight";
             if (checkBadge) checkBadge.classList.add('hidden');
