@@ -396,10 +396,10 @@
         if (heroBadge) heroBadge.className = "border-l-2 border-white pl-3 text-xs font-black tracking-widest uppercase text-white leading-none py-0.5 transition-colors duration-500";
         if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-white hover:bg-neutral-100 text-black font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
         if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white font-extrabold text-sm px-6 py-4 rounded-full border border-white/30 backdrop-blur-md shadow-sm transition-all";
-        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/20 pt-3 sm:pt-4 transition-colors duration-500";
+        if (heroBottomDivider) heroBottomDivider.className = "relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-3 pt-2.5 border-t border-white/20 transition-colors duration-500";
         if (heroSocialLinks) {
-          heroSocialLinks.className = "flex items-center gap-4 text-white/60 transition-colors duration-500";
-          heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-9 h-9 rounded-full bg-white/15 hover:bg-white hover:text-black text-white flex items-center justify-center border border-white/20 shadow-sm transition-all");
+          heroSocialLinks.className = "flex items-center justify-center gap-3 sm:gap-4 text-white/60 transition-colors duration-500";
+          heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/15 hover:bg-white hover:text-black text-white flex items-center justify-center border border-white/20 shadow-sm transition-all");
         }
         if (btnPrevVariant) btnPrevVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
         if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
@@ -423,10 +423,10 @@
         if (heroBadge) heroBadge.className = "border-l-2 border-black pl-3 text-xs font-black tracking-widest uppercase text-black leading-none py-0.5 transition-colors duration-500";
         if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-black hover:bg-neutral-900 text-white font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
         if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/90 hover:bg-white text-black font-extrabold text-sm px-6 py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all";
-        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-4 border-t border-gray-200/50 pt-3 sm:pt-4 transition-colors duration-500";
+        if (heroBottomDivider) heroBottomDivider.className = "relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full mt-3 pt-2.5 border-t border-gray-200/40 transition-colors duration-500";
         if (heroSocialLinks) {
-          heroSocialLinks.className = "flex items-center gap-4 text-gray-500 transition-colors duration-500";
-          heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white text-gray-700 flex items-center justify-center border border-gray-200 shadow-sm transition-all");
+          heroSocialLinks.className = "flex items-center justify-center gap-3 sm:gap-4 text-gray-500 transition-colors duration-500";
+          heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white hover:bg-black hover:text-white text-gray-700 flex items-center justify-center border border-gray-200 shadow-sm transition-all");
         }
         if (btnPrevVariant) btnPrevVariant.className = "w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200";
         if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200";
@@ -442,26 +442,26 @@
 
         if (isDark) {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white bg-white text-black shadow-2xl scale-[1.04] flex-shrink-0 group";
-            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-gray-100 flex items-center justify-center p-1 overflow-hidden border border-gray-200 transition-colors duration-300";
-            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white bg-white text-black shadow-2xl scale-[1.02] w-full group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-100 flex items-center justify-center p-1 overflow-hidden border border-gray-200 transition-colors duration-300 flex-shrink-0";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight truncate";
             if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
           } else {
-            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white/20 bg-white/15 text-white hover:bg-white/25 backdrop-blur-md shadow-sm flex-shrink-0 group";
-            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-black/25 flex items-center justify-center p-1 overflow-hidden border border-white/10 transition-colors duration-300";
-            if (titleEl) titleEl.className = "text-xs font-bold text-white leading-tight";
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-white/20 bg-white/15 text-white hover:bg-white/25 backdrop-blur-md shadow-sm w-full group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/25 flex items-center justify-center p-1 overflow-hidden border border-white/10 transition-colors duration-300 flex-shrink-0";
+            if (titleEl) titleEl.className = "text-xs font-bold text-white leading-tight truncate";
             if (checkBadge) checkBadge.classList.add('hidden');
           }
         } else {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-black bg-white text-black shadow-xl scale-[1.03] flex-shrink-0 group";
-            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300";
-            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-black bg-white text-black shadow-xl scale-[1.02] w-full group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight truncate";
             if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
           } else {
-            card.className = "variant-card cursor-pointer flex items-center gap-3.5 px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 text-gray-900 hover:bg-white shadow-sm hover:shadow-lg flex-shrink-0 group";
-            if (thumbBox) thumbBox.className = "variant-thumb-box w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300";
-            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
+            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border transition-all duration-300 border-transparent bg-white/70 text-gray-900 hover:bg-white shadow-sm hover:shadow-lg w-full group";
+            if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight truncate";
             if (checkBadge) checkBadge.classList.add('hidden');
           }
         }
