@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">AETHER // Product Detail</title>
+  <meta name="description" content="Explore technical performance specifications and engineering details for AETHER footwear and apparel.">
+
+  <!-- Google Fonts: Barlow Condensed & Oswald (Athletic, Orderly, Crisp), Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Oswald:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Barlow Condensed"', 'Oswald', 'sans-serif'],
+            sans: ['Inter', '"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              black: '#111216',
+              charcoal: '#1a1c22',
+              silver: '#eaedf2',
+              accent: '#ff3b30',
+              cyan: '#00f0ff',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-sans bg-[#f7f8fa] text-[#121316] antialiased selection:bg-black selection:text-white">
+
+  <!-- ============================================================ -->
+  <!-- 1. NAVIGATION BAR -->
+  <!-- ============================================================ -->
+  <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="AETHER Home">
+        <div class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
+          <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display font-bold text-xl tracking-tight text-black leading-none">AETHER</span>
+          <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">LABORATORY</span>
+        </div>
+      </a>
+
+      <!-- Center Links -->
+      <nav class="hidden md:flex items-center space-x-8 text-sm font-bold text-gray-700">
+        <a href="index.html" class="hover:text-black transition-colors py-2">Home</a>
+        <a href="products.html" class="hover:text-black transition-colors py-2 text-black font-extrabold">All Products</a>
+        <a href="products.html?filter=Footwear" class="hover:text-black transition-colors py-2">Footwear</a>
+        <a href="products.html?filter=Shirts" class="hover:text-black transition-colors py-2">Shirts & Apparel</a>
+        <a href="index.html#innovations-section" class="hover:text-black transition-colors py-2">Technology</a>
+      </nav>
+
+      <!-- Right Actions -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <!-- Back Button -->
+        <a href="products.html" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-gray-600 hover:text-black bg-gray-100 hover:bg-gray-200 px-3.5 py-2 rounded-full transition-colors">
+          <span>← Back to Catalog</span>
+        </a>
+
+        <!-- Shopping Cart Trigger -->
+        <button id="cart-btn" class="p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative" aria-label="Shopping Bag">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+          </svg>
+          <span id="cart-count-badge" class="absolute top-1 right-1 w-4 h-4 bg-red-600 text-white text-[10px] font-black rounded-full flex items-center justify-center ring-2 ring-white">1</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- 2. BREADCRUMBS -->
+  <!-- ============================================================ -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-2">
+    <nav class="flex items-center gap-2 text-xs font-semibold text-gray-400">
+      <a href="index.html" class="hover:text-black transition-colors">Home</a>
+      <span>/</span>
+      <a href="products.html" class="hover:text-black transition-colors">Products</a>
+      <span>/</span>
+      <span id="crumb-category" class="text-gray-600">Footwear</span>
+      <span>/</span>
+      <span id="crumb-title" class="text-black font-bold">AETHER Aero Excee</span>
+    </nav>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 3. PRODUCT DETAIL MAIN CONTAINER -->
+  <!-- ============================================================ -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      
+      <!-- Left Column: High-Res Interactive Visual Stage -->
+      <div class="lg:col-span-7 space-y-6">
+        
+        <!-- Main Image Card with Dynamic Studio Backdrop -->
+        <div class="relative bg-gradient-to-b from-white via-gray-50 to-[#e9ecf2] rounded-3xl p-8 sm:p-14 border border-gray-200/80 shadow-sm flex items-center justify-center min-h-[440px] sm:min-h-[540px] overflow-hidden group">
+          
+          <!-- Badge -->
+          <div class="absolute top-6 left-6 z-10 flex items-center gap-2">
+            <span id="detail-badge" class="bg-black text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
+              Bestseller
+            </span>
+            <span id="detail-type-badge" class="bg-white/80 backdrop-blur-md text-gray-800 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full border border-gray-200">
+              Footwear
+            </span>
+          </div>
+
+          <!-- Product Image with 3D Tilt Effect & Soft Floating Shadow -->
+          <div class="relative flex flex-col items-center justify-center w-full">
+            <img 
+              id="detail-main-img" 
+              src="assets/images/shoe-white.jpg" 
+              alt="AETHER Product" 
+              class="w-full max-w-[480px] sm:max-w-[540px] object-contain blend-shoe transform group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-500 drop-shadow-2xl select-none"
+            >
+          </div>
+
+          <!-- Zoom / Fullscreen Hint -->
+          <div class="absolute bottom-6 right-6 bg-white/90 backdrop-blur-md text-gray-600 text-[11px] font-bold px-3 py-1.5 rounded-full border border-gray-200 flex items-center gap-1.5 shadow-sm">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"/>
+            </svg>
+            <span>HD Studio Render</span>
+          </div>
+
+        </div>
+
+        <!-- Specifications Micro Grid -->
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm">
+          <h3 class="font-display font-bold text-lg text-black uppercase tracking-tight mb-4">Laboratory Engineering Specs</h3>
+          <div id="detail-specs-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Product Info, Price (REVEALED HERE!), Size Picker, and Add to Bag -->
+      <div class="lg:col-span-5 space-y-6">
+        
+        <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm space-y-6">
+          
+          <!-- Category & Rating -->
+          <div class="flex items-center justify-between">
+            <span id="detail-category" class="text-xs font-black uppercase tracking-widest text-gray-400">Footwear // Performance</span>
+            <div class="flex items-center gap-1.5 text-xs font-bold text-gray-900 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+              <span class="text-amber-500">★</span>
+              <span id="detail-rating">4.9</span>
+              <span id="detail-reviews" class="text-gray-400 font-normal">(2,450 Reviews)</span>
+            </div>
+          </div>
+
+          <!-- Product Title & Tagline -->
+          <div class="space-y-1">
+            <h1 id="detail-title" class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-black uppercase leading-tight">
+              AETHER Aero Excee Pure
+            </h1>
+            <p id="detail-color" class="text-sm font-semibold text-gray-500">Colorway: Triple White / Pure Ice</p>
+          </div>
+
+          <!-- ============================================== -->
+          <!-- PRICE SECTION (PROMINENTLY REVEALED ON CLICK) -->
+          <!-- ============================================== -->
+          <div class="bg-[#f8f9fb] rounded-2xl p-5 border border-gray-200/80">
+            <div class="flex items-baseline justify-between">
+              <div>
+                <p class="text-[11px] font-bold uppercase tracking-wider text-gray-400">Member Pricing</p>
+                <div class="flex items-baseline gap-3 mt-0.5">
+                  <span id="detail-price" class="text-3xl font-extrabold text-black font-sans tracking-tight">$159.00</span>
+                  <span id="detail-price-inr" class="text-sm font-bold text-gray-500 font-sans">₹12,995</span>
+                </div>
+              </div>
+              <span class="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                In Stock & Ready To Ship
+              </span>
+            </div>
+
+            <!-- Tax & Shipping Note -->
+            <p class="text-[11px] text-gray-500 mt-2 font-medium">
+              Tax included. Free express shipping on all orders over $100.
+            </p>
+          </div>
+
+          <!-- Short Description -->
+          <p id="detail-desc" class="text-sm text-gray-600 leading-relaxed font-medium">
+            Ultralight nitrogen-charged air cushion capsule with seamless hyper-weave knit. Unrivaled purity and cloud-soft rebound.
+          </p>
+
+          <!-- Size Selector (Adapts for Footwear US Sizes or Shirt Sizes XS-XXL) -->
+          <div class="space-y-3 pt-2">
+            <div class="flex items-center justify-between text-xs font-bold">
+              <span id="size-label" class="uppercase tracking-wider text-gray-800">Select Size:</span>
+              <a href="#" onclick="alert('All sizes fit true to athletic standards.'); return false;" class="text-gray-500 hover:text-black underline">Size Guide</a>
+            </div>
+            <div id="size-options-container" class="grid grid-cols-4 sm:grid-cols-5 gap-2">
+              <!-- Dynamically generated sizes -->
+            </div>
+          </div>
+
+          <!-- Quantity & Action Buttons -->
+          <div class="space-y-3 pt-4 border-t border-gray-100">
+            
+            <div class="flex items-center gap-4">
+              <!-- Quantity Stepper -->
+              <div class="flex items-center border border-gray-200 rounded-2xl bg-gray-50 p-1">
+                <button id="qty-minus-btn" class="w-9 h-9 rounded-xl bg-white hover:bg-gray-100 text-gray-800 flex items-center justify-center font-bold text-sm shadow-sm transition-colors">-</button>
+                <span id="qty-val" class="w-10 text-center font-bold text-sm text-gray-900">1</span>
+                <button id="qty-plus-btn" class="w-9 h-9 rounded-xl bg-white hover:bg-gray-100 text-gray-800 flex items-center justify-center font-bold text-sm shadow-sm transition-colors">+</button>
+              </div>
+
+              <!-- Main Add to Bag Button -->
+              <button id="add-to-bag-btn" class="btn-magnetic flex-1 bg-black hover:bg-neutral-900 text-white font-extrabold text-sm py-4 rounded-2xl shadow-xl flex items-center justify-center gap-2 uppercase tracking-wider transition-all">
+                <span>Add To Bag</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Instant Buy Now -->
+            <button id="instant-buy-btn" class="w-full bg-gray-100 hover:bg-gray-200 text-black font-extrabold text-xs py-3.5 rounded-2xl uppercase tracking-wider transition-all">
+              Buy With 1-Click Express
+            </button>
+
+          </div>
+
+          <!-- Trust Guarantees -->
+          <div class="pt-4 border-t border-gray-100 space-y-2.5 text-xs text-gray-600 font-medium">
+            <div class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span>Free Express Worldwide Delivery (2-3 business days)</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              <span>30-Day Zero-Risk Wear Test & Hassle-Free Returns</span>
+            </div>
+            <div class="flex items-center gap-2.5">
+              <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              <span>100% Authentic AETHER Laboratory Guarantee</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- 4. RELATED / COMPLEMENTARY PRODUCTS -->
+    <!-- ============================================================ -->
+    <div class="mt-20 pt-12 border-t border-gray-200">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <span class="text-xs font-black uppercase tracking-widest text-gray-400">RECOMMENDED PAIRING</span>
+          <h2 class="font-display font-bold text-2xl sm:text-3xl text-black uppercase tracking-tight mt-1">
+            Complete Your Atelier Setup
+          </h2>
+        </div>
+        <a href="products.html" class="text-xs font-bold text-black hover:underline">View All Items →</a>
+      </div>
+
+      <!-- Related Items Grid (Without price displayed until clicked!) -->
+      <div id="related-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============================================================ -->
+  <!-- 5. SHOPPING CART DRAWER (Shared) -->
+  <!-- ============================================================ -->
+  <div id="cart-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+
+  <div id="cart-drawer" class="fixed inset-y-0 right-0 max-w-md w-full bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col justify-between">
+    <div class="p-6 border-b border-gray-100 flex items-center justify-between">
+      <h3 class="font-display font-bold text-xl text-gray-900">Your Bag</h3>
+      <button id="cart-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 divide-y divide-gray-100"></div>
+
+    <div class="p-6 border-t border-gray-100 bg-gray-50 space-y-4">
+      <div class="flex justify-between text-base font-bold text-gray-900">
+        <span>Total</span>
+        <span id="cart-total">$0.00</span>
+      </div>
+      <button onclick="alert('Proceeding to checkout!');" class="w-full bg-black text-white font-bold py-4 rounded-2xl uppercase tracking-wider text-xs">
+        Checkout Securely
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+  <!-- Data Script -->
+  <script src="assets/js/products-data.js"></script>
+
+  <!-- Detail Page Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Get product ID from query parameter
+      const params = new URLSearchParams(window.location.search);
+      const prodId = params.get('id') || 'prod-1';
+      
+      const product = window.AETHER_PRODUCTS.find(p => p.id === prodId || p.slug === prodId) || window.AETHER_PRODUCTS[0];
+
+      // Update Page Meta & Breadcrumbs
+      document.title = `${product.name} — AETHER Laboratory`;
+      document.getElementById('crumb-category').textContent = product.type;
+      document.getElementById('crumb-title').textContent = product.name;
+
+      // Populate Visuals
+      document.getElementById('detail-badge').textContent = product.badge;
+      document.getElementById('detail-type-badge').textContent = product.type;
+      document.getElementById('detail-main-img').src = product.image;
+      document.getElementById('detail-main-img').alt = product.name;
+
+      // Populate Info
+      document.getElementById('detail-category').textContent = `${product.type} // ${product.category}`;
+      document.getElementById('detail-title').textContent = product.name;
+      document.getElementById('detail-color').textContent = `Colorway: ${product.color}`;
+      document.getElementById('detail-rating').textContent = product.rating;
+      document.getElementById('detail-reviews').textContent = `(${product.reviewsCount} Reviews)`;
+      document.getElementById('detail-desc').textContent = product.description;
+
+      // Populate REVEALED PRICE!
+      document.getElementById('detail-price').textContent = product.priceStr;
+      document.getElementById('detail-price-inr').textContent = product.priceInr;
+
+      // Populate Specs Grid
+      const specsGrid = document.getElementById('detail-specs-grid');
+      specsGrid.innerHTML = product.specs.map(s => `
+        <div class="bg-gray-50 rounded-2xl p-3 border border-gray-100">
+          <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">${s.label}</p>
+          <p class="text-xs font-bold text-gray-900 mt-0.5">${s.value}</p>
+        </div>
+      `).join('');
+
+      // Populate Sizes
+      const sizesContainer = document.getElementById('size-options-container');
+      let selectedSize = product.sizes[0];
+      sizesContainer.innerHTML = product.sizes.map((s, idx) => `
+        <button data-size="${s}" class="size-btn py-2.5 px-3 rounded-xl border text-xs font-bold transition-all ${
+          idx === 0 ? 'border-black bg-black text-white' : 'border-gray-200 bg-white text-gray-800 hover:border-black'
+        }">${s}</button>
+      `).join('');
+
+      sizesContainer.querySelectorAll('.size-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          sizesContainer.querySelectorAll('.size-btn').forEach(b => {
+            b.className = 'size-btn py-2.5 px-3 rounded-xl border border-gray-200 bg-white text-gray-800 hover:border-black text-xs font-bold transition-all';
+          });
+          btn.className = 'size-btn py-2.5 px-3 rounded-xl border border-black bg-black text-white text-xs font-bold transition-all';
+          selectedSize = btn.getAttribute('data-size');
+        });
+      });
+
+      // Quantity Logic
+      let quantity = 1;
+      const qtyVal = document.getElementById('qty-val');
+      document.getElementById('qty-minus-btn').addEventListener('click', () => {
+        if (quantity > 1) {
+          quantity--;
+          qtyVal.textContent = quantity;
+        }
+      });
+      document.getElementById('qty-plus-btn').addEventListener('click', () => {
+        quantity++;
+        qtyVal.textContent = quantity;
+      });
+
+      // Add to Bag Toast & Cart Sync
+      function showToast(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'bg-gray-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl text-xs font-bold flex items-center gap-2 transform translate-y-4 opacity-0 transition-all duration-300';
+        toast.innerHTML = `<span class="text-emerald-400">✓</span> <span>${msg}</span>`;
+        document.getElementById('toast-container').appendChild(toast);
+        requestAnimationFrame(() => {
+          toast.classList.remove('translate-y-4', 'opacity-0');
+        });
+        setTimeout(() => {
+          toast.classList.add('opacity-0');
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+
+      document.getElementById('add-to-bag-btn').addEventListener('click', () => {
+        showToast(`Added ${quantity}x ${product.name} (${selectedSize}) to Bag!`);
+      });
+
+      document.getElementById('instant-buy-btn').addEventListener('click', () => {
+        showToast(`Proceeding to 1-Click Express Checkout for ${product.name}!`);
+      });
+
+      // Populate Related Items (Cards WITHOUT price, clicking navigates to their product detail page!)
+      const relatedContainer = document.getElementById('related-products-container');
+      const otherProducts = window.AETHER_PRODUCTS.filter(p => p.id !== product.id).slice(0, 4);
+      relatedContainer.innerHTML = otherProducts.map(p => `
+        <div class="group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
+          <a href="product-detail.html?id=${p.id}" class="block">
+            <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-56 flex items-center justify-center overflow-hidden">
+              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
+                ${p.badge}
+              </span>
+              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-500">
+            </div>
+            <div class="mt-4">
+              <div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
+                <span>${p.type}</span>
+                <span class="text-amber-500">★ ${p.rating}</span>
+              </div>
+              <h3 class="text-sm font-bold text-gray-900 group-hover:text-red-500 transition-colors">${p.name}</h3>
+              <p class="text-xs text-gray-500 mt-0.5">${p.color}</p>
+            </div>
+          </a>
+
+          <!-- Bottom: NO PRICE SHOWN, Button opens dedicated page to reveal price! -->
+          <div class="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+            <span class="text-[11px] font-medium text-gray-400">Click to reveal price</span>
+            <a href="product-detail.html?id=${p.id}" class="inline-flex items-center gap-1.5 bg-black hover:bg-neutral-800 text-white text-xs font-bold px-3.5 py-2 rounded-full transition-all">
+              <span>View Product</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    });
+  </script>
+</body>
+</html>

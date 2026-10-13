@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Oswald:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --primary-accent: #ff3b30;
+  --primary-glow: rgba(255, 59, 48, 0.15);
+  --bg-gradient: radial-gradient(ellipse at 60% 40%, #ffffff 0%, #f1f3f6 45%, #e5e8ed 100%);
+  --text-primary: #121316;
+  --text-secondary: #646a78;
+}
+
+/* Custom Typography - Clean, Orderly, Athletic */
+.font-display {
+  font-family: 'Barlow Condensed', 'Oswald', -apple-system, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.font-sans {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Hero studio backdrop */
+.hero-backdrop {
+  background: radial-gradient(circle at 65% 45%, #ffffff 0%, #f3f4f7 40%, #e6e9ef 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Large Watermark Typography */
+.watermark-text {
+  font-family: 'Barlow Condensed', 'Oswald', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: rgba(20, 24, 33, 0.04);
+  -webkit-text-stroke: 1px rgba(20, 24, 33, 0.07);
+  user-select: none;
+  pointer-events: none;
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+/* Organic Floating Animation */
+@keyframes floatShoe {
+  0% {
+    transform: translateY(0px) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-24px) rotate(1.8deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(-1.5deg);
+  }
+}
+
+.animate-floating {
+  animation: floatShoe 5.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Ground shadow pulse */
+@keyframes shadowPulse {
+  0% {
+    transform: scale(1) translateX(0);
+    opacity: 0.55;
+    filter: blur(14px);
+  }
+  50% {
+    transform: scale(0.8) translateX(6px);
+    opacity: 0.28;
+    filter: blur(24px);
+  }
+  100% {
+    transform: scale(1) translateX(0);
+    opacity: 0.55;
+    filter: blur(14px);
+  }
+}
+
+.animate-shadow-pulse {
+  animation: shadowPulse 5.4s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+}
+
+/* 3D tilt wrapper */
+.perspective-container {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.tilt-inner {
+  transition: transform 0.15s ease-out;
+  transform-style: preserve-3d;
+}
+
+/* Glassmorphism elements */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05), 0 0 1px 1px rgba(255, 255, 255, 0.6) inset;
+}
+
+.glass-panel-dark {
+  background: rgba(18, 20, 24, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.glass-card-hover:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 22px 45px -12px rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Hotspot pulsing pin */
+@keyframes hotspotPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.8), 0 0 0 0 rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0), 0 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.hotspot-pin {
+  animation: hotspotPulse 2.4s infinite;
+}
+
+/* Image blend mode for seamless studio cutout */
+.blend-shoe {
+  mix-blend-mode: multiply;
+  filter: contrast(1.05) brightness(1.02);
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f3f6;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd2dc;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9aa4b2;
+}
+
+/* Subtle magnetic button transition */
+.btn-magnetic {
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+}
+.btn-magnetic:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.25);
+}
+.btn-magnetic:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+/* Color theme aura */
+.theme-glow-white {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(220, 225, 235, 0.3) 60%, transparent 80%);
+}
+.theme-glow-red {
+  background: radial-gradient(circle, rgba(255, 59, 48, 0.25) 0%, rgba(255, 69, 58, 0.1) 60%, transparent 80%);
+}
+.theme-glow-black {
+  background: radial-gradient(circle, rgba(30, 32, 38, 0.2) 0%, rgba(15, 16, 20, 0.08) 60%, transparent 80%);
+}
+.theme-glow-cyan {
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.22) 0%, rgba(0, 195, 255, 0.08) 60%, transparent 80%);
+}
