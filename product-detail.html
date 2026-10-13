@@ -7,7 +7,7 @@
   <meta name="description" content="Explore technical performance specifications and engineering details for Malzie Softs footwear and apparel.">
 
   <!-- Favicon -->
-  <link id="site-favicon" rel="icon" type="image/png" href="assets/images/shoe-white.png">
+  <link id="site-favicon" rel="icon" type="image/png" href="assets/images/favicon.png">
 
   <!-- Google Fonts: Barlow Condensed & Oswald (Athletic, Orderly, Crisp), Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +41,7 @@
   </script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css?v=4.4">
+  <link rel="stylesheet" href="assets/css/style.css?v=5.2">
 
   <!-- Lucide Icons Library -->
   <script src="assets/js/lucide.min.js"></script>
@@ -56,10 +56,8 @@
       
       <!-- Brand Logo -->
       <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="Malzie Softs Home">
-        <div class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
-          <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
-          </svg>
+        <div class="w-10 h-10 rounded-2xl bg-white border border-gray-200/80 p-1 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+          <img src="assets/images/logo.png" alt="Malzie Softz Logo" class="w-full h-full object-contain">
         </div>
         <div class="flex flex-col">
           <span class="font-calligraphy font-bold text-xl md:text-2xl text-black leading-none">MALZIE SOFTZ</span>
@@ -347,12 +345,141 @@
   </div>
 
   <!-- Toast Container -->
-  <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+  <div id="toast-container" class="fixed bottom-20 md:bottom-6 right-6 z-50 flex flex-col gap-2.5 pointer-events-none"></div>
+
+  <!-- ============================================================ -->
+  <!-- MOBILE FLOATING QUICK SEARCH CAPSULE (Mobile Phones Only)     -->
+  <!-- ============================================================ -->
+  <div id="mobile-floating-search-bar" class="md:hidden">
+    <div class="search-capsule-inner group">
+      <button id="mobile-floating-search-submit" type="button" aria-label="Search" class="text-[var(--mobile-nav-accent,#ff3b30)] mr-3 flex-shrink-0 transition-transform active:scale-90">
+        <svg class="w-5 h-5 drop-shadow-[0_0_6px_var(--mobile-nav-glow,rgba(255,59,48,0.7))]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7.5"></circle>
+          <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+        </svg>
+      </button>
+      <input 
+        type="text" 
+        id="mobile-quick-search-input" 
+        placeholder="Search sneakers, drops, style..." 
+        autocomplete="off"
+        class="w-full bg-transparent text-sm text-white placeholder-gray-400 focus:outline-none"
+      />
+      <button type="button" id="mobile-search-close-btn" aria-label="Close search" class="text-gray-400 hover:text-white ml-2 p-1 transition-colors">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MOBILE BOTTOM NAVIGATION BAR (Floating Pill with Wave)        -->
+  <!-- ============================================================ -->
+  <nav id="mobile-bottom-nav" class="md:hidden" style="--active-tab: 2;">
+    <!-- Ambient Wave Glow Engine Background -->
+    <div class="nav-wave-track" aria-hidden="true">
+      <div class="nav-baseline"></div>
+      <div class="nav-wave-slider">
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 56" preserveAspectRatio="none">
+          <defs>
+            <radialGradient id="nav-arch-glow-det" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="var(--mobile-nav-accent, #ff3b30)" stop-opacity="0.45"/>
+              <stop offset="65%" stop-color="var(--mobile-nav-accent, #ff3b30)" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <path d="M 0,54.5 C 22,54.5 34,8.5 50,8.5 C 66,8.5 78,54.5 100,54.5 L 100,58 L 0,58 Z" fill="#121316"/>
+          <ellipse cx="50" cy="29" rx="30" ry="20" fill="url(#nav-arch-glow-det)"/>
+          <path d="M 0,54.5 C 22,54.5 34,8.5 50,8.5 C 66,8.5 78,54.5 100,54.5" fill="none" stroke="var(--mobile-nav-accent, #ff3b30)" stroke-width="2.6" stroke-linecap="round" class="nav-wave-stroke"/>
+          <circle cx="50" cy="27.5" r="2.4" fill="var(--mobile-nav-accent, #ff3b30)" class="nav-wave-dot"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 5 Nav Tab Items Grid -->
+    <div class="mobile-nav-grid">
+      <!-- 1. Home -->
+      <a href="index.html" data-nav-index="0" class="mobile-nav-item" aria-label="Home">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Home</span>
+      </a>
+
+      <!-- 2. Search -->
+      <button id="mobile-nav-search-btn" data-nav-index="1" type="button" class="mobile-nav-item" aria-label="Search">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Search</span>
+      </button>
+
+      <!-- 3. Categories / Shop (Active on Details) -->
+      <a href="products.html" data-nav-index="2" class="mobile-nav-item active is-current-page" aria-label="Shop">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Shop</span>
+      </a>
+
+      <!-- 4. Cart -->
+      <button onclick="if(window.MalzieCommerce){window.MalzieCommerce.openCart();}" data-nav-index="3" type="button" class="mobile-nav-item cart-trigger-btn" aria-label="Cart">
+        <div class="nav-icon-wrap relative">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span id="mobile-nav-cart-badge" class="cart-count-badge absolute -top-1.5 -right-2.5 min-w-[16px] h-[16px] px-1 text-[9.5px] font-bold rounded-full flex items-center justify-center leading-none">0</span>
+        </div>
+        <span class="mobile-nav-label">Cart</span>
+      </button>
+
+      <!-- 5. Account -->
+      <a href="index.html" data-nav-index="4" class="mobile-nav-item" aria-label="Account">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Account</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- INSTANT SCROLL TO TOP FLOATING BUTTON                        -->
+  <!-- ============================================================ -->
+  <button 
+    id="scroll-to-top-btn" 
+    type="button" 
+    aria-label="Scroll to top of page" 
+    title="Scroll to top"
+    class="fixed z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/90 hover:bg-black text-white shadow-2xl backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 pointer-events-none translate-y-3 transition-all duration-300 active:scale-90 hover:scale-110 group right-4 sm:right-6 bottom-[86px] md:bottom-8"
+  >
+    <svg class="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
 
   <!-- Central Data & Commerce Engine -->
   <script src="assets/js/products-data.js"></script>
-  <script src="assets/js/cart.js"></script>
-  <script src="assets/js/scroll-animate.js?v=4.4"></script>
+  <script src="assets/js/cart.js?v=5.3"></script>
+  <script src="assets/js/scroll-animate.js?v=4.9"></script>
 
   <!-- Detail Page Logic -->
   <script>
@@ -465,11 +592,13 @@
       relatedContainer.innerHTML = otherProducts.map(p => `
         <div class="group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
           <a href="product-detail.html?id=${p.id}" class="block">
-            <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-56 flex items-center justify-center overflow-hidden">
-              <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
+            <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl h-56 flex items-center justify-center overflow-hidden">
+              <span class="absolute top-3.5 left-3.5 z-20 bg-white/90 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm pointer-events-none">
                 ${p.badge}
               </span>
-              <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-500">
+              <div class="w-full h-full pt-8 pb-3 px-3 flex items-center justify-center relative z-10">
+                <img src="${p.image}" alt="${p.name}" class="max-w-full max-h-full object-contain blend-shoe group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-500 rounded-xl">
+              </div>
             </div>
             <div class="mt-4">
               <div class="flex items-center justify-between text-xs text-gray-400 font-semibold mb-1">
@@ -521,6 +650,129 @@
 
       if (window.lucide) {
         window.lucide.createIcons();
+      }
+
+      // Scroll to top controller
+      const scrollBtn = document.getElementById('scroll-to-top-btn');
+      if (scrollBtn) {
+        const toggleBtn = () => {
+          if (window.scrollY > 280) {
+            scrollBtn.classList.add('is-visible');
+          } else {
+            scrollBtn.classList.remove('is-visible');
+          }
+        };
+        window.addEventListener('scroll', toggleBtn, { passive: true });
+        toggleBtn();
+        scrollBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Mobile Bottom Nav & Floating Search Controller
+      const nav = document.getElementById('mobile-bottom-nav');
+      const floatingSearch = document.getElementById('mobile-floating-search-bar');
+      const searchInput = document.getElementById('mobile-quick-search-input');
+      const searchClose = document.getElementById('mobile-search-close-btn');
+      const searchSubmit = document.getElementById('mobile-floating-search-submit');
+
+      let currentTab = 2; // Default active tab is Shop (2) on product-detail.html
+
+      function updateNavVisuals(idx, isHover = false) {
+        if (!nav) return;
+        nav.style.setProperty('--active-tab', idx);
+        nav.querySelectorAll('.mobile-nav-item').forEach(item => {
+          if (parseInt(item.getAttribute('data-nav-index') || '-1', 10) === idx) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+        if (!isHover) {
+          currentTab = idx;
+        }
+      }
+
+      function setTab(idx) {
+        updateNavVisuals(idx, false);
+      }
+
+      const searchBtn = document.getElementById('mobile-nav-search-btn');
+      if (searchBtn && floatingSearch) {
+        searchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isVis = floatingSearch.classList.contains('is-visible');
+          if (isVis) {
+            window.location.href = 'products.html';
+          } else {
+            floatingSearch.classList.add('is-visible');
+            setTab(1);
+            if (searchInput) setTimeout(() => searchInput.focus(), 120);
+          }
+        });
+      }
+
+      if (searchClose && floatingSearch) {
+        searchClose.addEventListener('click', (e) => {
+          e.preventDefault();
+          floatingSearch.classList.remove('is-visible');
+          setTab(2);
+        });
+      }
+
+      if (searchSubmit) {
+        searchSubmit.addEventListener('click', (e) => {
+          e.preventDefault();
+          const q = searchInput ? searchInput.value.trim() : '';
+          if (q) {
+            window.location.href = `products.html?q=${encodeURIComponent(q)}`;
+          } else {
+            window.location.href = 'products.html';
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const q = searchInput.value.trim();
+            if (q) {
+              window.location.href = `products.html?q=${encodeURIComponent(q)}`;
+            } else {
+              window.location.href = 'products.html';
+            }
+          } else if (e.key === 'Escape' && floatingSearch) {
+            floatingSearch.classList.remove('is-visible');
+            setTab(2);
+          }
+        });
+      }
+
+      if (nav) {
+        nav.querySelectorAll('.mobile-nav-item').forEach(item => {
+          const idx = parseInt(item.getAttribute('data-nav-index') || '-1', 10);
+          if (idx >= 0) {
+            // Hover: glide wave to hovered item
+            item.addEventListener('mouseenter', () => {
+              updateNavVisuals(idx, true);
+            });
+
+            // Click: set active tab
+            item.addEventListener('click', () => {
+              if (idx !== 1) {
+                setTab(idx);
+                if (floatingSearch) floatingSearch.classList.remove('is-visible');
+              }
+            });
+          }
+        });
+
+        // Mouse leaves nav bar: glide back to active tab
+        nav.addEventListener('mouseleave', () => {
+          updateNavVisuals(currentTab, false);
+        });
       }
     });
   </script>

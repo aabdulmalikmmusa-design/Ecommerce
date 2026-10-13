@@ -375,7 +375,7 @@
 
     const modalHtml = `
       <div id="checkout-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden opacity-0 transition-opacity duration-300"></div>
-      <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 scale-95 pointer-events-none transition-all duration-300">
+      <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 scale-95 pointer-events-none transition-all duration-300 hidden">
         <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-gray-100 overflow-hidden pointer-events-auto max-h-[92vh] flex flex-col">
           
           <!-- Modal Header -->
@@ -662,6 +662,7 @@
     const modal = document.getElementById('checkout-modal');
     const backdrop = document.getElementById('checkout-backdrop');
     if (modal && backdrop) {
+      modal.classList.remove('hidden', 'pointer-events-none');
       backdrop.classList.remove('hidden');
       requestAnimationFrame(() => {
         backdrop.classList.remove('opacity-0');
@@ -678,10 +679,11 @@
     const backdrop = document.getElementById('checkout-backdrop');
     if (modal && backdrop) {
       modal.classList.remove('opacity-100', 'scale-100');
-      modal.classList.add('opacity-0', 'scale-95');
+      modal.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
       backdrop.classList.add('opacity-0');
       setTimeout(() => {
         backdrop.classList.add('hidden');
+        modal.classList.add('hidden');
       }, 250);
     }
   }
@@ -692,7 +694,7 @@
 
     const modalHtml = `
       <div id="size-guide-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
-      <div id="size-guide-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 scale-95 pointer-events-none transition-all duration-300">
+      <div id="size-guide-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 opacity-0 scale-95 pointer-events-none transition-all duration-300 hidden">
         <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-gray-100 overflow-hidden pointer-events-auto max-h-[90vh] flex flex-col">
           <div class="p-6 border-b border-gray-100 flex items-center justify-between">
             <div>
@@ -777,6 +779,7 @@
     const modal = document.getElementById('size-guide-modal');
     const backdrop = document.getElementById('size-guide-backdrop');
     if (modal && backdrop) {
+      modal.classList.remove('hidden', 'pointer-events-none');
       backdrop.classList.remove('hidden');
       requestAnimationFrame(() => {
         backdrop.classList.remove('opacity-0');
@@ -792,10 +795,11 @@
     const backdrop = document.getElementById('size-guide-backdrop');
     if (modal && backdrop) {
       modal.classList.remove('opacity-100', 'scale-100');
-      modal.classList.add('opacity-0', 'scale-95');
+      modal.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
       backdrop.classList.add('opacity-0');
       setTimeout(() => {
         backdrop.classList.add('hidden');
+        modal.classList.add('hidden');
       }, 250);
     }
   }
@@ -867,7 +871,10 @@
   }
 
   function initFavicon() {
-    const savedUrl = localStorage.getItem('malzie_favicon_url') || 'assets/images/shoe-white.png';
+    let savedUrl = localStorage.getItem('malzie_favicon_url');
+    if (!savedUrl || savedUrl === 'assets/images/shoe-white.png') {
+      savedUrl = 'assets/images/favicon.png';
+    }
     let link = document.querySelector("link[rel~='icon']");
     if (!link) {
       link = document.createElement('link');

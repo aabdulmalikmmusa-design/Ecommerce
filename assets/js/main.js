@@ -248,6 +248,33 @@
     // Catalog Rendering
     const catalogContainer = document.getElementById('catalog-products-container');
     const catalogFilters = document.querySelectorAll('.catalog-filter-btn');
+    const catalogTitle = document.getElementById('catalog-title');
+    const catalogSubtitle = document.getElementById('catalog-subtitle');
+    const catalogViewAllLink = document.getElementById('catalog-view-all-link');
+    let activeCatalogCategory = 'All';
+
+    function updateCatalogFilterStyles(dark = null) {
+      if (!catalogFilters || catalogFilters.length === 0) return;
+      const isDarkActive = dark !== null ? dark : (shoeModels[currentShoeIndex]?.slug !== 'white');
+      catalogFilters.forEach((btn) => {
+        const cat = btn.getAttribute('data-category') || 'All';
+        const isSelected = cat.toLowerCase() === activeCatalogCategory.toLowerCase();
+        btn.classList.toggle('active', isSelected);
+        if (isDarkActive) {
+          if (isSelected) {
+            btn.className = 'catalog-filter-btn active h-10 px-5 rounded-full text-xs font-extrabold bg-white text-black shadow-lg transition-all scale-[1.03] whitespace-nowrap flex-shrink-0 inline-flex items-center justify-center';
+          } else {
+            btn.className = 'catalog-filter-btn h-10 px-5 rounded-full text-xs font-extrabold bg-white/15 text-white border border-white/25 hover:bg-white/25 transition-all whitespace-nowrap flex-shrink-0 inline-flex items-center justify-center';
+          }
+        } else {
+          if (isSelected) {
+            btn.className = 'catalog-filter-btn active h-10 px-5 rounded-full text-xs font-extrabold bg-black text-white shadow-md transition-all whitespace-nowrap flex-shrink-0 inline-flex items-center justify-center';
+          } else {
+            btn.className = 'catalog-filter-btn h-10 px-5 rounded-full text-xs font-extrabold bg-white text-gray-700 border border-gray-200 hover:bg-gray-50 transition-all whitespace-nowrap flex-shrink-0 inline-flex items-center justify-center';
+          }
+        }
+      });
+    }
 
     // Quick View Modal
     const quickViewModal = document.getElementById('quick-view-modal');
@@ -386,7 +413,7 @@
 
       // 4. Contrast Adapting (Header, CTA Buttons, Hero Texts, Social Icons)
       if (heroSection) {
-        heroSection.className = 'relative hero-backdrop min-h-[calc(100vh-5rem)] flex flex-col justify-center py-4 sm:py-6 overflow-hidden select-none hero-theme-' + model.slug;
+        heroSection.className = 'relative hero-backdrop min-h-[calc(100vh-5rem)] flex flex-col justify-center py-4 sm:py-6 overflow-hidden hero-theme-' + model.slug;
       }
 
       if (document.body) {
@@ -400,32 +427,59 @@
         } else {
           document.body.style.backgroundColor = '#f7f8fa';
         }
+        document.body.classList.toggle('dark-theme', isDark);
+        document.body.setAttribute('data-theme', model.slug);
+
+        // Dynamically harmonize mobile nav accent & glow with active shoe colorway
+        if (model.slug === 'cyan') {
+          document.documentElement.style.setProperty('--mobile-nav-accent', '#00f0ff');
+          document.documentElement.style.setProperty('--mobile-nav-glow', 'rgba(0, 240, 255, 0.65)');
+        } else if (model.slug === 'black') {
+          document.documentElement.style.setProperty('--mobile-nav-accent', '#f3f4f6');
+          document.documentElement.style.setProperty('--mobile-nav-glow', 'rgba(255, 255, 255, 0.5)');
+        } else {
+          document.documentElement.style.setProperty('--mobile-nav-accent', '#ff3b30');
+          document.documentElement.style.setProperty('--mobile-nav-glow', 'rgba(255, 59, 48, 0.65)');
+        }
       }
 
       // Auto-sync favicon with active shoe colorway if enabled
-      const autoSyncFavicon = localStorage.getItem('malzie_favicon_autosync') !== 'false';
+      const autoSyncFavicon = localStorage.getItem('malzie_favicon_autosync') === 'true';
       if (autoSyncFavicon && typeof setFavicon === 'function') {
         setFavicon(model.image, model.name, false);
       }
 
       if (isDark) {
         if (mainHeader) {
-          let bgClass = "bg-[#740a07]/95";
-          if (model.slug === 'black') bgClass = "bg-[#121316]/95";
-          else if (model.slug === 'cyan') bgClass = "bg-[#004f5e]/95";
-          mainHeader.className = `fixed top-0 left-0 bottom-0 h-screen w-72 z-50 ${bgClass} backdrop-blur-2xl border-r border-white/15 transition-all duration-500 text-white flex flex-col justify-between p-6 shadow-2xl lg:shadow-none -translate-x-full lg:translate-x-0 overflow-y-auto`;
+          if (model.slug === 'red') {
+            mainHeader.className = "sticky top-0 z-40 bg-[#740a07]/95 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
+          } else if (model.slug === 'black') {
+            mainHeader.className = "sticky top-0 z-40 bg-[#121316]/95 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
+          } else {
+            mainHeader.className = "sticky top-0 z-40 bg-[#004f5e]/95 backdrop-blur-xl border-b border-white/15 transition-all duration-500 text-white";
+          }
         }
-        if (headerBrandName) headerBrandName.className = "font-calligraphy font-bold text-xl text-white leading-none transition-colors duration-500";
-        if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-white text-black flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
+        if (mobileMenu) {
+          const isHidden = mobileMenu.classList.contains('hidden');
+          if (model.slug === 'red') {
+            mobileMenu.className = (isHidden ? 'hidden ' : '') + "md:hidden border-t border-white/15 bg-[#540705]/98 backdrop-blur-2xl px-5 py-5 space-y-3 shadow-2xl transition-all text-white";
+          } else if (model.slug === 'black') {
+            mobileMenu.className = (isHidden ? 'hidden ' : '') + "md:hidden border-t border-white/15 bg-[#0e1014]/98 backdrop-blur-2xl px-5 py-5 space-y-3 shadow-2xl transition-all text-white";
+          } else {
+            mobileMenu.className = (isHidden ? 'hidden ' : '') + "md:hidden border-t border-white/15 bg-[#003844]/98 backdrop-blur-2xl px-5 py-5 space-y-3 shadow-2xl transition-all text-white";
+          }
+        }
+        if (headerBrandName) headerBrandName.className = "font-calligraphy font-bold text-lg sm:text-xl text-white leading-none transition-colors duration-500";
+        if (headerLogoBox) headerLogoBox.className = "w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-white text-black flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300 p-1 overflow-hidden";
         if (headerNavLinks) {
-          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-white/80 hover:text-white hover:bg-white/10 transition-all group");
+          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-white/80 hover:text-white transition-colors py-2");
         }
-        if (searchBtn) searchBtn.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-white/15 hover:bg-white/25 text-white transition-colors text-xs font-bold";
+        if (searchBtn) searchBtn.className = "p-2 sm:p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center";
         if (authBtn) authBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center";
-        if (cartBtn) cartBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative";
+        if (cartBtn) cartBtn.className = "p-2 sm:p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center";
         if (soundToggleBtn) soundToggleBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors";
         if (faviconBtn) faviconBtn.className = "p-2.5 rounded-full hover:bg-white/15 text-white transition-colors relative flex items-center justify-center group";
-        if (mobileMenuBtn) mobileMenuBtn.className = "p-2 rounded-full hover:bg-white/15 text-white transition-colors";
+        if (mobileMenuBtn) mobileMenuBtn.className = "md:hidden p-2 rounded-full hover:bg-white/15 text-white transition-colors flex items-center justify-center";
 
         if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white uppercase leading-[0.95] transition-colors duration-500";
         if (heroTagline) heroTagline.className = "text-sm sm:text-base text-white/90 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
@@ -439,21 +493,31 @@
         }
         if (btnPrevVariant) btnPrevVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
         if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white/15 hover:bg-white hover:text-black text-white shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-white/20";
+
+        // Catalog Section Contrast Adapting (White write-ups on dark themes)
+        if (catalogTitle) catalogTitle.className = "font-display text-3xl sm:text-4xl font-bold text-white uppercase tracking-tight mt-1 transition-colors duration-500";
+        if (catalogSubtitle) catalogSubtitle.className = "text-xs font-black uppercase tracking-widest text-gray-300 transition-colors duration-500";
+        if (catalogViewAllLink) catalogViewAllLink.className = "h-10 px-5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 transition-all inline-flex items-center justify-center gap-1.5 shadow-md whitespace-nowrap flex-shrink-0";
+        updateCatalogFilterStyles(true);
       } else {
         if (mainHeader) {
-          mainHeader.className = "fixed top-0 left-0 bottom-0 h-screen w-72 z-50 bg-white/95 backdrop-blur-2xl border-r border-gray-200/80 transition-all duration-500 text-gray-900 flex flex-col justify-between p-6 shadow-2xl lg:shadow-none -translate-x-full lg:translate-x-0 overflow-y-auto";
+          mainHeader.className = "sticky top-0 z-40 bg-white/90 backdrop-blur-xl border-b border-gray-200/80 transition-all duration-500 text-gray-900";
         }
-        if (headerBrandName) headerBrandName.className = "font-calligraphy font-bold text-xl text-black leading-none transition-colors duration-500";
-        if (headerLogoBox) headerLogoBox.className = "w-10 h-10 rounded-2xl bg-black text-white flex items-center justify-center shadow-md group-hover:scale-105 transition-all duration-300";
+        if (mobileMenu) {
+          const isHidden = mobileMenu.classList.contains('hidden');
+          mobileMenu.className = (isHidden ? 'hidden ' : '') + "md:hidden border-t border-gray-100 bg-white/98 backdrop-blur-2xl px-5 py-5 space-y-3 shadow-2xl transition-all text-gray-900";
+        }
+        if (headerBrandName) headerBrandName.className = "font-calligraphy font-bold text-lg sm:text-xl text-black leading-none transition-colors duration-500";
+        if (headerLogoBox) headerLogoBox.className = "w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-white text-black flex items-center justify-center shadow-md border border-gray-200/80 group-hover:scale-105 transition-all duration-300 p-1 overflow-hidden";
         if (headerNavLinks) {
-          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-gray-700 hover:text-black hover:bg-black/5 transition-all group");
+          headerNavLinks.querySelectorAll('a:not(:last-child)').forEach(a => a.className = "text-gray-700 hover:text-black transition-colors py-2");
         }
-        if (searchBtn) searchBtn.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-gray-100 hover:bg-gray-200 text-gray-700 transition-colors text-xs font-bold";
+        if (searchBtn) searchBtn.className = "p-2 sm:p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative flex items-center justify-center";
         if (authBtn) authBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-700 transition-colors relative flex items-center justify-center";
-        if (cartBtn) cartBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative";
+        if (cartBtn) cartBtn.className = "p-2 sm:p-2.5 rounded-full hover:bg-gray-100 text-gray-900 transition-colors relative flex items-center justify-center";
         if (soundToggleBtn) soundToggleBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-black transition-colors";
         if (faviconBtn) faviconBtn.className = "p-2.5 rounded-full hover:bg-gray-100 text-gray-700 hover:text-black transition-colors relative flex items-center justify-center group";
-        if (mobileMenuBtn) mobileMenuBtn.className = "p-2 rounded-full hover:bg-gray-100 text-gray-900 transition-colors";
+        if (mobileMenuBtn) mobileMenuBtn.className = "md:hidden p-2 rounded-full hover:bg-gray-100 text-gray-900 transition-colors flex items-center justify-center";
 
         if (heroTitle) heroTitle.className = "font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-black uppercase leading-[0.95] transition-colors duration-500";
         if (heroTagline) heroTagline.className = "text-sm sm:text-base text-gray-600 font-medium max-w-md leading-relaxed pt-1 transition-colors duration-500";
@@ -467,6 +531,12 @@
         }
         if (btnPrevVariant) btnPrevVariant.className = "w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200";
         if (btnNextVariant) btnNextVariant.className = "w-10 h-10 rounded-full bg-white hover:bg-black hover:text-white text-gray-800 shadow-md flex items-center justify-center flex-shrink-0 transition-all border border-gray-200";
+
+        // Catalog Section Contrast Adapting (Dark write-ups on light theme)
+        if (catalogTitle) catalogTitle.className = "font-display text-3xl sm:text-4xl font-bold text-black uppercase tracking-tight mt-1 transition-colors duration-500";
+        if (catalogSubtitle) catalogSubtitle.className = "text-xs font-black uppercase tracking-widest text-gray-400 transition-colors duration-500";
+        if (catalogViewAllLink) catalogViewAllLink.className = "h-10 px-5 rounded-full text-xs font-extrabold bg-neutral-900 text-white hover:bg-black transition-all inline-flex items-center justify-center gap-1.5 shadow-md whitespace-nowrap flex-shrink-0";
+        updateCatalogFilterStyles(false);
       }
 
       // 5. Update Variant Switcher Cards
@@ -479,28 +549,50 @@
 
         if (isDark) {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-white bg-white/20 text-white shadow-2xl scale-[1.03] backdrop-blur-xl w-full group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-white bg-white/20 text-white shadow-2xl scale-[1.02] backdrop-blur-xl group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/20 flex items-center justify-center p-1 overflow-hidden border border-white/30 transition-colors duration-300 flex-shrink-0";
-            if (titleEl) titleEl.className = "text-xs font-bold text-white leading-tight truncate";
+            if (titleEl) titleEl.className = "text-xs font-bold text-white leading-tight";
             if (checkBadge) { checkBadge.className = "active-check text-white font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
           } else {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-white/15 bg-white/10 hover:bg-white/20 text-white/90 backdrop-blur-md shadow-sm w-full group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-white/15 bg-white/10 hover:bg-white/20 text-white/90 backdrop-blur-md shadow-sm group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-black/25 flex items-center justify-center p-1 overflow-hidden border border-white/10 transition-colors duration-300 flex-shrink-0";
-            if (titleEl) titleEl.className = "text-xs font-bold text-white/90 leading-tight truncate";
+            if (titleEl) titleEl.className = "text-xs font-bold text-white/90 leading-tight";
             if (checkBadge) checkBadge.classList.add('hidden');
           }
         } else {
           if (isCurrent) {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-black bg-white text-black shadow-xl scale-[1.02] w-full group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border-2 border-black bg-white text-black shadow-xl scale-[1.02] group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-100 flex items-center justify-center p-1 overflow-hidden border border-gray-200 transition-colors duration-300 flex-shrink-0";
-            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight truncate";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-900 leading-tight";
             if (checkBadge) { checkBadge.className = "active-check text-black font-black ml-1 text-xs"; checkBadge.classList.remove('hidden'); }
           } else {
-            card.className = "variant-card cursor-pointer flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-gray-200/80 bg-white/70 hover:bg-white text-gray-800 shadow-sm hover:shadow-md w-full group";
+            card.className = "variant-card cursor-pointer flex-shrink-0 w-[220px] xs:w-[240px] sm:w-[250px] md:flex-1 snap-center flex items-center gap-3 sm:gap-3.5 px-3.5 sm:px-4 py-2.5 rounded-2xl border border-gray-200/80 bg-white/70 hover:bg-white text-gray-800 shadow-sm hover:shadow-md group";
             if (thumbBox) thumbBox.className = "variant-thumb-box w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gray-50 flex items-center justify-center p-1 overflow-hidden border border-gray-100 transition-colors duration-300 flex-shrink-0";
-            if (titleEl) titleEl.className = "text-xs font-bold text-gray-800 leading-tight truncate";
+            if (titleEl) titleEl.className = "text-xs font-bold text-gray-800 leading-tight";
             if (checkBadge) checkBadge.classList.add('hidden');
           }
+        }
+      });
+
+      // Auto-scroll the active card into center view in the swipe container
+      const variantSliderContainer = document.getElementById('variant-slider-container');
+      const activeCard = Array.from(variantCards).find(c => parseInt(c.getAttribute('data-index'), 10) === index);
+      if (activeCard && variantSliderContainer) {
+        activeCard.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+
+      // Update mobile swipe indicator dots
+      const swipeDots = document.querySelectorAll('.variant-swipe-dot');
+      swipeDots.forEach((dot) => {
+        const dotIdx = parseInt(dot.getAttribute('data-index'), 10);
+        if (dotIdx === index) {
+          dot.className = isDark 
+            ? 'variant-swipe-dot w-6 h-1.5 rounded-full bg-white shadow-sm transition-all duration-300'
+            : 'variant-swipe-dot w-6 h-1.5 rounded-full bg-black shadow-sm transition-all duration-300';
+        } else {
+          dot.className = isDark
+            ? 'variant-swipe-dot w-1.5 h-1.5 rounded-full bg-white/35 transition-all duration-300'
+            : 'variant-swipe-dot w-1.5 h-1.5 rounded-full bg-gray-300 transition-all duration-300';
         }
       });
 
@@ -520,6 +612,17 @@
       });
     });
 
+    // Attach click events on mobile swipe indicator dots
+    document.querySelectorAll('.variant-swipe-dot').forEach((dot) => {
+      dot.addEventListener('click', () => {
+        initAudio();
+        playUiSound('whoosh');
+        const index = parseInt(dot.getAttribute('data-index'), 10);
+        const direction = index >= currentShoeIndex ? 'next' : 'prev';
+        updateHeroShoe(index, true, direction);
+      });
+    });
+
     if (btnPrevVariant) {
       btnPrevVariant.addEventListener('click', () => {
         initAudio();
@@ -533,6 +636,36 @@
         initAudio();
         playUiSound('click');
         updateHeroShoe(currentShoeIndex + 1, true, 'next');
+      });
+    }
+
+    // Drag-to-swipe mouse support for variant slider
+    const variantSliderContainer = document.getElementById('variant-slider-container');
+    if (variantSliderContainer) {
+      let isDown = false;
+      let startX = 0;
+      let scrollLeftPos = 0;
+
+      variantSliderContainer.addEventListener('mousedown', (e) => {
+        isDown = true;
+        variantSliderContainer.classList.add('cursor-grabbing');
+        startX = e.pageX - variantSliderContainer.offsetLeft;
+        scrollLeftPos = variantSliderContainer.scrollLeft;
+      });
+      variantSliderContainer.addEventListener('mouseleave', () => {
+        isDown = false;
+        variantSliderContainer.classList.remove('cursor-grabbing');
+      });
+      variantSliderContainer.addEventListener('mouseup', () => {
+        isDown = false;
+        variantSliderContainer.classList.remove('cursor-grabbing');
+      });
+      variantSliderContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - variantSliderContainer.offsetLeft;
+        const walk = (x - startX) * 1.5;
+        variantSliderContainer.scrollLeft = scrollLeftPos - walk;
       });
     }
 
@@ -683,6 +816,11 @@
       if (cartCountBadge) {
         cartCountBadge.textContent = totalQty;
         cartCountBadge.classList.toggle('hidden', totalQty === 0);
+      }
+      const mobileNavBadge = document.getElementById('mobile-nav-cart-badge');
+      if (mobileNavBadge) {
+        mobileNavBadge.textContent = totalQty;
+        mobileNavBadge.classList.toggle('hidden', totalQty === 0);
       }
 
       // Update prices
@@ -897,15 +1035,15 @@
           (product, idx) => `
         <div class="scroll-reveal stagger-${(idx % 4) + 1} group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
           <div class="block">
-            <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl p-4 h-60 flex items-center justify-center overflow-hidden">
-              <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
+            <div class="relative bg-gradient-to-b from-gray-50 to-gray-100 rounded-2xl h-60 flex items-center justify-center overflow-hidden">
+              <span class="absolute top-3.5 left-3.5 z-20 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm pointer-events-none">
                 ${product.badge}
               </span>
-              <span class="absolute top-3 right-3 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
+              <span class="absolute top-3.5 right-3.5 z-20 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full pointer-events-none">
                 ${product.type || 'Product'}
               </span>
-              <a href="product-detail.html?id=${product.id}" class="w-full h-full flex items-center justify-center">
-                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500">
+              <a href="product-detail.html?id=${product.id}" class="w-full h-full pt-9 pb-3 px-3 flex items-center justify-center relative z-10">
+                <img src="${product.image}" alt="${product.name}" class="max-w-full max-h-full object-contain blend-shoe group-hover:scale-105 group-hover:-rotate-3 transition-transform duration-500 rounded-xl">
               </a>
               <!-- Quick View Floating Action -->
               <button data-id="${product.id}" class="quick-view-btn absolute bottom-3 right-3 bg-white/95 hover:bg-black hover:text-white text-gray-800 p-2.5 rounded-xl shadow-md transition-all opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0" title="Quick Preview">
@@ -983,13 +1121,9 @@
       btn.addEventListener('click', () => {
         initAudio();
         playUiSound('click');
-        catalogFilters.forEach((b) => {
-          b.classList.remove('bg-black', 'text-white');
-          b.classList.add('bg-white', 'text-gray-700', 'border-gray-200');
-        });
-        btn.classList.add('bg-black', 'text-white');
-        btn.classList.remove('bg-white', 'text-gray-700', 'border-gray-200');
-        const cat = btn.getAttribute('data-category');
+        const cat = btn.getAttribute('data-category') || 'All';
+        activeCatalogCategory = cat;
+        updateCatalogFilterStyles();
         renderCatalog(cat);
       });
     });
@@ -1047,6 +1181,7 @@
       }
 
       if (quickViewModal && quickViewBackdrop) {
+        quickViewModal.classList.remove('hidden', 'pointer-events-none');
         quickViewBackdrop.classList.remove('hidden');
         requestAnimationFrame(() => {
           quickViewBackdrop.classList.remove('opacity-0');
@@ -1059,10 +1194,11 @@
     function closeQuickView() {
       if (quickViewModal && quickViewBackdrop) {
         quickViewModal.classList.remove('opacity-100', 'scale-100');
-        quickViewModal.classList.add('opacity-0', 'scale-95');
+        quickViewModal.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
         quickViewBackdrop.classList.add('opacity-0');
         setTimeout(() => {
           quickViewBackdrop.classList.add('hidden');
+          quickViewModal.classList.add('hidden');
         }, 250);
       }
     }
@@ -1094,6 +1230,7 @@
       initAudio();
       playUiSound('whoosh');
       if (authModal && authBackdrop) {
+        authModal.classList.remove('hidden', 'pointer-events-none');
         authBackdrop.classList.remove('hidden');
         requestAnimationFrame(() => {
           authBackdrop.classList.remove('opacity-0');
@@ -1107,10 +1244,11 @@
     function closeAuthModal() {
       if (authModal && authBackdrop) {
         authModal.classList.remove('opacity-100', 'scale-100');
-        authModal.classList.add('opacity-0', 'scale-95');
+        authModal.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
         authBackdrop.classList.add('opacity-0');
         setTimeout(() => {
           authBackdrop.classList.add('hidden');
+          authModal.classList.add('hidden');
         }, 250);
       }
     }
@@ -1335,6 +1473,7 @@
       initAudio();
       playUiSound('whoosh');
       if (searchModal && searchBackdrop) {
+        searchModal.classList.remove('hidden', 'pointer-events-none');
         searchBackdrop.classList.remove('hidden');
         requestAnimationFrame(() => {
           searchBackdrop.classList.remove('opacity-0');
@@ -1349,10 +1488,11 @@
     function closeSearchModal() {
       if (searchModal && searchBackdrop) {
         searchModal.classList.remove('opacity-100', 'scale-100');
-        searchModal.classList.add('opacity-0', 'scale-95');
+        searchModal.classList.add('opacity-0', 'scale-95', 'pointer-events-none');
         searchBackdrop.classList.add('opacity-0');
         setTimeout(() => {
           searchBackdrop.classList.add('hidden');
+          searchModal.classList.add('hidden');
         }, 250);
       }
     }
@@ -1440,15 +1580,8 @@
     });
 
     // ----------------------------------------------------
-    // 11. MOBILE MENU TOGGLE
+    // 11. FAVICON STUDIO CONTROLLER
     // ----------------------------------------------------
-    if (mobileMenuBtn && mobileMenu) {
-      mobileMenuBtn.addEventListener('click', () => {
-        initAudio();
-        playUiSound('click');
-        mobileMenu.classList.toggle('hidden');
-      });
-    }
 
     // ----------------------------------------------------
     // 12. FAVICON STUDIO CONTROLLER
@@ -1497,8 +1630,8 @@
       initAudio();
       playUiSound('whoosh');
       if (faviconModal && faviconBackdrop) {
+        faviconModal.classList.remove('hidden', 'pointer-events-none');
         faviconBackdrop.classList.remove('hidden');
-        faviconModal.classList.remove('pointer-events-none');
         requestAnimationFrame(() => {
           faviconBackdrop.classList.remove('opacity-0');
           faviconModal.classList.remove('opacity-0', 'scale-95');
@@ -1515,6 +1648,7 @@
         faviconBackdrop.classList.add('opacity-0');
         setTimeout(() => {
           faviconBackdrop.classList.add('hidden');
+          faviconModal.classList.add('hidden');
         }, 250);
       }
     }
@@ -1564,15 +1698,15 @@
         playUiSound('click');
         localStorage.removeItem('malzie_favicon_url');
         localStorage.removeItem('malzie_favicon_name');
-        setFavicon('assets/images/shoe-white.png', 'Pure White Sneaker', true);
-        showToast('Favicon reset to Pure White Sneaker default.');
+        setFavicon('assets/images/favicon.png', 'Malzie Softz Monogram', true);
+        showToast('Favicon reset to Malzie Softz Monogram default.');
       });
     }
 
     // Auto-sync Toggle
     if (faviconAutoSyncToggle) {
       const savedAutoSync = localStorage.getItem('malzie_favicon_autosync');
-      faviconAutoSyncToggle.checked = savedAutoSync !== 'false';
+      faviconAutoSyncToggle.checked = savedAutoSync === 'true';
       faviconAutoSyncToggle.addEventListener('change', () => {
         localStorage.setItem('malzie_favicon_autosync', faviconAutoSyncToggle.checked ? 'true' : 'false');
         showToast(faviconAutoSyncToggle.checked ? 'Auto-sync enabled: Favicon matches active shoe.' : 'Auto-sync disabled.');
@@ -1580,62 +1714,265 @@
     }
 
     // Restore saved favicon on page load
-    const savedFaviconUrl = localStorage.getItem('malzie_favicon_url');
-    const savedFaviconName = localStorage.getItem('malzie_favicon_name');
-    if (savedFaviconUrl) {
-      setFavicon(savedFaviconUrl, savedFaviconName || 'Saved Custom Favicon', false);
-    } else {
-      setFavicon('assets/images/shoe-white.png', 'Pure White Sneaker', false);
+    let savedFaviconUrl = localStorage.getItem('malzie_favicon_url');
+    let savedFaviconName = localStorage.getItem('malzie_favicon_name');
+    if (!savedFaviconUrl || savedFaviconUrl === 'assets/images/shoe-white.png') {
+      savedFaviconUrl = 'assets/images/favicon.png';
+      savedFaviconName = 'Malzie Softz Monogram';
     }
+    setFavicon(savedFaviconUrl, savedFaviconName, false);
 
     // Expose setFavicon globally
     window.setFavicon = setFavicon;
 
     // ----------------------------------------------------
-    // 13. MOBILE SIDEBAR TOGGLE
+    // 13. MOBILE MENU DROPDOWN DRAWER TOGGLE
     // ----------------------------------------------------
-    const sidebarCloseBtn = document.getElementById('sidebar-close-btn');
-    const sidebarBackdrop = document.getElementById('sidebar-backdrop');
+    const mobileAuthTrigger = document.getElementById('mobile-auth-trigger');
 
-    if (mobileMenuBtn) {
+    if (mobileMenuBtn && mobileMenu) {
       mobileMenuBtn.addEventListener('click', () => {
         initAudio();
         playUiSound('whoosh');
-        if (mainHeader && sidebarBackdrop) {
-          sidebarBackdrop.classList.remove('hidden');
-          requestAnimationFrame(() => {
-            sidebarBackdrop.classList.remove('opacity-0');
-            mainHeader.classList.remove('-translate-x-full');
+        const isClosed = mobileMenu.classList.contains('hidden');
+        if (isClosed) {
+          mobileMenu.classList.remove('hidden');
+          mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-6 h-6"></i>';
+        } else {
+          mobileMenu.classList.add('hidden');
+          mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+        }
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons();
+        }
+      });
+
+      // Close mobile menu when clicking any navigation link inside it
+      mobileMenu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          if (mobileMenuBtn) {
+            mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+              window.lucide.createIcons();
+            }
+          }
+        });
+      });
+    }
+
+    if (mobileAuthTrigger) {
+      mobileAuthTrigger.addEventListener('click', () => {
+        if (mobileMenu) {
+          mobileMenu.classList.add('hidden');
+          if (mobileMenuBtn) {
+            mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-6 h-6"></i>';
+            if (window.lucide && typeof window.lucide.createIcons === 'function') {
+              window.lucide.createIcons();
+            }
+          }
+        }
+        openAuthModal('signin');
+      });
+    }
+
+    // ----------------------------------------------------
+    // 14. MOBILE BOTTOM NAVIGATION BAR & FLOATING SEARCH CONTROLLER
+    // ----------------------------------------------------
+    const mobileBottomNav = document.getElementById('mobile-bottom-nav');
+    const mobileFloatingSearch = document.getElementById('mobile-floating-search-bar');
+    const mobileQuickSearchInput = document.getElementById('mobile-quick-search-input');
+    const mobileSearchCloseBtn = document.getElementById('mobile-search-close-btn');
+    const mobileFloatingSearchSubmit = document.getElementById('mobile-floating-search-submit');
+    const mobileNavSearchBtn = document.getElementById('mobile-nav-search-btn');
+    const mobileNavCartBtn = document.getElementById('mobile-nav-cart-btn');
+    const mobileNavAccountBtn = document.getElementById('mobile-nav-account-btn');
+    const mobileNavCategoriesBtn = document.getElementById('mobile-nav-categories-btn');
+
+    let currentMobileNavTab = 0; // Default active tab is Home (0) on index.html
+
+    function updateMobileNavVisuals(index, isHover = false) {
+      if (!mobileBottomNav) return;
+      mobileBottomNav.style.setProperty('--active-tab', index);
+      const items = mobileBottomNav.querySelectorAll('.mobile-nav-item');
+      items.forEach((item) => {
+        const itemIdx = parseInt(item.getAttribute('data-nav-index') || '-1', 10);
+        if (itemIdx === index) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+      if (!isHover) {
+        currentMobileNavTab = index;
+      }
+    }
+
+    function setMobileNavActiveTab(index) {
+      updateMobileNavVisuals(index, false);
+    }
+
+    function toggleMobileFloatingSearch(forceOpen) {
+      if (!mobileFloatingSearch) return;
+      const isCurrentlyVisible = mobileFloatingSearch.classList.contains('is-visible');
+      const shouldOpen = forceOpen !== undefined ? forceOpen : !isCurrentlyVisible;
+
+      if (shouldOpen) {
+        mobileFloatingSearch.classList.add('is-visible');
+        setMobileNavActiveTab(1); // Wave glides under Search
+        if (mobileQuickSearchInput) {
+          setTimeout(() => mobileQuickSearchInput.focus(), 120);
+        }
+      } else {
+        mobileFloatingSearch.classList.remove('is-visible');
+        if (mobileQuickSearchInput) {
+          mobileQuickSearchInput.blur();
+        }
+        const isProductsPage = window.location.pathname.includes('products');
+        setMobileNavActiveTab(isProductsPage ? 2 : 0);
+      }
+    }
+
+    if (mobileNavSearchBtn) {
+      mobileNavSearchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        initAudio();
+        playUiSound('click');
+        if (mobileFloatingSearch && mobileFloatingSearch.classList.contains('is-visible')) {
+          openSearchModal();
+        } else {
+          toggleMobileFloatingSearch(true);
+        }
+      });
+    }
+
+    if (mobileSearchCloseBtn) {
+      mobileSearchCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        initAudio();
+        playUiSound('click');
+        toggleMobileFloatingSearch(false);
+      });
+    }
+
+    if (mobileFloatingSearchSubmit) {
+      mobileFloatingSearchSubmit.addEventListener('click', (e) => {
+        e.preventDefault();
+        initAudio();
+        playUiSound('click');
+        const query = mobileQuickSearchInput ? mobileQuickSearchInput.value.trim() : '';
+        if (query) {
+          window.location.href = `products.html?q=${encodeURIComponent(query)}`;
+        } else {
+          openSearchModal();
+        }
+      });
+    }
+
+    if (mobileQuickSearchInput) {
+      mobileQuickSearchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const query = mobileQuickSearchInput.value.trim();
+          if (query) {
+            window.location.href = `products.html?q=${encodeURIComponent(query)}`;
+          } else {
+            openSearchModal();
+          }
+        } else if (e.key === 'Escape') {
+          toggleMobileFloatingSearch(false);
+        }
+      });
+    }
+
+    if (mobileNavCartBtn) {
+      mobileNavCartBtn.addEventListener('click', () => {
+        initAudio();
+        playUiSound('whoosh');
+        setMobileNavActiveTab(3);
+        if (mobileFloatingSearch) mobileFloatingSearch.classList.remove('is-visible');
+        openCart();
+      });
+    }
+
+    if (mobileNavAccountBtn) {
+      mobileNavAccountBtn.addEventListener('click', () => {
+        initAudio();
+        playUiSound('click');
+        setMobileNavActiveTab(4);
+        if (mobileFloatingSearch) mobileFloatingSearch.classList.remove('is-visible');
+        openAuthModal('signin');
+      });
+    }
+
+    if (mobileNavCategoriesBtn) {
+      mobileNavCategoriesBtn.addEventListener('click', () => {
+        initAudio();
+        playUiSound('click');
+        setMobileNavActiveTab(2);
+        if (mobileFloatingSearch) mobileFloatingSearch.classList.remove('is-visible');
+        const toggleBtn = document.getElementById('toggle-category-nav-btn');
+        if (toggleBtn) toggleBtn.click();
+      });
+    }
+
+    // Attach hover & click listeners to all nav items for fluid wave gliding
+    if (mobileBottomNav) {
+      const navItems = mobileBottomNav.querySelectorAll('.mobile-nav-item');
+      navItems.forEach((item) => {
+        const idx = parseInt(item.getAttribute('data-nav-index') || '-1', 10);
+        if (idx >= 0) {
+          // Hover: fluidly glide glowing red wave over to hovered tab
+          item.addEventListener('mouseenter', () => {
+            updateMobileNavVisuals(idx, true);
+          });
+
+          // Click: lock in active tab and execute navigation or drawer
+          item.addEventListener('click', () => {
+            if (idx !== 1) {
+              setMobileNavActiveTab(idx);
+              if (mobileFloatingSearch) mobileFloatingSearch.classList.remove('is-visible');
+            }
           });
         }
       });
+
+      // Mouse leaves bottom nav bar: fluidly glide wave back to true active page tab
+      mobileBottomNav.addEventListener('mouseleave', () => {
+        updateMobileNavVisuals(currentMobileNavTab, false);
+      });
     }
 
-    if (sidebarCloseBtn) {
-      sidebarCloseBtn.addEventListener('click', () => {
+    // ----------------------------------------------------
+    // 15. INSTANT SCROLL TO TOP FLOATING BUTTON CONTROLLER
+    // ----------------------------------------------------
+    function initScrollToTop() {
+      const scrollBtn = document.getElementById('scroll-to-top-btn');
+      if (!scrollBtn) return;
+
+      const toggleScrollBtn = () => {
+        if (window.scrollY > 280) {
+          scrollBtn.classList.add('is-visible');
+        } else {
+          scrollBtn.classList.remove('is-visible');
+        }
+      };
+
+      window.addEventListener('scroll', toggleScrollBtn, { passive: true });
+      toggleScrollBtn();
+
+      scrollBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         initAudio();
-        playUiSound('click');
-        if (mainHeader && sidebarBackdrop) {
-          mainHeader.classList.add('-translate-x-full');
-          sidebarBackdrop.classList.add('opacity-0');
-          setTimeout(() => {
-            sidebarBackdrop.classList.add('hidden');
-          }, 300);
-        }
+        playUiSound('whoosh');
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
       });
     }
-
-    if (sidebarBackdrop) {
-      sidebarBackdrop.addEventListener('click', () => {
-        if (mainHeader && sidebarBackdrop) {
-          mainHeader.classList.add('-translate-x-full');
-          sidebarBackdrop.classList.add('opacity-0');
-          setTimeout(() => {
-            sidebarBackdrop.classList.add('hidden');
-          }, 300);
-        }
-      });
-    }
+    window.initScrollToTop = initScrollToTop;
 
     // ----------------------------------------------------
     // INITIALIZATION
@@ -1643,6 +1980,7 @@
     updateHeroShoe(0, false);
     renderCatalog('All');
     initUserSession();
+    initScrollToTop();
     const commerce = window.MalzieCommerce || window.AetherCommerce;
     if (commerce && commerce.updateCartUI) {
       commerce.updateCartUI();

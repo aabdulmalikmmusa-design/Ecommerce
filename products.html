@@ -7,7 +7,7 @@
   <meta name="description" content="Browse the full collection of Malzie Softs high-performance footwear and engineered athletic shirts.">
 
   <!-- Favicon -->
-  <link id="site-favicon" rel="icon" type="image/png" href="assets/images/shoe-white.png">
+  <link id="site-favicon" rel="icon" type="image/png" href="assets/images/favicon.png">
 
   <!-- Google Fonts: Barlow Condensed, Oswald, Inter, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,25 +41,23 @@
   </script>
 
   <!-- Custom Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css?v=4.4">
+  <link rel="stylesheet" href="assets/css/style.css?v=5.4">
 
   <!-- Lucide Icons Library -->
   <script src="assets/js/lucide.min.js"></script>
 </head>
-<body class="font-sans antialiased text-white selection:bg-black selection:text-white" style="background: radial-gradient(ellipse at 50% -8%, #FE9600 0%, #FD6300 24%, #D36311 55%, #421300 100%) no-repeat fixed; min-height: 100vh;">
+<body class="font-sans antialiased text-white selection:bg-black selection:text-white pb-16 md:pb-0" style="background: radial-gradient(ellipse at 50% -8%, #FE9600 0%, #FD6300 24%, #D36311 55%, #421300 100%) no-repeat fixed; min-height: 100vh;">
 
   <!-- ============================================================ -->
   <!-- 1. NAVIGATION BAR -->
   <!-- ============================================================ -->
   <header class="sticky top-0 z-40 bg-[#421300]/80 backdrop-blur-xl border-b border-white/15 text-white transition-all shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="Malzie Softs Home">
-        <div class="w-10 h-10 rounded-2xl bg-white text-[#421300] flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300">
-          <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
-          </svg>
+        <div class="w-10 h-10 rounded-2xl bg-white text-[#421300] p-1 flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+          <img src="assets/images/logo.png" alt="Malzie Softz Logo" class="w-full h-full object-contain">
         </div>
         <div class="flex flex-col">
           <span class="font-calligraphy font-bold text-xl md:text-2xl text-white leading-none">MALZIE SOFTZ</span>
@@ -106,45 +104,174 @@
         <h1 class="font-serif-times text-4xl sm:text-5xl font-bold text-white uppercase tracking-normal mt-2 leading-tight drop-shadow-sm">
           Footwear & Performance Shirts
         </h1>
-        <p class="text-sm sm:text-base text-white/90 mt-2 font-medium">
-          Zero-gravity nitrogen cushioning meets precision-engineered technical apparel. Click on any item to view its detailed specifications and price.
-        </p>
       </div>
 
-      <!-- Quick Category Pills Filter -->
-      <div class="flex flex-wrap items-center gap-2.5 mt-8">
-        <button data-cat="All" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-black shadow-lg transition-all scale-105">All Items</button>
-        <button data-cat="Footwear" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Footwear Only</button>
-        <button data-cat="Shirts" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Shirts & Apparel</button>
-        <button data-cat="Running" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Running Category</button>
-        <button data-cat="Lifestyle" class="filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">Lifestyle</button>
-      </div>
     </div>
   </section>
 
   <!-- ============================================================ -->
-  <!-- 3. PRODUCTS GRID (PRICES HIDDEN UNTIL CLICKED) -->
+  <!-- 3. PRODUCTS CATALOG WITH CATEGORY SIDEBAR -->
   <!-- ============================================================ -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    
-    <!-- Count & Sort Bar -->
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-      <p id="products-count" class="text-xs font-bold text-white/80 uppercase tracking-wider">
-        Showing 8 Products
-      </p>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="flex flex-col lg:flex-row gap-8 items-start">
+      
+      <!-- ============================================================ -->
+      <!-- CATEGORY NAVIGATION SIDEBAR (The exact bar from user request) -->
+      <!-- ============================================================ -->
+      <aside id="category-sidebar" class="w-full lg:w-80 xl:w-[340px] flex-shrink-0 lg:sticky lg:top-24 space-y-6">
+        
+        <!-- Sidebar Navigation Card -->
+        <div id="category-sidebar-card" class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-5 sm:p-6 shadow-2xl transition-all duration-300 overflow-hidden box-border">
+          
+          <!-- Sidebar Header with Interactive Toggle Switch -->
+          <div id="category-sidebar-header" class="flex items-center justify-between pb-3.5 border-b border-white/15 cursor-pointer select-none group gap-2 w-full" title="Click to Toggle Categories Navbar">
+            <div class="flex items-center gap-2 min-w-0">
+              <div class="w-8 h-8 rounded-xl bg-white text-[#541a00] flex items-center justify-center font-black shadow-sm group-hover:scale-105 transition-transform flex-shrink-0">
+                <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+              </div>
+              <div class="flex items-center gap-1.5 min-w-0">
+                <h2 class="font-display font-black text-xs sm:text-sm uppercase tracking-wider text-white whitespace-nowrap">Categories</h2>
+                <span id="category-toggle-status-badge" class="text-[9px] font-bold text-amber-300 bg-white/15 px-2 py-0.5 rounded-full transition-colors whitespace-nowrap">Visible</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-2 flex-shrink-0 ml-auto">
+              <span id="sidebar-count-badge" class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-white/20 text-white border border-white/20 whitespace-nowrap">8 Items</span>
+              
+              <!-- iOS-style Visual Toggle Switch -->
+              <div id="category-toggle-switch" class="relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-amber-400 transition-colors duration-200 ease-in-out shadow-inner" role="switch" aria-checked="true" aria-label="Toggle Categories Navbar">
+                <span id="category-toggle-knob" class="pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out translate-x-5"></span>
+              </div>
+            </div>
+          </div>
 
-      <!-- Instant Search Filter -->
-      <div class="relative max-w-xs w-full">
-        <input id="collection-search" type="text" placeholder="Search shoes or shirts..." class="w-full bg-white/15 text-white placeholder-white/60 border border-white/25 text-xs font-semibold rounded-full pl-9 pr-4 py-2.5 focus:outline-none focus:bg-white/25 focus:border-white shadow-inner backdrop-blur-md">
-        <i data-lucide="search" class="w-4 h-4 text-white/70 absolute left-3 top-3"></i>
-      </div>
+          <!-- Collapsible Body containing Navigation Pills, Search & Home Link -->
+          <div id="category-sidebar-body" class="space-y-5 pt-4 transition-all duration-300 ease-in-out overflow-hidden">
+            
+            <!-- Vertical Category Navigation Bar (Pills styled in sidebar) -->
+            <nav class="flex flex-col space-y-2" aria-label="Category Navigation">
+              <button data-cat="All" class="filter-tab-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-black bg-white text-black shadow-lg transition-all scale-[1.02]">
+                <span class="flex items-center gap-2.5">
+                  <i data-lucide="layers" class="w-4 h-4"></i>
+                  <span>All Items</span>
+                </span>
+                <span class="text-[10px] opacity-70">21</span>
+              </button>
+              <button data-cat="Footwear" class="filter-tab-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">
+                <span class="flex items-center gap-2.5">
+                  <i data-lucide="footprints" class="w-4 h-4"></i>
+                  <span>Footwear Only</span>
+                </span>
+                <span class="text-[10px] opacity-70">6</span>
+              </button>
+              <button data-cat="Shirts" class="filter-tab-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">
+                <span class="flex items-center gap-2.5">
+                  <i data-lucide="shirt" class="w-4 h-4"></i>
+                  <span>Shirts & Apparel</span>
+                </span>
+                <span class="text-[10px] opacity-70">15</span>
+              </button>
+              <button data-cat="Running" class="filter-tab-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">
+                <span class="flex items-center gap-2.5">
+                  <i data-lucide="activity" class="w-4 h-4"></i>
+                  <span>Running Category</span>
+                </span>
+                <span class="text-[10px] opacity-70">12</span>
+              </button>
+              <button data-cat="Lifestyle" class="filter-tab-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all">
+                <span class="flex items-center gap-2.5">
+                  <i data-lucide="sparkles" class="w-4 h-4"></i>
+                  <span>Lifestyle</span>
+                </span>
+                <span class="text-[10px] opacity-70">9</span>
+              </button>
+            </nav>
+
+            <!-- Instant Search Box inside Sidebar -->
+            <div class="pt-4 border-t border-white/15 space-y-2">
+              <label for="collection-search" class="text-[10px] font-black uppercase tracking-wider text-amber-200">Search Products</label>
+              <div class="relative w-full">
+                <input id="collection-search" type="text" placeholder="Search shoes or shirts..." class="w-full bg-white/15 text-white placeholder-white/60 border border-white/25 text-xs font-semibold rounded-2xl pl-9 pr-4 py-3 focus:outline-none focus:bg-white/25 focus:border-white shadow-inner backdrop-blur-md">
+                <i data-lucide="search" class="w-4 h-4 text-white/70 absolute left-3 top-3.5"></i>
+              </div>
+            </div>
+
+            <!-- Quick Return to Home Link -->
+            <div class="pt-2">
+              <a href="index.html" class="flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-2xl bg-black/25 hover:bg-black/40 text-white/90 text-xs font-bold border border-white/10 transition-colors">
+                <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                <span>Return to Home Page</span>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+      </aside>
+
+      <!-- ============================================================ -->
+      <!-- MAIN PRODUCTS AREA (Right Column) -->
+      <!-- ============================================================ -->
+      <section class="flex-1 min-w-0 w-full space-y-6">
+        
+        <!-- Top Toolbar / Results Bar with Navbar Toggle Button -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15">
+          <div class="flex items-center gap-3 flex-wrap">
+            <!-- Dedicated Toggle Button -->
+            <button id="toolbar-category-toggle-btn" type="button" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/20 hover:bg-white/30 text-white text-xs font-black border border-white/25 transition-all shadow-sm group active:scale-95" title="Toggle Categories Navbar">
+              <i data-lucide="sliders-horizontal" class="w-3.5 h-3.5 text-amber-300 group-hover:rotate-12 transition-transform"></i>
+              <span id="toolbar-toggle-btn-text">Categories Navbar</span>
+              <span id="toolbar-toggle-pill" class="text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-400 text-black">ON</span>
+            </button>
+            <span class="text-xs font-black uppercase tracking-wider text-amber-200">Active Category:</span>
+            <span id="active-filter-label" class="text-xs font-bold text-white bg-white/20 px-3 py-1 rounded-full border border-white/20">All Items</span>
+          </div>
+          <p id="products-count" class="text-xs font-bold text-white/80 uppercase tracking-wider">
+            Showing 8 Products
+          </p>
+        </div>
+
+        <!-- Product Grid (3 cols alongside sidebar) -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Injected by JS -->
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- VIEW MORE / CATALOG PAGINATION CONTROLLER -->
+        <!-- ============================================================ -->
+        <div id="view-more-container" class="mt-12 mb-6 flex flex-col items-center justify-center gap-3.5">
+          
+          <!-- View More Primary Action Button -->
+          <button 
+            id="view-more-btn" 
+            type="button" 
+            class="btn-magnetic group relative inline-flex items-center gap-3 px-9 py-4 rounded-full bg-white hover:bg-amber-50 text-[#421300] font-black text-xs uppercase tracking-widest shadow-2xl hover:shadow-[0_16px_36px_rgba(0,0,0,0.28)] border-2 border-amber-300/80 transition-all duration-300 active:scale-95 hover:scale-105"
+          >
+            <span id="view-more-btn-text">View More Items</span>
+            <i id="view-more-icon" data-lucide="chevron-down" class="w-4 h-4 text-[#ad4f12] group-hover:translate-y-1 transition-transform"></i>
+            <span id="view-more-remaining-badge" class="px-2.5 py-0.5 rounded-full bg-[#ad4f12] text-white text-[10px] font-extrabold tracking-normal shadow-sm">+6 More</span>
+          </button>
+
+          <!-- Counter Text -->
+          <p id="view-more-status" class="text-xs font-semibold text-amber-100/90 tracking-wide">
+            Showing <span id="view-more-showing-count" class="font-extrabold text-white text-sm">6</span> of <span id="view-more-total-count" class="font-extrabold text-white text-sm">12</span> items
+          </p>
+
+          <!-- Visual Progress Bar -->
+          <div class="w-56 sm:w-72 h-2 bg-black/30 rounded-full overflow-hidden border border-white/15 p-0.5 shadow-inner">
+            <div id="view-more-progress-bar" class="h-full bg-gradient-to-r from-amber-400 via-orange-400 to-[#FE9600] rounded-full transition-all duration-500 shadow-sm" style="width: 50%;"></div>
+          </div>
+
+          <!-- Quick Collapse (Show Less) option -->
+          <button id="view-less-btn" type="button" class="hidden text-[11px] font-bold text-amber-200 hover:text-white underline transition-colors pt-1">
+            Show Less (Collapse) ↑
+          </button>
+
+        </div>
+
+      </section>
+
     </div>
-
-    <!-- Product Grid -->
-    <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      <!-- Injected by JS -->
-    </div>
-
   </main>
 
   <!-- ============================================================ -->
@@ -232,73 +359,118 @@
 
   <!-- Central Products Data & Commerce Engine -->
   <script src="assets/js/products-data.js"></script>
-  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/cart.js?v=5.3"></script>
   <script src="assets/js/scroll-animate.js?v=4.4"></script>
 
   <script>
+    const ITEMS_PER_PAGE = 6;
+    let visibleLimit = ITEMS_PER_PAGE;
     let activeCategory = 'All';
+    let currentSearchQuery = '';
 
     function setFilter(cat) {
       activeCategory = cat;
+      visibleLimit = ITEMS_PER_PAGE; // Reset visible count to first page
       document.querySelectorAll('.filter-tab-btn').forEach(b => {
         if (b.getAttribute('data-cat') === cat) {
-          b.className = 'filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white text-black shadow-lg transition-all scale-105';
+          b.className = 'filter-tab-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-black bg-white text-black shadow-lg transition-all scale-[1.02]';
         } else {
-          b.className = 'filter-tab-btn px-5 py-2.5 rounded-full text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all';
+          b.className = 'filter-tab-btn w-full text-left flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-extrabold bg-white/15 text-white hover:bg-white/25 border border-white/20 backdrop-blur-md transition-all';
         }
       });
-      renderProducts();
+      const filterLabel = document.getElementById('active-filter-label');
+      if (filterLabel) {
+        filterLabel.textContent = cat === 'All' ? 'All Items' : (cat === 'Footwear' ? 'Footwear Only' : (cat === 'Shirts' ? 'Shirts & Apparel' : cat));
+      }
+      renderProducts(currentSearchQuery, true);
     }
 
-    function renderProducts(searchQuery = '') {
+    function renderProducts(searchQuery = currentSearchQuery, resetPagination = false) {
+      if (resetPagination) {
+        visibleLimit = ITEMS_PER_PAGE;
+      }
+      currentSearchQuery = searchQuery;
+
       const grid = document.getElementById('products-grid');
       const countEl = document.getElementById('products-count');
+      const sidebarBadge = document.getElementById('sidebar-count-badge');
+
+      const viewMoreContainer = document.getElementById('view-more-container');
+      const viewMoreBtn = document.getElementById('view-more-btn');
+      const viewMoreRemainingBadge = document.getElementById('view-more-remaining-badge');
+      const viewMoreShowingCount = document.getElementById('view-more-showing-count');
+      const viewMoreTotalCount = document.getElementById('view-more-total-count');
+      const viewMoreProgressBar = document.getElementById('view-more-progress-bar');
+      const viewLessBtn = document.getElementById('view-less-btn');
 
       let list = window.MALZIE_PRODUCTS || [];
 
-      // Filter by category
+      // Filter by category (Supports All, Footwear, Shirts, Running, Lifestyle)
       if (activeCategory !== 'All') {
-        list = list.filter(p => 
-          p.type.toLowerCase() === activeCategory.toLowerCase() || 
-          p.category.toLowerCase() === activeCategory.toLowerCase()
-        );
+        const catLower = activeCategory.toLowerCase();
+        list = list.filter(p => {
+          const type = (p.type || '').toLowerCase();
+          const category = (p.category || '').toLowerCase();
+          const subCategory = (p.subCategory || '').toLowerCase();
+          const badge = (p.badge || '').toLowerCase();
+          const tagline = (p.tagline || '').toLowerCase();
+
+          if (catLower === 'running') {
+            return subCategory === 'running' || tagline.includes('runner') || tagline.includes('running') || badge.includes('velocity');
+          }
+          if (catLower === 'lifestyle') {
+            return subCategory === 'lifestyle' || badge.includes('streetwear') || badge.includes('craft') || badge.includes('bestseller');
+          }
+          return type === catLower || category === catLower;
+        });
       }
 
       // Filter by search query
       if (searchQuery.trim() !== '') {
         const q = searchQuery.toLowerCase();
         list = list.filter(p => 
-          p.name.toLowerCase().includes(q) || 
-          p.type.toLowerCase().includes(q) || 
-          p.color.toLowerCase().includes(q)
+          (p.name && p.name.toLowerCase().includes(q)) || 
+          (p.type && p.type.toLowerCase().includes(q)) || 
+          (p.color && p.color.toLowerCase().includes(q)) ||
+          (p.badge && p.badge.toLowerCase().includes(q)) ||
+          (p.tagline && p.tagline.toLowerCase().includes(q))
         );
       }
 
-      countEl.textContent = `Showing ${list.length} Products`;
+      const totalItems = list.length;
+      if (sidebarBadge) sidebarBadge.textContent = `${totalItems} Items`;
 
-      if (list.length === 0) {
+      if (totalItems === 0) {
+        if (countEl) countEl.textContent = 'Showing 0 Products';
         grid.innerHTML = `
           <div class="col-span-full py-16 text-center text-white/80 bg-black/20 rounded-3xl border border-white/10 backdrop-blur-md">
             <p class="font-bold text-base text-white">No items found matching your filter.</p>
             <p class="text-xs text-amber-200/80 mt-1">Try switching categories or clearing search.</p>
           </div>
         `;
+        if (viewMoreContainer) viewMoreContainer.classList.add('hidden');
         return;
       }
 
-      // Render cards with both Quick Add and View Detail options
-      grid.innerHTML = list.map((p, idx) => `
+      // Slice visible products for pagination
+      const visibleItems = list.slice(0, visibleLimit);
+      if (countEl) countEl.textContent = `Showing ${visibleItems.length} of ${totalItems} Products`;
+
+      // Render cards
+      grid.innerHTML = visibleItems.map((p, idx) => `
         <div class="scroll-reveal stagger-${(idx % 4) + 1} group bg-white/95 backdrop-blur-md rounded-3xl p-5 border border-amber-200/50 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1.5 flex flex-col justify-between">
           <div>
             <a href="product-detail.html?id=${p.id}" class="block">
-              <div class="relative bg-gradient-to-b from-amber-50/70 to-orange-100/40 rounded-2xl p-4 h-64 flex items-center justify-center overflow-hidden">
-                <span class="absolute top-3 left-3 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm">
+              <div class="relative bg-gradient-to-b from-amber-50/70 to-orange-100/40 rounded-2xl h-64 flex items-center justify-center overflow-hidden">
+                <span class="absolute top-3.5 left-3.5 z-20 bg-white/95 backdrop-blur-md text-[10px] font-black uppercase tracking-wider text-gray-900 px-2.5 py-1 rounded-full shadow-sm pointer-events-none">
                   ${p.badge}
                 </span>
-                <span class="absolute top-3 right-3 bg-[#421300] text-amber-200 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full">
+                <span class="absolute top-3.5 right-3.5 z-20 bg-[#421300] text-amber-200 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full pointer-events-none">
                   ${p.type}
                 </span>
-                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-contain blend-shoe group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-500">
+                <div class="w-full h-full pt-9 pb-3 px-3 flex items-center justify-center relative z-10">
+                  <img src="${p.image}" alt="${p.name}" class="max-w-full max-h-full object-contain blend-shoe group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-500 rounded-xl">
+                </div>
               </div>
               
               <div class="mt-4">
@@ -325,6 +497,39 @@
           </div>
         </div>
       `).join('');
+
+      // Update View More Container & Progress State
+      if (viewMoreContainer) {
+        viewMoreContainer.classList.remove('hidden');
+
+        if (viewMoreShowingCount) viewMoreShowingCount.textContent = visibleItems.length;
+        if (viewMoreTotalCount) viewMoreTotalCount.textContent = totalItems;
+        if (viewMoreProgressBar) {
+          const pct = Math.min(100, Math.round((visibleItems.length / totalItems) * 100));
+          viewMoreProgressBar.style.width = pct + '%';
+        }
+
+        if (visibleItems.length < totalItems) {
+          // More items exist
+          const remaining = totalItems - visibleItems.length;
+          if (viewMoreBtn) {
+            viewMoreBtn.classList.remove('hidden');
+            viewMoreBtn.disabled = false;
+          }
+          if (viewMoreRemainingBadge) viewMoreRemainingBadge.textContent = `+${remaining} More`;
+          if (viewLessBtn) viewLessBtn.classList.add('hidden');
+        } else {
+          // All items displayed
+          if (viewMoreBtn) viewMoreBtn.classList.add('hidden');
+          if (viewLessBtn) {
+            if (totalItems > ITEMS_PER_PAGE) {
+              viewLessBtn.classList.remove('hidden');
+            } else {
+              viewLessBtn.classList.add('hidden');
+            }
+          }
+        }
+      }
 
       if (window.lucide) {
         window.lucide.createIcons();
@@ -361,7 +566,44 @@
       if (initialFilter) {
         setFilter(initialFilter);
       } else {
-        renderProducts();
+        renderProducts('', true);
+      }
+
+      // View More Button Click
+      const viewMoreBtn = document.getElementById('view-more-btn');
+      if (viewMoreBtn) {
+        viewMoreBtn.addEventListener('click', () => {
+          if (window.MalzieCommerce && window.MalzieCommerce.playSound) {
+            window.MalzieCommerce.playSound('click');
+          }
+          const btnText = document.getElementById('view-more-btn-text');
+          const icon = document.getElementById('view-more-icon');
+          if (btnText) btnText.textContent = "Loading More Items...";
+          if (icon) icon.classList.add('animate-bounce');
+
+          setTimeout(() => {
+            visibleLimit += ITEMS_PER_PAGE;
+            renderProducts(currentSearchQuery, false);
+            if (btnText) btnText.textContent = "View More Items";
+            if (icon) icon.classList.remove('animate-bounce');
+          }, 200);
+        });
+      }
+
+      // View Less (Collapse) Button Click
+      const viewLessBtn = document.getElementById('view-less-btn');
+      if (viewLessBtn) {
+        viewLessBtn.addEventListener('click', () => {
+          if (window.MalzieCommerce && window.MalzieCommerce.playSound) {
+            window.MalzieCommerce.playSound('click');
+          }
+          visibleLimit = ITEMS_PER_PAGE;
+          renderProducts(currentSearchQuery, false);
+          const grid = document.getElementById('products-grid');
+          if (grid) {
+            grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
       }
 
       // Filter tabs click
@@ -375,7 +617,106 @@
       const searchInput = document.getElementById('collection-search');
       if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-          renderProducts(e.target.value);
+          renderProducts(e.target.value, true);
+        });
+      }
+
+      // ============================================================
+      // CATEGORY NAVBAR TOGGLE ENGINE
+      // ============================================================
+      const sidebarHeader = document.getElementById('category-sidebar-header');
+      const sidebarToggleSwitch = document.getElementById('category-toggle-switch');
+      const sidebarToggleKnob = document.getElementById('category-toggle-knob');
+      const sidebarToggleStatus = document.getElementById('category-toggle-status-badge');
+      const sidebarBody = document.getElementById('category-sidebar-body');
+      const toolbarToggleBtn = document.getElementById('toolbar-category-toggle-btn');
+      const toolbarToggleText = document.getElementById('toolbar-toggle-btn-text');
+      const toolbarTogglePill = document.getElementById('toolbar-toggle-pill');
+      const bottomNavCategoriesBtn = document.getElementById('mobile-nav-categories-btn');
+
+      let isCategoryNavOpen = true;
+
+      function updateCategoryNavToggleUI(isOpen, smoothScroll = false) {
+        isCategoryNavOpen = isOpen;
+
+        if (sidebarBody) {
+          if (isOpen) {
+            sidebarBody.classList.remove('collapsed');
+          } else {
+            sidebarBody.classList.add('collapsed');
+          }
+        }
+
+        // Update Toggle Switch Knob & Track
+        if (sidebarToggleSwitch && sidebarToggleKnob) {
+          if (isOpen) {
+            sidebarToggleSwitch.className = "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-amber-400 transition-colors duration-200 ease-in-out shadow-inner";
+            sidebarToggleKnob.className = "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out translate-x-5";
+            if (sidebarToggleStatus) {
+              sidebarToggleStatus.textContent = "Visible";
+              sidebarToggleStatus.className = "text-[9px] font-bold text-amber-300 bg-white/15 px-2 py-0.5 rounded-full transition-colors";
+            }
+          } else {
+            sidebarToggleSwitch.className = "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-white/20 transition-colors duration-200 ease-in-out shadow-inner";
+            sidebarToggleKnob.className = "pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white/90 shadow-md ring-0 transition duration-200 ease-in-out translate-x-0";
+            if (sidebarToggleStatus) {
+              sidebarToggleStatus.textContent = "Collapsed";
+              sidebarToggleStatus.className = "text-[9px] font-bold text-amber-200/70 bg-black/25 px-2 py-0.5 rounded-full transition-colors";
+            }
+          }
+        }
+
+        // Update Toolbar Toggle Button
+        if (toolbarTogglePill && toolbarToggleText) {
+          if (isOpen) {
+            toolbarToggleText.textContent = "Categories Navbar";
+            toolbarTogglePill.textContent = "ON";
+            toolbarTogglePill.className = "text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-amber-400 text-black";
+          } else {
+            toolbarToggleText.textContent = "Categories Navbar";
+            toolbarTogglePill.textContent = "OFF";
+            toolbarTogglePill.className = "text-[9px] font-black uppercase px-2 py-0.5 rounded-full bg-white/20 text-white";
+          }
+        }
+
+        if (smoothScroll && isOpen) {
+          const sidebar = document.getElementById('category-sidebar');
+          if (sidebar) {
+            sidebar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
+
+      function toggleCategoryNav() {
+        if (window.MalzieCommerce && window.MalzieCommerce.playSound) {
+          window.MalzieCommerce.playSound('click');
+        }
+        updateCategoryNavToggleUI(!isCategoryNavOpen);
+      }
+
+      if (sidebarHeader) {
+        sidebarHeader.addEventListener('click', (e) => {
+          toggleCategoryNav();
+        });
+      }
+
+      if (toolbarToggleBtn) {
+        toolbarToggleBtn.addEventListener('click', (e) => {
+          toggleCategoryNav();
+        });
+      }
+
+      if (bottomNavCategoriesBtn) {
+        bottomNavCategoriesBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (!isCategoryNavOpen) {
+            updateCategoryNavToggleUI(true, true);
+          } else {
+            const sidebar = document.getElementById('category-sidebar');
+            if (sidebar) {
+              sidebar.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
         });
       }
 
@@ -387,6 +728,270 @@
         window.lucide.createIcons();
       }
     });
+  </script>
+
+  <!-- ============================================================ -->
+  <!-- MOBILE FLOATING QUICK SEARCH CAPSULE (Mobile Phones Only)     -->
+  <!-- ============================================================ -->
+  <div id="mobile-floating-search-bar" class="md:hidden">
+    <div class="search-capsule-inner group">
+      <button id="mobile-floating-search-submit" type="button" aria-label="Search" class="text-[var(--mobile-nav-accent,#ff3b30)] mr-3 flex-shrink-0 transition-transform active:scale-90">
+        <svg class="w-5 h-5 drop-shadow-[0_0_6px_var(--mobile-nav-glow,rgba(255,59,48,0.7))]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7.5"></circle>
+          <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+        </svg>
+      </button>
+      <input 
+        type="text" 
+        id="mobile-quick-search-input" 
+        placeholder="Search sneakers, categories, drops..." 
+        autocomplete="off"
+        class="w-full bg-transparent text-sm text-white placeholder-gray-400 focus:outline-none"
+      />
+      <button type="button" id="mobile-search-close-btn" aria-label="Close search" class="text-gray-400 hover:text-white ml-2 p-1 transition-colors">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MOBILE BOTTOM NAVIGATION BAR (Floating Pill with Wave)        -->
+  <!-- ============================================================ -->
+  <nav id="mobile-bottom-nav" class="md:hidden" style="--active-tab: 2;">
+    <!-- Ambient Wave Glow Engine Background -->
+    <div class="nav-wave-track" aria-hidden="true">
+      <div class="nav-baseline"></div>
+      <div class="nav-wave-slider">
+        <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 100 56" preserveAspectRatio="none">
+          <defs>
+            <radialGradient id="nav-arch-glow-prod" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="var(--mobile-nav-accent, #ff3b30)" stop-opacity="0.45"/>
+              <stop offset="65%" stop-color="var(--mobile-nav-accent, #ff3b30)" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="transparent" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <path d="M 0,54.5 C 22,54.5 34,8.5 50,8.5 C 66,8.5 78,54.5 100,54.5 L 100,58 L 0,58 Z" fill="#121316"/>
+          <ellipse cx="50" cy="29" rx="30" ry="20" fill="url(#nav-arch-glow-prod)"/>
+          <path d="M 0,54.5 C 22,54.5 34,8.5 50,8.5 C 66,8.5 78,54.5 100,54.5" fill="none" stroke="var(--mobile-nav-accent, #ff3b30)" stroke-width="2.6" stroke-linecap="round" class="nav-wave-stroke"/>
+          <circle cx="50" cy="27.5" r="2.4" fill="var(--mobile-nav-accent, #ff3b30)" class="nav-wave-dot"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- 5 Nav Tab Items Grid -->
+    <div class="mobile-nav-grid">
+      <!-- 1. Home -->
+      <a href="index.html" data-nav-index="0" class="mobile-nav-item" aria-label="Home">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Home</span>
+      </a>
+
+      <!-- 2. Search -->
+      <button id="mobile-nav-search-btn" data-nav-index="1" type="button" class="mobile-nav-item" aria-label="Search">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7.5"></circle>
+            <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Search</span>
+      </button>
+
+      <!-- 3. Categories / Shop (Active on Products) -->
+      <button id="mobile-nav-categories-btn" data-nav-index="2" type="button" class="mobile-nav-item active is-current-page" aria-label="Shop">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Shop</span>
+      </button>
+
+      <!-- 4. Cart -->
+      <button onclick="if(window.MalzieCommerce){window.MalzieCommerce.openCart();}" data-nav-index="3" type="button" class="mobile-nav-item cart-trigger-btn" aria-label="Cart">
+        <div class="nav-icon-wrap relative">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-2z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span id="mobile-nav-cart-badge" class="cart-count-badge absolute -top-1.5 -right-2.5 min-w-[16px] h-[16px] px-1 text-[9.5px] font-bold rounded-full flex items-center justify-center leading-none">0</span>
+        </div>
+        <span class="mobile-nav-label">Cart</span>
+      </button>
+
+      <!-- 5. Account -->
+      <a href="index.html" data-nav-index="4" class="mobile-nav-item" aria-label="Account">
+        <div class="nav-icon-wrap">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+        <span class="mobile-nav-label">Account</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- INSTANT SCROLL TO TOP FLOATING BUTTON                        -->
+  <!-- ============================================================ -->
+  <button 
+    id="scroll-to-top-btn" 
+    type="button" 
+    aria-label="Scroll to top of page" 
+    title="Scroll to top"
+    class="fixed z-40 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-black/90 hover:bg-black text-white shadow-2xl backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 pointer-events-none translate-y-3 transition-all duration-300 active:scale-90 hover:scale-110 group right-4 sm:right-6 bottom-[86px] md:bottom-8"
+  >
+    <svg class="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </button>
+  <script>
+    (function() {
+      // Instant Scroll to Top controller
+      const scrollBtn = document.getElementById('scroll-to-top-btn');
+      if (scrollBtn) {
+        const toggleBtn = () => {
+          if (window.scrollY > 280) {
+            scrollBtn.classList.add('is-visible');
+          } else {
+            scrollBtn.classList.remove('is-visible');
+          }
+        };
+        window.addEventListener('scroll', toggleBtn, { passive: true });
+        toggleBtn();
+        scrollBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Mobile Bottom Nav & Floating Search Controller
+      const nav = document.getElementById('mobile-bottom-nav');
+      const floatingSearch = document.getElementById('mobile-floating-search-bar');
+      const searchInput = document.getElementById('mobile-quick-search-input');
+      const searchClose = document.getElementById('mobile-search-close-btn');
+      const searchSubmit = document.getElementById('mobile-floating-search-submit');
+
+      let currentTab = 2; // Default active tab is Shop (2) on products.html
+
+      function updateNavVisuals(idx, isHover = false) {
+        if (!nav) return;
+        nav.style.setProperty('--active-tab', idx);
+        nav.querySelectorAll('.mobile-nav-item').forEach(item => {
+          if (parseInt(item.getAttribute('data-nav-index') || '-1', 10) === idx) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
+        });
+        if (!isHover) {
+          currentTab = idx;
+        }
+      }
+
+      function setTab(idx) {
+        updateNavVisuals(idx, false);
+      }
+
+      const searchBtn = document.getElementById('mobile-nav-search-btn');
+      if (searchBtn && floatingSearch) {
+        searchBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          const isVis = floatingSearch.classList.contains('is-visible');
+          if (isVis) {
+            const pageSearch = document.getElementById('collection-search');
+            if (pageSearch) pageSearch.focus();
+          } else {
+            floatingSearch.classList.add('is-visible');
+            setTab(1);
+            if (searchInput) setTimeout(() => searchInput.focus(), 120);
+          }
+        });
+      }
+
+      if (searchClose && floatingSearch) {
+        searchClose.addEventListener('click', (e) => {
+          e.preventDefault();
+          floatingSearch.classList.remove('is-visible');
+          setTab(2);
+        });
+      }
+
+      if (searchSubmit) {
+        searchSubmit.addEventListener('click', (e) => {
+          e.preventDefault();
+          const q = searchInput ? searchInput.value.trim() : '';
+          if (q) {
+            const pageSearch = document.getElementById('collection-search');
+            if (pageSearch) {
+              pageSearch.value = q;
+              pageSearch.dispatchEvent(new Event('input', { bubbles: true }));
+              floatingSearch.classList.remove('is-visible');
+              setTab(2);
+            }
+          }
+        });
+      }
+
+      if (searchInput) {
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            const q = searchInput.value.trim();
+            if (q) {
+              const pageSearch = document.getElementById('collection-search');
+              if (pageSearch) {
+                pageSearch.value = q;
+                pageSearch.dispatchEvent(new Event('input', { bubbles: true }));
+                floatingSearch.classList.remove('is-visible');
+                setTab(2);
+              }
+            }
+          } else if (e.key === 'Escape' && floatingSearch) {
+            floatingSearch.classList.remove('is-visible');
+            setTab(2);
+          }
+        });
+      }
+
+      if (nav) {
+        nav.querySelectorAll('.mobile-nav-item').forEach(item => {
+          const idx = parseInt(item.getAttribute('data-nav-index') || '-1', 10);
+          if (idx >= 0) {
+            // Hover: glide wave to hovered item
+            item.addEventListener('mouseenter', () => {
+              updateNavVisuals(idx, true);
+            });
+
+            // Click: set active tab
+            item.addEventListener('click', () => {
+              if (idx !== 1) {
+                setTab(idx);
+                if (floatingSearch) floatingSearch.classList.remove('is-visible');
+              }
+            });
+          }
+        });
+
+        // Mouse leaves nav bar: glide back to active tab
+        nav.addEventListener('mouseleave', () => {
+          updateNavVisuals(currentTab, false);
+        });
+      }
+    })();
   </script>
 </body>
 </html>
