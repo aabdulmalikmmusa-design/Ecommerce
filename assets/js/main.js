@@ -1,4 +1,4 @@
-// AETHER Footwear - Next-Gen Ecommerce Interactive Logic
+// Malzie Softs - Next-Gen Ecommerce Interactive Logic
 (function () {
   'use strict';
 
@@ -66,13 +66,13 @@
     {
       id: 'excee',
       slug: 'white',
-      name: 'AETHER AERO EXCEE',
+      name: 'MALZIE AERO EXCEE',
       badge: 'Bestseller // Pure Ice',
       tagline: 'Feel the future. Move with pure zero-gravity Air.',
       price: '$159.00',
       priceInr: '₹12,995',
       image: 'assets/images/shoe-white.jpg',
-      watermark: 'AERO EXCEE',
+      watermark: 'MALZIE AERO',
       glowClass: 'theme-glow-white',
       accentColor: '#121316',
       colorName: 'Pure Ice / Triple White',
@@ -81,7 +81,7 @@
     {
       id: '270',
       slug: 'red',
-      name: 'AETHER AERO 270',
+      name: 'MALZIE AERO 270',
       badge: 'High Velocity // Crimson Blaze',
       tagline: 'High-octane scarlet energy. Ignite every stride.',
       price: '$179.00',
@@ -96,7 +96,7 @@
     {
       id: 'alpha',
       slug: 'black',
-      name: 'AETHER AERO ALPHA',
+      name: 'MALZIE AERO ALPHA',
       badge: 'Matte Carbon // Stealth Onyx',
       tagline: 'Nocturnal engineering. Surgical control & carbon stability.',
       price: '$149.00',
@@ -111,7 +111,7 @@
     {
       id: 'pulse',
       slug: 'cyan',
-      name: 'AETHER AERO PULSE',
+      name: 'MALZIE AERO PULSE',
       badge: 'Cyber Luminescent // Electric Cyan',
       tagline: 'Step directly into 2030 with luminescent gas chambers.',
       price: '$169.00',
@@ -128,10 +128,10 @@
   let currentShoeIndex = 0; // Default to white / pure ice (index 0)
 
   // --- Catalog Database for Ecommerce Browsing (Synchronized from products-data.js) ---
-  const catalogProducts = window.AETHER_PRODUCTS || [
+  const catalogProducts = window.MALZIE_PRODUCTS || window.AETHER_PRODUCTS || [
     {
       id: 'prod-1',
-      name: 'AETHER Aero Excee Pure',
+      name: 'Malzie Aero Excee Pure',
       type: 'Footwear',
       category: 'Footwear',
       price: 159,
@@ -147,7 +147,7 @@
   let cart = [
     {
       id: 'prod-1',
-      name: 'AETHER Aero Excee Pure',
+      name: 'Malzie Aero Excee Pure',
       size: 'US 10',
       price: 159,
       image: 'assets/images/shoe-white.jpg',
@@ -277,7 +277,7 @@
           heroShoeImg.src = model.image;
           heroShoeImg.alt = model.name;
 
-          if (heroTitle) heroTitle.innerHTML = `AETHER<br><span class="text-neutral-800">${model.name.replace('AETHER ', '')}</span>`;
+          if (heroTitle) heroTitle.innerHTML = `MALZIE SOFTS<br><span class="text-neutral-800">${model.name.replace('MALZIE ', '').replace('AETHER ', '')}</span>`;
           if (heroTagline) heroTagline.textContent = model.tagline;
           if (heroPrice) heroPrice.textContent = model.price;
           if (heroPriceInr) heroPriceInr.textContent = model.priceInr;
@@ -301,7 +301,7 @@
           heroShoeImg.src = model.image;
           heroShoeImg.alt = model.name;
         }
-        if (heroTitle) heroTitle.innerHTML = `AETHER<br><span class="text-neutral-800">${model.name.replace('AETHER ', '')}</span>`;
+        if (heroTitle) heroTitle.innerHTML = `MALZIE SOFTS<br><span class="text-neutral-800">${model.name.replace('MALZIE ', '').replace('AETHER ', '')}</span>`;
         if (heroTagline) heroTagline.textContent = model.tagline;
         if (heroPrice) heroPrice.textContent = model.price;
         if (heroPriceInr) heroPriceInr.textContent = model.priceInr;
@@ -496,7 +496,7 @@
                 </svg>
               </div>
               <p class="text-base font-bold text-gray-900 mb-1">Your Bag is Empty</p>
-              <p class="text-xs text-gray-500 max-w-xs">Explore the Aether collection and elevate your stride today.</p>
+              <p class="text-xs text-gray-500 max-w-xs">Explore the Malzie Softs collection and elevate your stride today.</p>
             </div>
           `;
           return;
@@ -594,7 +594,7 @@
       applyPromoBtn.addEventListener('click', () => {
         initAudio();
         const code = promoCodeInput.value.trim().toUpperCase();
-        if (code === 'FUTURE20' || code === 'AETHER20') {
+        if (code === 'FUTURE20' || code === 'MALZIE20' || code === 'SOFTS20' || code === 'AETHER20') {
           discountPercent = 20;
           playUiSound('success');
           promoFeedback.className = 'text-xs text-emerald-600 font-bold block mt-1.5';
@@ -635,8 +635,9 @@
     // 6. ADD TO BAG FUNCTIONALITY
     // ----------------------------------------------------
     function addToBag(item) {
-      if (window.AetherCommerce && window.AetherCommerce.addToBag) {
-        window.AetherCommerce.addToBag(item);
+      const commerce = window.MalzieCommerce || window.AetherCommerce;
+      if (commerce && commerce.addToBag) {
+        commerce.addToBag(item);
       } else {
         showToast(`Added ${item.name} (${item.size || 'US 10'}) to bag!`);
       }
@@ -680,7 +681,7 @@
     // ----------------------------------------------------
     function renderCatalog(filterCategory = 'All') {
       if (!catalogContainer) return;
-      const allProducts = window.AETHER_PRODUCTS || catalogProducts;
+      const allProducts = window.MALZIE_PRODUCTS || window.AETHER_PRODUCTS || catalogProducts;
       let filtered = allProducts;
       if (filterCategory !== 'All') {
         filtered = allProducts.filter((p) =>
@@ -742,7 +743,7 @@
       catalogContainer.querySelectorAll('.catalog-add-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const id = btn.getAttribute('data-id');
-          const p = (window.AETHER_PRODUCTS || catalogProducts).find((item) => item.id === id);
+          const p = (window.MALZIE_PRODUCTS || window.AETHER_PRODUCTS || catalogProducts).find((item) => item.id === id);
           if (p) {
             addToBag({
               id: p.id,
@@ -761,7 +762,7 @@
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = btn.getAttribute('data-id');
-          const p = (window.AETHER_PRODUCTS || catalogProducts).find((item) => item.id === id);
+          const p = (window.MALZIE_PRODUCTS || window.AETHER_PRODUCTS || catalogProducts).find((item) => item.id === id);
           if (p) openQuickView(p);
         });
       });
@@ -945,7 +946,7 @@
             authAvatar.textContent = initials;
           }
           if (displayName) displayName.textContent = user.name || 'Alex Mercer';
-          if (displayEmail) displayEmail.textContent = user.email || 'alex@aetherlabs.com';
+          if (displayEmail) displayEmail.textContent = user.email || 'alex@malziesofts.com';
         } catch (e) {}
       } else {
         if (authAvatar && authIconOut) {
@@ -1113,7 +1114,7 @@
         const email = formSignUp.querySelector('input[type="email"]').value;
         localStorage.setItem('aether_current_user', JSON.stringify({ name: name, email: email }));
         initUserSession();
-        showToast('Account created successfully! Welcome to Aether.');
+        showToast('Account created successfully! Welcome to Malzie Softs.');
         closeAuthModal();
       });
     }
@@ -1149,7 +1150,7 @@
 
     function renderSearchResults(query) {
       if (!searchResultsContainer) return;
-      const allProducts = window.AETHER_PRODUCTS || catalogProducts;
+      const allProducts = window.MALZIE_PRODUCTS || window.AETHER_PRODUCTS || catalogProducts;
       const q = query.trim().toLowerCase();
       const results = q === ''
         ? allProducts.slice(0, 5)
@@ -1194,7 +1195,7 @@
       searchResultsContainer.querySelectorAll('.search-result-item').forEach((item) => {
         item.addEventListener('click', () => {
           const id = item.getAttribute('data-id');
-          const p = (window.AETHER_PRODUCTS || catalogProducts).find((i) => i.id === id);
+          const p = (window.MALZIE_PRODUCTS || window.AETHER_PRODUCTS || catalogProducts).find((i) => i.id === id);
           if (p) {
             closeSearchModal();
             openQuickView(p);
@@ -1219,7 +1220,8 @@
         e.preventDefault();
         openSearchModal();
       } else if (e.key === 'Escape') {
-        if (window.AetherCommerce) window.AetherCommerce.closeCart();
+        const commerce = window.MalzieCommerce || window.AetherCommerce;
+        if (commerce && commerce.closeCart) commerce.closeCart();
         closeAuthModal();
         closeSearchModal();
         closeQuickView();
@@ -1244,8 +1246,9 @@
     updateHeroShoe(0, false);
     renderCatalog('All');
     initUserSession();
-    if (window.AetherCommerce) {
-      window.AetherCommerce.updateCartUI();
+    const commerce = window.MalzieCommerce || window.AetherCommerce;
+    if (commerce && commerce.updateCartUI) {
+      commerce.updateCartUI();
     }
   });
 })();

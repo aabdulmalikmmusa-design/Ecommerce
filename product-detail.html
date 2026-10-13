@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">AETHER // Product Detail</title>
-  <meta name="description" content="Explore technical performance specifications and engineering details for AETHER footwear and apparel.">
+  <title id="page-title">Malzie Softs // Product Detail</title>
+  <meta name="description" content="Explore technical performance specifications and engineering details for Malzie Softs footwear and apparel.">
 
   <!-- Google Fonts: Barlow Condensed & Oswald (Athletic, Orderly, Crisp), Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,15 +48,15 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="AETHER Home">
+      <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="Malzie Softs Home">
         <div class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
           <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-bold text-xl tracking-tight text-black leading-none">AETHER</span>
-          <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">LABORATORY</span>
+          <span class="font-display font-bold text-xl tracking-tight text-black leading-none">MALZIE SOFTS</span>
+          <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">STUDIO</span>
         </div>
       </a>
 
@@ -99,7 +99,7 @@
       <span>/</span>
       <span id="crumb-category" class="text-gray-600">Footwear</span>
       <span>/</span>
-      <span id="crumb-title" class="text-black font-bold">AETHER Aero Excee</span>
+      <span id="crumb-title" class="text-black font-bold">Malzie Aero Excee</span>
     </nav>
   </div>
 
@@ -130,7 +130,7 @@
             <img 
               id="detail-main-img" 
               src="assets/images/shoe-white.jpg" 
-              alt="AETHER Product" 
+              alt="Malzie Softs Product" 
               class="w-full max-w-[480px] sm:max-w-[540px] object-contain blend-shoe transform group-hover:scale-105 group-hover:-rotate-2 transition-transform duration-500 drop-shadow-2xl select-none"
             >
           </div>
@@ -173,7 +173,7 @@
           <!-- Product Title & Tagline -->
           <div class="space-y-1">
             <h1 id="detail-title" class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-black uppercase leading-tight">
-              AETHER Aero Excee Pure
+              Malzie Aero Excee Pure
             </h1>
             <p id="detail-color" class="text-sm font-semibold text-gray-500">Colorway: Triple White / Pure Ice</p>
           </div>
@@ -211,7 +211,7 @@
           <div class="space-y-3 pt-2">
             <div class="flex items-center justify-between text-xs font-bold">
               <span id="size-label" class="uppercase tracking-wider text-gray-800">Select Size:</span>
-              <button type="button" onclick="window.AetherCommerce.openSizeGuide()" class="text-gray-500 hover:text-black underline">Size Guide & Fit</button>
+              <button type="button" onclick="window.MalzieCommerce.openSizeGuide()" class="text-gray-500 hover:text-black underline">Size Guide & Fit</button>
             </div>
             <div id="size-options-container" class="grid grid-cols-4 sm:grid-cols-5 gap-2">
               <!-- Dynamically generated sizes -->
@@ -263,7 +263,7 @@
               <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
               </svg>
-              <span>100% Authentic AETHER Laboratory Guarantee</span>
+              <span>100% Authentic Malzie Softs Guarantee</span>
             </div>
           </div>
 
@@ -364,10 +364,10 @@
       const params = new URLSearchParams(window.location.search);
       const prodId = params.get('id') || 'prod-1';
       
-      const product = window.AETHER_PRODUCTS.find(p => p.id === prodId || p.slug === prodId) || window.AETHER_PRODUCTS[0];
+      const product = (window.MALZIE_PRODUCTS || []).find(p => p.id === prodId || p.slug === prodId) || (window.MALZIE_PRODUCTS || [])[0];
 
       // Update Page Meta & Breadcrumbs
-      document.title = `${product.name} — AETHER Laboratory`;
+      document.title = `${product.name} — Malzie Softs`;
       document.getElementById('crumb-category').textContent = product.type;
       document.getElementById('crumb-title').textContent = product.name;
 
@@ -433,8 +433,8 @@
 
       // Add to Bag CTA
       document.getElementById('add-to-bag-btn').addEventListener('click', () => {
-        if (window.AetherCommerce) {
-          window.AetherCommerce.addToBag({
+        if (window.MalzieCommerce) {
+          window.MalzieCommerce.addToBag({
             id: product.id,
             name: product.name,
             size: selectedSize,
@@ -448,8 +448,8 @@
 
       // Instant 1-Click Buy
       document.getElementById('instant-buy-btn').addEventListener('click', () => {
-        if (window.AetherCommerce) {
-          window.AetherCommerce.addToBag({
+        if (window.MalzieCommerce) {
+          window.MalzieCommerce.addToBag({
             id: product.id,
             name: product.name,
             size: selectedSize,
@@ -458,13 +458,13 @@
             quantity: quantity,
             type: product.type
           });
-          window.AetherCommerce.openCheckout();
+          window.MalzieCommerce.openCheckout();
         }
       });
 
       // Populate Related Items
       const relatedContainer = document.getElementById('related-products-container');
-      const otherProducts = window.AETHER_PRODUCTS.filter(p => p.id !== product.id).slice(0, 4);
+      const otherProducts = (window.MALZIE_PRODUCTS || []).filter(p => p.id !== product.id).slice(0, 4);
       relatedContainer.innerHTML = otherProducts.map(p => `
         <div class="group bg-white rounded-3xl p-5 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
           <a href="product-detail.html?id=${p.id}" class="block">
@@ -504,9 +504,9 @@
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = btn.getAttribute('data-id');
-          const p = window.AETHER_PRODUCTS.find(item => item.id === id);
-          if (p && window.AetherCommerce) {
-            window.AetherCommerce.addToBag({
+          const p = (window.MALZIE_PRODUCTS || []).find(item => item.id === id);
+          if (p && window.MalzieCommerce) {
+            window.MalzieCommerce.addToBag({
               id: p.id,
               name: p.name,
               size: p.sizes ? p.sizes[0] : (p.type === 'Shirts' ? 'M' : 'US 10'),
@@ -519,8 +519,8 @@
       });
 
       // Initialize cart UI
-      if (window.AetherCommerce) {
-        window.AetherCommerce.updateCartUI();
+      if (window.MalzieCommerce) {
+        window.MalzieCommerce.updateCartUI();
       }
     });
   </script>

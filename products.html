@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AETHER // All Products — Footwear & Apparel</title>
-  <meta name="description" content="Browse the full collection of AETHER high-performance footwear and engineered athletic shirts.">
+  <title>Malzie Softs // All Products — Footwear & Apparel</title>
+  <meta name="description" content="Browse the full collection of Malzie Softs high-performance footwear and engineered athletic shirts.">
 
   <!-- Google Fonts: Barlow Condensed, Oswald, Inter, Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,15 +48,15 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="AETHER Home">
+      <a href="index.html" class="flex items-center gap-3 group focus:outline-none" aria-label="Malzie Softs Home">
         <div class="w-10 h-10 rounded-2xl bg-black flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform duration-300">
           <svg class="w-6 h-6 transform -rotate-12 group-hover:rotate-0 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/>
           </svg>
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-bold text-xl tracking-tight text-black leading-none">AETHER</span>
-          <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">LABORATORY</span>
+          <span class="font-display font-bold text-xl tracking-tight text-black leading-none">MALZIE SOFTS</span>
+          <span class="text-[9px] font-extrabold tracking-[0.25em] text-gray-400 uppercase leading-tight">STUDIO</span>
         </div>
       </a>
 
@@ -146,7 +146,7 @@
   <!-- ============================================================ -->
   <footer class="bg-black text-white py-12 mt-20 border-t border-gray-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-      <p>© 2026 AETHER Laboratory. Footwear & Technical Apparel.</p>
+      <p>© 2026 Malzie Softs Athletic Studio. Footwear & Technical Apparel.</p>
       <div class="flex gap-6">
         <a href="index.html" class="hover:text-white transition-colors">Home Welcoming Page</a>
         <a href="products.html" class="hover:text-white transition-colors">Catalog</a>
@@ -253,7 +253,7 @@
       const grid = document.getElementById('products-grid');
       const countEl = document.getElementById('products-count');
 
-      let list = window.AETHER_PRODUCTS || [];
+      let list = window.MALZIE_PRODUCTS || [];
 
       // Filter by category
       if (activeCategory !== 'All') {
@@ -331,9 +331,9 @@
         btn.addEventListener('click', (e) => {
           e.stopPropagation();
           const id = btn.getAttribute('data-id');
-          const p = (window.AETHER_PRODUCTS || []).find(item => item.id === id);
-          if (p && window.AetherCommerce) {
-            window.AetherCommerce.addToBag({
+          const p = (window.MALZIE_PRODUCTS || []).find(item => item.id === id);
+          if (p && window.MalzieCommerce) {
+            window.MalzieCommerce.addToBag({
               id: p.id,
               name: p.name,
               size: p.sizes ? p.sizes[0] : (p.type === 'Shirts' ? 'M' : 'US 10'),
@@ -371,8 +371,8 @@
         });
       }
 
-      if (window.AetherCommerce) {
-        window.AetherCommerce.updateCartUI();
+      if (window.MalzieCommerce) {
+        window.MalzieCommerce.updateCartUI();
       }
     });
   </script>

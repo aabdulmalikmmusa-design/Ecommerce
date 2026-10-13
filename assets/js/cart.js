@@ -1,4 +1,4 @@
-// AETHER Laboratory — Global Cart & Commerce Engine
+// Malzie Softs — Global Cart & Commerce Engine
 // Manages shared cart state, local storage persistence, drawers, and checkout across all pages
 (function () {
   'use strict';
@@ -94,7 +94,7 @@
     return [
       {
         id: 'prod-1',
-        name: 'AETHER Aero Excee Pure',
+        name: 'Malzie Aero Excee Pure',
         size: 'US 10',
         price: 159,
         image: 'assets/images/shoe-white.jpg',
@@ -344,7 +344,7 @@
   function applyPromo(code) {
     const clean = (code || '').trim().toUpperCase();
     const feedback = document.getElementById('promo-feedback');
-    if (clean === 'FUTURE20' || clean === 'AETHER20') {
+    if (clean === 'FUTURE20' || clean === 'MALZIE20' || clean === 'SOFTS20' || clean === 'AETHER20') {
       promo = { code: clean, percent: 20 };
       saveActivePromo(promo);
       playSound('celebrate');
@@ -386,8 +386,8 @@
                 ⚡
               </div>
               <div>
-                <h3 class="font-display font-bold text-xl leading-none">AETHER Express Checkout</h3>
-                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">256-Bit SSL Encrypted // Fast Dispatch</p>
+                <h3 class="font-display font-bold text-xl leading-none">Malzie Softs Express Checkout</h3>
+                <p class="text-[10px] text-gray-400 mt-1 uppercase tracking-widest">256-Bit SSL Encrypted // Priority Dispatch</p>
               </div>
             </div>
             <button id="checkout-close-btn" class="p-2 rounded-full hover:bg-neutral-800 text-gray-400 hover:text-white transition-colors" aria-label="Close Checkout">
@@ -426,7 +426,7 @@
                 </div>
                 <div>
                   <label class="block text-[11px] font-bold text-gray-600 mb-1">Email Address *</label>
-                  <input type="email" id="chk-email" required placeholder="alex@aetherlabs.com" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-none focus:border-black">
+                  <input type="email" id="chk-email" required placeholder="alex@malziesofts.com" class="w-full bg-gray-50 border border-gray-200 rounded-xl px-3.5 py-2.5 text-xs font-semibold focus:outline-none focus:border-black">
                 </div>
               </div>
 
@@ -512,13 +512,13 @@
               </div>
               <h4 class="font-display font-bold text-2xl uppercase tracking-tight text-black">Order Confirmed!</h4>
               <p class="text-xs text-gray-600 max-w-sm mx-auto">
-                Thank you for choosing AETHER Laboratory. Your athletic gear has been scheduled for priority nitrogen inspection and dispatch.
+                Thank you for choosing Malzie Softs. Your athletic gear has been scheduled for priority nitrogen inspection and dispatch.
               </p>
               
               <div class="bg-gray-50 border border-gray-200 rounded-2xl p-4 max-w-sm mx-auto text-left space-y-2 text-xs">
                 <div class="flex justify-between">
                   <span class="text-gray-500 font-semibold">Order Reference:</span>
-                  <span id="order-ref-num" class="font-mono font-bold text-black">#AET-2026-8914</span>
+                  <span id="order-ref-num" class="font-mono font-bold text-black">#MS-2026-8914</span>
                 </div>
                 <div class="flex justify-between">
                   <span class="text-gray-500 font-semibold">Estimated Delivery:</span>
@@ -575,7 +575,7 @@
         e.preventDefault();
         playSound('celebrate');
 
-        const orderId = '#AET-' + Math.floor(100000 + Math.random() * 900000);
+        const orderId = '#MS-' + Math.floor(100000 + Math.random() * 900000);
         const orderSummary = {
           orderId,
           date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
@@ -694,7 +694,7 @@
         <div class="bg-white rounded-3xl max-w-xl w-full shadow-2xl border border-gray-100 overflow-hidden pointer-events-auto max-h-[90vh] flex flex-col">
           <div class="p-6 border-b border-gray-100 flex items-center justify-between">
             <div>
-              <h3 class="font-display font-bold text-2xl text-black">AETHER Size & Fit Guide</h3>
+              <h3 class="font-display font-bold text-2xl text-black">Malzie Softs Size & Fit Guide</h3>
               <p class="text-xs text-gray-500">Biomechanical athlete dimensions</p>
             </div>
             <button id="size-guide-close-btn" class="p-2 rounded-full hover:bg-gray-100 text-gray-400 hover:text-black transition-colors">
@@ -757,7 +757,7 @@
             </div>
 
             <div class="bg-gray-50 rounded-2xl p-4 text-xs text-gray-600 font-medium">
-              💡 <strong class="text-black">Fit Recommendation:</strong> All AETHER products run true to athletic international standards. If you are between sizes, we advise sizing up for casual lifestyle wear or staying true to size for locked-in running performance.
+              💡 <strong class="text-black">Fit Recommendation:</strong> All Malzie Softs products run true to athletic international standards. If you are between sizes, we advise sizing up for casual lifestyle wear or staying true to size for locked-in running performance.
             </div>
           </div>
         </div>
@@ -863,7 +863,7 @@
   }
 
   // Expose API on window
-  window.AetherCommerce = {
+  window.MalzieCommerce = {
     cart,
     addToBag,
     openCart,
@@ -877,6 +877,7 @@
     playSound,
     applyPromo
   };
+  window.AetherCommerce = window.MalzieCommerce;
 
   document.addEventListener('DOMContentLoaded', init);
 })();

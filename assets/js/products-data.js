@@ -1,10 +1,10 @@
-// AETHER Brand Global Products Database (Footwear & Apparel)
-window.AETHER_PRODUCTS = [
+// Malzie Softs — Global Products Database (Footwear & Apparel)
+window.MALZIE_PRODUCTS = [
   // --- Footwear Line ---
   {
     id: 'prod-1',
     slug: 'aero-excee-pure',
-    name: 'AETHER Aero Excee Pure',
+    name: 'Malzie Aero Excee Pure',
     type: 'Footwear',
     category: 'Footwear',
     department: 'Men',
@@ -19,7 +19,7 @@ window.AETHER_PRODUCTS = [
     inStock: true,
     sizes: ['US 7.5', 'US 8', 'US 8.5', 'US 9', 'US 9.5', 'US 10', 'US 10.5', 'US 11', 'US 12'],
     tagline: 'Feel the future. Move with pure zero-gravity nitrogen cushioning.',
-    description: 'The pinnacle of minimalist engineering. Handcrafted with an ultralight 360° nitrogen-sealed air capsule and breathable matrix knit upper for cloud-like responsiveness across all urban surfaces.',
+    description: 'The pinnacle of minimalist engineering by Malzie Softs. Handcrafted with an ultralight 360° nitrogen-sealed air capsule and breathable matrix knit upper for cloud-like responsiveness across all urban surfaces.',
     specs: [
       { label: 'Weight', value: '210 grams' },
       { label: 'Offset Drop', value: '8mm' },
@@ -31,7 +31,7 @@ window.AETHER_PRODUCTS = [
   {
     id: 'prod-2',
     slug: 'aero-270-crimson',
-    name: 'AETHER Aero 270 Crimson',
+    name: 'Malzie Aero 270 Crimson',
     type: 'Footwear',
     category: 'Footwear',
     department: 'Men',
@@ -58,7 +58,7 @@ window.AETHER_PRODUCTS = [
   {
     id: 'prod-3',
     slug: 'aero-alpha-carbon',
-    name: 'AETHER Aero Alpha Carbon',
+    name: 'Malzie Aero Alpha Carbon',
     type: 'Footwear',
     category: 'Footwear',
     department: 'Men',
@@ -73,7 +73,7 @@ window.AETHER_PRODUCTS = [
     inStock: true,
     sizes: ['US 7.5', 'US 8', 'US 8.5', 'US 9', 'US 9.5', 'US 10', 'US 10.5', 'US 11'],
     tagline: 'Nocturnal engineering. Surgical stability with carbon matrix.',
-    description: 'A blacked-out silhouette reinforced with lightweight carbon-fiber lateral stabilizers. Built for night workouts, urban sprinting, and stealth aesthetic mastery.',
+    description: 'A blacked-out silhouette reinforced with lightweight carbon-fiber lateral stabilizers. Built for night workouts, urban sprinting, and stealth aesthetic mastery by Malzie Softs.',
     specs: [
       { label: 'Weight', value: '215 grams' },
       { label: 'Offset Drop', value: '6mm' },
@@ -85,7 +85,7 @@ window.AETHER_PRODUCTS = [
   {
     id: 'prod-4',
     slug: 'aero-pulse-cyber',
-    name: 'AETHER Aero Pulse Cyber',
+    name: 'Malzie Aero Pulse Cyber',
     type: 'Footwear',
     category: 'Footwear',
     department: 'Women',
@@ -114,7 +114,7 @@ window.AETHER_PRODUCTS = [
   {
     id: 'prod-shirt-1',
     slug: 'stealth-matrix-tee',
-    name: 'AETHER Stealth Matrix Tech Tee',
+    name: 'Malzie Stealth Matrix Tech Tee',
     type: 'Shirts',
     category: 'Shirts',
     department: 'Men',
@@ -141,7 +141,7 @@ window.AETHER_PRODUCTS = [
   {
     id: 'prod-shirt-2',
     slug: 'kinetic-minimal-oversized-tee',
-    name: 'AETHER Kinetic Minimal Oversized Tee',
+    name: 'Malzie Kinetic Minimal Oversized Tee',
     type: 'Shirts',
     category: 'Shirts',
     department: 'Unisex',
@@ -156,7 +156,7 @@ window.AETHER_PRODUCTS = [
     inStock: true,
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     tagline: 'Heavyweight 300GSM organic cotton with structured drape.',
-    description: 'A boxy, architectural silhouette crafted from dense heavyweight organic combed cotton. Features the raised metallic geometric AETHER logo on chest and drop-shoulder construction.',
+    description: 'A boxy, architectural silhouette crafted from dense heavyweight organic combed cotton. Features the raised metallic geometric Malzie Softs insignia on chest and drop-shoulder construction.',
     specs: [
       { label: 'Fabric', value: '100% Organic Heavy Combed Cotton' },
       { label: 'Density', value: '300 GSM Heavyweight' },
@@ -168,7 +168,7 @@ window.AETHER_PRODUCTS = [
   {
     id: 'prod-shirt-3',
     slug: 'velocity-compression-top',
-    name: 'AETHER Velocity Compression Top',
+    name: 'Malzie Velocity Compression Top',
     type: 'Shirts',
     category: 'Shirts',
     department: 'Men',
@@ -195,7 +195,7 @@ window.AETHER_PRODUCTS = [
   {
     id: 'prod-shirt-4',
     slug: 'cyber-loom-hybrid-tee',
-    name: 'AETHER Cyber-Loom Hybrid Runner Tee',
+    name: 'Malzie Cyber-Loom Hybrid Runner Tee',
     type: 'Shirts',
     category: 'Shirts',
     department: 'Unisex',
@@ -210,7 +210,7 @@ window.AETHER_PRODUCTS = [
     inStock: true,
     sizes: ['XS', 'S', 'M', 'L', 'XL'],
     tagline: 'Cooling micro-mesh with neon reflective accents.',
-    description: 'Infused with cooling mineral micro-particles that lower skin surface temperature by up to 2.5°C. Features high-visibility cyan piping and aerodynamic side split hems.',
+    description: 'Infused with cooling mineral micro-particles that lower skin surface temperature by up to 2.5°C. Features high-visibility cyan piping and aerodynamic side split hems by Malzie Softs.',
     specs: [
       { label: 'Fabric', value: '90% Cooling Poly, 10% Spandex' },
       { label: 'Technology', value: 'Cryo-Mesh Active Thermal Dissipation' },
@@ -220,3 +220,6 @@ window.AETHER_PRODUCTS = [
     ]
   }
 ];
+
+// Backwards compatibility alias
+window.AETHER_PRODUCTS = window.MALZIE_PRODUCTS;
