@@ -396,7 +396,7 @@
         if (heroBadge) heroBadge.className = "border-l-2 border-white pl-3 text-xs font-black tracking-widest uppercase text-white leading-none py-0.5 transition-colors duration-500";
         if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-white hover:bg-neutral-100 text-black font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
         if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 text-white font-extrabold text-sm px-6 py-4 rounded-full border border-white/30 backdrop-blur-md shadow-sm transition-all";
-        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-6 border-t border-white/20 pt-6 transition-colors duration-500";
+        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-4 border-t border-white/20 pt-3 sm:pt-4 transition-colors duration-500";
         if (heroSocialLinks) {
           heroSocialLinks.className = "flex items-center gap-4 text-white/60 transition-colors duration-500";
           heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-9 h-9 rounded-full bg-white/15 hover:bg-white hover:text-black text-white flex items-center justify-center border border-white/20 shadow-sm transition-all");
@@ -423,7 +423,7 @@
         if (heroBadge) heroBadge.className = "border-l-2 border-black pl-3 text-xs font-black tracking-widest uppercase text-black leading-none py-0.5 transition-colors duration-500";
         if (heroShopNowBtn) heroShopNowBtn.className = "btn-magnetic inline-flex items-center gap-2.5 bg-black hover:bg-neutral-900 text-white font-black text-sm tracking-wider uppercase px-8 py-4 rounded-full shadow-2xl transition-all group";
         if (heroAddBagBtn) heroAddBagBtn.className = "btn-magnetic inline-flex items-center gap-2 bg-white/90 hover:bg-white text-black font-extrabold text-sm px-6 py-4 rounded-full border border-gray-300 shadow-sm hover:shadow-md transition-all";
-        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-6 border-t border-gray-200/80 pt-6 transition-colors duration-500";
+        if (heroBottomDivider) heroBottomDivider.className = "flex flex-col md:flex-row items-center justify-between gap-4 border-t border-gray-200/50 pt-3 sm:pt-4 transition-colors duration-500";
         if (heroSocialLinks) {
           heroSocialLinks.className = "flex items-center gap-4 text-gray-500 transition-colors duration-500";
           heroSocialLinks.querySelectorAll('a').forEach(a => a.className = "w-9 h-9 rounded-full bg-white hover:bg-black hover:text-white text-gray-700 flex items-center justify-center border border-gray-200 shadow-sm transition-all");
